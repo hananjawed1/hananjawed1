@@ -1,0 +1,172 @@
+<style>
+  .client_attachments_cls .table th {
+    line-height: 20px;
+    white-space: unset !important;
+    font-weight: normal;
+  }
+
+  .no-bottom-border td {
+      border: none;
+  }
+
+  .bullet-list ul {
+    padding-left: 17px;
+    margin: 0px;
+  }
+</style>
+<div class="container-fluid">
+
+    <!-- breadcrumb -->
+    <div class="breadcrumb-header justify-content-between">
+      <div class="my-auto">
+        <div class="d-flex">
+          <h4 class="content-title mb-0 my-auto">Client Request Update</h4>
+        </div>
+      </div>
+      <button class="btn btn-primary" (click) = "FileOpeaningDetails()" >
+        Entity Details
+      </button>
+    </div>
+    <!-- breadcrumb -->
+  
+    <!-- row opened -->
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="card" id="tabs-style4">
+          <div class="card-body">
+            <div class="row">
+              <div *ngIf="ClientNewRequestDetails != ''" class="col-md-12 ">
+                <!-- <div class="card"> -->
+                  <!-- <div class="d-flex justify-content-between align-items-center flex-wrap p-2 border-bottom"> -->
+                    <div>
+                      <h5 class="font-weight-bold display-5">Client Request</h5>
+                    </div>
+                  <!-- </div> -->
+            
+                  
+                    <table class="table text-md-nowrap dataTable no-footer" >
+                      <tr *ngFor="let request of ClientRequestDetails">
+                        <td style="font-weight: bold;" *ngIf="request.requestType == 1">Change Liquor Manager</td>
+                        <td style="font-weight: bold;" *ngIf="request.requestType == 2">Renewal</td>
+                        <td style="font-weight: bold;" *ngIf="request.requestType == 3">Other</td>
+                        <td style="font-weight: bold;" *ngIf="request.requestType == 4">Upload Receipt</td>
+                         <td>
+                          <span *ngIf="request.uploadReceipt != null && request.uploadReceipt != ''">
+                            <!-- <a class="btn btn-success" data-target="#exampleModalLong" data-toggle="modal" (click)="showImages(request.uploadReceipt)">View</a> -->
+                            <a class="btn btn-success" data-target="#exampleModalLong" data-toggle="modal" (click)="showDocuments(request.uploadReceipt)">View All Document</a>
+                          </span>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <table class="table text-md-nowrap dataTable no-footer" >
+                      <thead>
+                        <th>Notes</th>
+                        <th>Created Date</th>
+                      </thead>
+                      <tr *ngFor="let item of clientHistory">
+                        <td *ngIf="item.requestNote != null">{{item.requestNote}}</td>
+                        <td *ngIf="item.requestNote != null">{{item.creationDateString}}</td>
+                      </tr>
+                    </table>
+                <!-- </div> -->
+              </div>
+            </div>
+            
+            <div class="row">
+              <div *ngIf="ClientNewRequestDetails != ''" class="col-md-12 ">
+                <!-- <div class="card"> -->
+                  <!-- <div class="d-flex justify-content-between align-items-center flex-wrap p-2 border-bottom"> -->
+                    <div>
+                      <h5 class="font-weight-bold display-5">Admin Reply</h5>
+                    </div>
+                  <!-- </div> -->
+            
+                  
+                    <table class="table text-md-nowrap dataTable no-footer" >
+                      <tr *ngFor="let request of ClientRequestDetails">
+                        <td style="font-weight: bold;" *ngIf="request.requestType == 1">Change Liquor Manager</td>
+                        <td style="font-weight: bold;" *ngIf="request.requestType == 2">Renewal</td>
+                        <td style="font-weight: bold;" *ngIf="request.requestType == 3">Other</td>
+                        <td style="font-weight: bold;" *ngIf="request.requestType == 4">Upload Receipt</td>
+                        <td  *ngIf="returnNotes != null">
+                          <div class="bullet-list" style="max-height: 250px; overflow: auto;">
+                            <ul>
+                              <ng-container *ngFor="let item of returnNotes" >
+                                <li style="margin-bottom: 10px;" *ngIf="item != null">
+                                   {{item}}
+                                </li>
+                              </ng-container>
+                            </ul>
+                          </div>
+                        </td>
+                         <td *ngIf="returnNotes == null">NA</td>
+                      </tr>
+                    </table>
+                <!-- </div> -->
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                    <label for="status">Change Status To:</label>
+                    <select class="form-control" [(ngModel)]="status">
+                        <option selected value="0">Select Status</option> 
+                        <option [ngValue] = 1> Pending </option>
+                        <option [ngValue] = 2> Returned </option>
+                        <option [ngValue] = 3> Completed </option>
+                    </select>
+                    </div>
+                    <div class="form-group" *ngIf= 'status == 2'>
+                    <label for="status">Message</label>
+                    <textarea class="form-control" [(ngModel)]='msg' id="message_box" name="message_box" placeholder="Message"></textarea> 
+                    </div>
+
+                    <div class="form-group mb-0 mt-3 justify-content-end">
+                    <div>
+                        <button class="btn btn-primary" [disabled]='loading' (click)='updateClientRequestStatus()'>
+                        <i class="btn-icon-prepend"
+                            data-feather="save"></i>
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Accept
+                        </button>
+                    </div>
+                    </div>
+                </form>
+                </div>
+            </div>
+          </div>
+        </div>
+        <!--/div-->
+      </div>
+      <!-- /row -->
+    </div>
+  </div>
+  
+  <!-- Slider Image Model -->
+<div aria-hidden="true" data-backdrop="static" aria-labelledby="exampleModalLongTitle" class="modal fade" id="exampleModalLong" role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" aria-label="Close" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div style="overflow: auto; height: 500px;">
+                  <ngb-carousel id="carousel" #carouse *ngIf="data" (slide)="change($event)">
+                  <ng-template *ngFor="let imgIdx of data; let i = index" [id]="i" ngbSlide>
+                      <div class="picsum-img-wrapper">
+                      <div *ngIf="imgIdx.name == 'pdf'">
+                          <pdf-viewer [src]="imgIdx.image" [render-text]="true" style="display: block;"></pdf-viewer>
+                      </div>
+                      <div *ngIf="imgIdx.name != 'pdf'">
+                          <img [src]="imgIdx.image" [alt]="">
+                      </div>
+                      </div>
+                  </ng-template>
+                  </ngb-carousel>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>

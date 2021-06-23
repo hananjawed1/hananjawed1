@@ -1,0 +1,130 @@
+<div class="container-fluid">
+
+    <!-- breadcrumb -->
+    <div class="breadcrumb-header justify-content-between">
+      <div class="my-auto">
+        <div class="d-flex">
+          <h4 class="content-title mb-0 my-auto">{{siteLabel.groups}}</h4>
+        </div>
+      </div>
+      <div class="d-flex my-xl-auto right-content">
+        <div class="pr-1 mb-3 mb-xl-0">
+          <a  data-target="#exampleModalLong" style="color: white;" data-toggle="modal" href="javascript:void(0)" (click)="addNew()" class="btn btn-primary">{{siteLabel.addNew}} </a>
+        </div>
+      </div>
+    </div>
+    <!-- breadcrumb -->
+    <div class="card-body">
+
+
+
+        <div *ngIf="loading" class="row">
+            <div class="col-md-12">
+              <div class="alert alert-warning">
+                <span class="spinner-border spinner-border-sm mr-1"></span>
+                Loading....
+              </div>
+            </div>
+          </div>
+  
+          <div *ngIf="loading===false" class="table-responsive" style="margin-top: 20px;">
+            <table class="table text-md-nowrap dataTable no-footer ">
+              <thead class="thead-dark">
+                <tr>
+                  <th>{{siteLabel.name}}</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody *ngIf='groups'>
+                <tr *ngFor='let a of groups'>
+                  <td>{{a.name}}</td>
+                  <td>
+                    <a class="btn btn-info"
+                       data-target="#exampleModalLong"
+                       data-toggle="modal" href="javascript:void(0)" (click)="removeIP(a)">
+                      <i class="btn-icon-prepend"
+                         data-feather="plus-square"></i>  {{siteLabel.edit}}
+                    </a>
+                  </td>
+                  
+              </tbody>
+              <tfoot class="thead-dark">
+                <tr>
+                  <th>{{siteLabel.total}} {{groups?groups.length:0}}</th>
+                  <th></th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+  
+          <ul class="pagination mt-3 mb-0 justify-content-end" [hidden]="(loading || pagesCount < 2)">
+            <!--<li class="page-item">
+        <a class="page-link" [hidden]="page == 0" (click)="getAgents(0)"><<</a>
+      </li>-->
+            <li class="page-item">
+              <a class="page-link" href="javascript:void(0)" [hidden]="page == 0" (click)="searchIPS(page-1)">Previous</a>
+            </li>
+            <li class="page-item" *ngFor='let n of range()'
+                [class]="{active: n == page}">
+              <a class="page-link" href="javascript:void(0)" (click)="searchIPS(n)" *ngIf="n != page">{{n+1}}</a>
+              <a class="page-link" href="javascript:void(0)" *ngIf="n == page">{{n+1}}</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="javascript:void(0)" [hidden]="page == pagesCount - 1" (click)="searchIPS(page+1)">Next</a>
+            </li>
+            <!--<li class="page-item">
+        <a class="page-link" [hidden]="page == pagesCount - 1" (click)="getAgents(pagesCount - 1)">>></a>
+      </li>-->
+          </ul>
+  
+  
+        </div>
+      </div>
+   
+  <div aria-hidden="true" aria-labelledby="exampleModalLongTitle" class="modal fade" id="exampleModalLong" role="dialog"
+       tabindex="-1">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">{{siteLabel.groupDetails}}</h5>
+          <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]='formAgent' id="employee_form" name="employee_form">
+            <div class="form-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="name">{{siteLabel.name}}*</label>
+                    <input formControlName='name' [(ngModel)]='groupVM.name'
+                           class="form-control" id="name"
+                           name="name" placeholder="{{siteLabel.name}}"
+                           type="text">
+                    <span *ngIf="formAgent.get('name').invalid && (formAgent.get('name').dirty || formAgent.get('name').touched)"
+                          class="alert alert-danger">{{siteLabel.pleaseEnterName}}</span>
+                  </div>
+                </div>
+  
+              </div>
+            </div>
+            <hr>
+            <button class="btn btn-success"
+                    [disabled]='!formAgent.valid || loading' (click)='saveIP()'>
+              <i class="btn-icon-prepend"
+                 data-feather="save">
+              </i>
+              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+              {{siteLabel.submit}}
+            </button>
+  
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" id="close-modal" data-dismiss="modal" type="button">{{siteLabel.close}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,125 @@
+<div class="container-fluid">
+
+    <!-- breadcrumb -->
+    <div class="breadcrumb-header justify-content-between">
+      <div class="my-auto">
+        <div class="d-flex">
+          <h4 class="content-title mb-0 my-auto">{{siteLabel.newCardStatus.addNewCardStatus}}</h4>
+        </div>
+      </div>
+  
+    </div>
+    <!-- breadcrumb -->
+  
+    <!-- row opened -->
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="card" id="tabs-style4">
+          <div class="card-body">
+            <form [formGroup]='formCardStatus' id="profile_form" name="profile_form">
+              <div class="form-body">
+                <div class="panel panel-primary tabs-style-2">
+                  <div class="row">
+                    <div class="row row-sm-12 col-md-12 mt-3">
+                      <div class="col-md-6 col-lg-6">
+                            <label>Id*</label>
+                            <input type="text" [(ngModel)]='objCardStatus.id' name="id"
+                                formControlName='id' class="form-control" disabled>
+                      </div>
+                      <div class="col-md-6 col-lg-6 mg-t-20 mg-md-t-0">
+                        <label for="email">{{siteLabel.newCardStatus.creationDate}}*</label>
+                        <input formControlName='creationDate'
+                           [(ngModel)]="objCardStatus.creationDate" class="form-control"
+                           id="creationDate"
+                           name="creationDate" placeholder="{{siteLabel.creationDate}}"
+                           type="date">
+                        <span *ngIf="formCardStatus.get('creationDate').invalid && (formCardStatus.get('creationDate').dirty || formCardStatus.get('creationDate').touched)"
+                          class="alert alert-danger">{{siteLabel.newCardStatus.pleaseEnterCreationDate}}</span>
+                      </div>
+                    </div>
+                    <div class="row row-sm-12 col-md-12 mt-3">
+                      <div class="col-md-6 col-lg-6">
+                            <label>{{siteLabel.newCardStatus.selectAgent}}*</label>
+                            <select formControlName='agentId' [(ngModel)]='objCardStatus.agentId' class="form-control">
+                            <option value=0>Agent</option>
+                            <option *ngFor="let i of agents"
+                                    value={{i.agentId}}>
+                                {{i.user.name}}
+                            </option>
+                            </select>
+                            <span *ngIf="formCardStatus.get('agentId').invalid && (formCardStatus.get('agentId').dirty || formCardStatus.get('agentId').touched)"
+                                class="alert alert-danger">{{siteLabel.newCardStatus.pleaseChooseAgent}}</span>
+                        </div>
+                      <div class="col-md-6 col-lg-6 mg-t-20 mg-md-t-0">
+                        <label>{{siteLabel.newCardStatus.collectedFrom}}*</label>
+                      <select formControlName='collectedFrom' [(ngModel)]='objCardStatus.collectedFrom' class="form-control">
+                        <option value=0>Employee</option>
+                        <option *ngFor="let i of employees"
+                                value={{i.userId}}>
+                          {{i.name}}
+                        </option>
+                      </select>
+                      <span *ngIf="formCardStatus.get('collectedFrom').invalid && (formCardStatus.get('collectedFrom').dirty || formCardStatus.get('collectedFrom').touched)"
+                          class="alert alert-danger">{{siteLabel.newCardStatus.pleaseChooseEmployee}}</span>
+                      </div>
+                    </div>
+                    <div class="row row-sm-12 col-md-12 mt-3">
+                      <div class="col-md-6 col-lg-6">
+                        <label>{{siteLabel.newCardStatus.collectedBy}}*</label>
+                        <input type="text" [(ngModel)]='objCardStatus.collectedBy' name="CollectedBy"
+                               formControlName='collectedBy' class="form-control" placeholder="{{siteLabel.newCardStatus.collectedBy}}">
+      
+                        <span *ngIf="formCardStatus.get('collectedBy').invalid && (formCardStatus.get('collectedBy').dirty || formCardStatus.get('collectedBy').touched)"
+                              class="alert alert-danger">{{siteLabel.newCardStatus.pleaseEnterCollectedBy}}</span> 
+                      </div>
+                      <div class="col-md-6 col-lg-6 mg-t-20 mg-md-t-0">
+                        <label>{{siteLabel.newCardStatus.numberOfCards}}*</label>
+                        <input type="text" [(ngModel)]='objCardStatus.numberOfCards' name="NumberOfCards"
+                               formControlName='numberOfCards' class="form-control" placeholder="{{siteLabel.newCardStatus.numberOfCards}}">
+      
+                        <span *ngIf="formCardStatus.get('numberOfCards').invalid && (formCardStatus.get('numberOfCards').dirty || formCardStatus.get('numberOfCards').touched)"
+                              class="alert alert-danger">{{siteLabel.newCardStatus.pleaseEnterNumberOfCards}}</span>
+                      </div>
+                    </div>
+                    <div class="row row-sm-12 col-md-12 mt-3">
+                        <div class="col-md-6 col-lg-6">
+                            <label>{{siteLabel.newCardStatus.chooseStatus}}*</label>
+                            <select formControlName='status'
+                                    [(ngModel)]='objCardStatus.status' class="form-control"
+                                    id="status" name="status">
+                            <option value=0>Status</option>
+                                <option *ngFor="let i of statusForCards" value={{i.cardStatusTypeId}}>
+                                {{i.status}}
+                                </option>
+                            </select>
+                            <span *ngIf="formCardStatus.get('status').invalid && (formCardStatus.get('status').dirty || formCardStatus.get('status').touched)"
+                                    class="alert alert-danger">{{siteLabel.newCardStatus.pleaseChooseStatus}}</span>   
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-12 mt-3">
+                        <label>{{siteLabel.newCardStatus.notes}}</label>
+                        <textarea class="form-control" name="notes" id="description"
+                                  formControlName='notes' [(ngModel)]='objCardStatus.notes'
+                                  placeholder="{{siteLabel.newCardStatus.description}}" rows="5"></textarea>
+                    </div>
+                    <div class="col-md-12 mt-4 mb-3">
+                        <button class="btn btn-success" [disabled]='!formCardStatus.valid || loading' (click)='saveCardStatus()'>
+                            <i class="btn-icon-prepend"
+                               data-feather="save"></i>
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                            {{siteLabel.newCardStatus.submit}}
+                          </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!--/div-->
+    </div>
+    <!-- /row -->
+  </div>
+  

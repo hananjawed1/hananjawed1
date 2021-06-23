@@ -1,0 +1,227 @@
+<div class="container-fluid">
+
+  <!-- breadcrumb -->
+  <div class="breadcrumb-header justify-content-between">
+    <div class="my-auto">
+      <div class="d-flex">
+        <h4 class="content-title mb-0 my-auto">Add Employee</h4>
+      </div>
+    </div>
+  </div>
+  <!-- breadcrumb -->
+
+  <!-- row opened -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card" id="tabs-style4">
+        <div class="card-body">
+          <form *ngIf='emplId==0' [formGroup]='formEmpl' id="employee_form" method="post" name="employee_form">
+            <div class="panel panel-primary tabs-style-2">
+              <div class="row">
+                <div class="row row-sm-12 col-md-12 mt-3">
+                  <div class="col-md-6 col-lg-6">
+                    <label for="role">{{siteLabel.role}}*</label>
+                    <select class="form-control" formControlName='role'
+                            [(ngModel)]='ObjEmp.role' id="role" name="role">
+                        <option value="" selected>{{siteLabel.pleaseSelectRole}}</option>
+                        <option *ngFor="let i of employeeRoleOnly" value={{i.id}}>
+                          {{i.name}}
+                        </option>
+                      </select>
+                  </div>
+                  <div class="col-md-6 col-lg-6 mg-t-20 mg-md-t-0">
+                    <label for="name">{{siteLabel.name}}*</label>
+                    <input class="form-control" formControlName='name' [(ngModel)]='ObjEmp.name' id="name" name="name" placeholder="Name"
+                          type="text">
+                    <span *ngIf="formEmpl.get('name').invalid && (formEmpl.get('name').dirty || formEmpl.get('name').touched)"
+                          class="alert alert-danger">
+                      {{siteLabel.pleaseEnterName}}
+                    </span>    
+                  </div>
+                </div>
+                <div class="row row-sm-12 col-md-12 mt-3">
+                  <div class="col-md-6 col-lg-6">
+                    <label for="email">{{siteLabel.email}}*</label>
+                    <input class="form-control" formControlName='email' [(ngModel)]='ObjEmp.email' id="email" name="email" placeholder="Email"
+                          type="text">
+                          <span *ngIf="formEmpl.get('email').invalid && (formEmpl.get('email').dirty || formEmpl.get('email').touched)"
+                          class="alert alert-danger">Please Enter Email</span>
+                  </div>
+                  <div class="col-md-6 col-lg-6 mg-t-20 mg-md-t-0">
+                    <label for="password">{{siteLabel.password}}*</label>
+                    <input class="form-control" id="password" name="password" formControlName='password' [(ngModel)]='ObjEmp.password'
+                          placeholder="Password" type="password">
+                          <span *ngIf="formEmpl.get('password').invalid && (formEmpl.get('password').dirty || formEmpl.get('password').touched)"
+                          class="alert alert-danger">Please Enter Password</span>
+                  </div>
+                </div>
+                <div class="row row-sm-12 col-md-12 mt-3">
+                  <div class="col-md-6 col-lg-6">
+                    <label for="confirm_password">{{siteLabel.confirmPassword}}*</label>
+                    <input class="form-control" id="confirm_password" name="confirm_password" formControlName='confirmPassword' [(ngModel)]='ObjEmp.confirmPassword'
+                          placeholder="Confirm Password" type="password">
+                          <span *ngIf="formEmpl.get('confirmPassword').invalid && (formEmpl.get('confirmPassword').dirty || formEmpl.get('confirmPassword').touched)"
+                          class="alert alert-danger">Please Enter Confirm Password</span>
+                          <span *ngIf="formEmpl.get('confirmPassword').value !=formEmpl.get('password').value && (formEmpl.get('confirmPassword').dirty || formEmpl.get('confirmPassword').touched)"
+                          class="alert alert-danger">Confirm & Password does not match</span>   
+                  </div>
+                  <div class="col-md-6 col-lg-6 mg-t-20 mg-md-t-0">
+                    <label for="phone_no">{{siteLabel.phoneNumber}}*</label>
+                    <input class="form-control" id="phone_no" maxlength="10" pattern="\d{10}" name="phone_no" placeholder="Phone Number" formControlName='phoneNumber' [(ngModel)]='ObjEmp.phoneNumber'
+                          type="text">
+                      <span *ngIf="formEmpl.get('phoneNumber').invalid && (formEmpl.get('phoneNumber').dirty || formEmpl.get('phoneNumber').touched)"
+                        class="alert alert-danger">Please Enter 10 Digit Phone Number</span>
+                  </div>
+                </div>
+                <div class="row row-sm-12 col-md-12 mt-3">
+                  <div class="col-md-6 col-lg-6">
+                    <label for="employee_no">{{siteLabel.employeeNumber}}*</label>
+                    <input class="form-control" id="employee_no" name="employee_no" formControlName='employeeNumber' [(ngModel)]='ObjEmp.employeeNumber'
+                          placeholder="Employee Number" type="text">
+                          <span *ngIf="formEmpl.get('employeeNumber').invalid && (formEmpl.get('employeeNumber').dirty || formEmpl.get('employeeNumber').touched)"
+                          class="alert alert-danger">Please Enter Employee Number</span>
+                  </div>
+                  <div class="col-md-6 col-lg-6 mg-t-20 mg-md-t-0">
+                    <label for="status">{{siteLabel.status}}*</label>
+                    <select class="form-control" id="status" name="status" formControlName='status' [(ngModel)]=ObjEmp.status>
+                      <option [ngValue]=StatusEnums.Active>Active</option>
+                      <option [ngValue]=StatusEnums.InActive>InActive</option>
+                      <!--<option [ngValue]=StatusEnums.Approved>Approved</option>
+                      <option [ngValue]=StatusEnums.Rejected>Rejected</option>-->
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-12 mt-3">
+                  <label for="role">{{siteLabel.empGroup}}*</label>
+                    <ng-select #MyNgSelect bindLabel="name" multiple="true" [clearable]="true"
+                        placeholder="{{siteLabel.selectEmpGroup}}" [(ngModel)]="ObjEmp.employeeGroupIds" 
+                        name="mySelectBox" required [ngModelOptions]="{standalone: true}">
+                        <ng-option [value]="item" [disabled]="item.disabled" *ngFor="let item of empArray">
+                            {{item.name}}
+                        </ng-option>
+                    </ng-select> 
+                </div>
+                <div class="col-md-12 col-lg-12 mt-3" *ngIf="ObjEmp.role == 'Employee'">
+                  <div class="col-md-6 col-lg-6 mg-t-20 mg-md-t-0">
+                    <label for="logo">{{siteLabel.profilePicture}}</label>
+                          <input (change)="onChange($event)" class="form-control" id="profilePicture" name="profilePicture" type="file">
+                  </div>
+                  <div class="col-md-6 col-lg-6 mg-t-20 mg-md-t-0 border">
+                    <img [src]="preview" style="width: 250px"/>
+                  </div>    
+                </div>
+                <div class="col-md-12 mt-3" *ngIf="ObjEmp.role == 'Employee'">
+                  <label for="role">{{siteLabel.userAccess}}</label>
+                        <select class="form-control" formControlName='UserAccess' [(ngModel)]='ObjEmp.userAccess' id="UserAccess" name="UserAccess">
+                          <option value="0">{{siteLabel.selectUserAccess}}</option>
+                          <option value='2'>{{siteLabel.admin}}</option>
+                          <option value='3'>{{siteLabel.subAdmin}}</option>
+                          <option value='4'>{{siteLabel.mobileAppAccessOnly}}</option>
+                          <option value='5'>{{siteLabel.accounts}}</option>
+                        </select>
+                </div>
+                <hr>
+                <div class="col-md-12 mt-4 mb-3">
+                  <button class="btn btn-success" [disabled]='!formEmpl.valid || loading' (click)='SaveEmployee()'>
+                    <i class="btn-icon-prepend"
+                       data-feather="save"></i>
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    {{siteLabel.submit}}
+                  </button>
+                  <button class="btn btn-light" type="button">
+                    <i class="btn-icon-prepend"
+                       data-feather="x"></i> {{siteLabel.cancel}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- <div class="col-xl-12">
+      <div class="card" id="tabs-style4">
+        <div class="card-body">
+          <div class="panel panel-primary tabs-style-2">
+            <div class="row">
+              <div class="row row-sm-12 col-md-12 mt-3">
+                <div class="col-md-6 col-lg-6">
+                  <label for="role">{{siteLabel.role}}*</label>
+                  <select class="form-control" formControlName='role'
+                          [(ngModel)]='ObjEmp.role' id="role" name="role">
+                    <option value="">{{siteLabel.pleaseSelectRole}}</option>
+                    <option *ngFor="let i of employeeRoleOnly" value={{i.id}}>
+                      {{i.name}}
+                    </option>
+                </div>
+                <div class="col-md-6 col-lg-6 mg-t-20 mg-md-t-0">
+                  <label class="form-control-label">Name* </label> <input
+                  class="form-control" id="datetimepicker" type="text" value="Name">
+                </div>
+              </div>
+              <div class="row row-sm-12 col-md-12 mt-3">
+                <div class="col-md-6 col-lg-6">
+                  <label class="form-control-label">Email*</label> <input
+                  class="form-control" id="datetimepicker" type="text" value="Email">
+                </div>
+                <div class="col-md-6 col-lg-6 mg-t-20 mg-md-t-0">
+                  <label class="form-control-label">Password* </label> <input
+                  class="form-control" id="datetimepicker" type="text"
+                  value="Password">
+                </div>
+              </div>
+              <div class="row row-sm-12 col-md-12 mt-3">
+                <div class="col-md-6 col-lg-6">
+                  <label class="form-control-label">Confirm Password*</label> <input
+                  class="form-control" id="datetimepicker" type="text"
+                  value="Confirm Password">
+                </div>
+                <div class="col-md-6 col-lg-6 mg-t-20 mg-md-t-0">
+                  <label class="form-control-label">Phone Number* </label> <input
+                  class="form-control" id="datetimepicker" type="text"
+                  value="Phone Number">
+                </div>
+              </div>
+              <div class="row row-sm-12 col-md-12 mt-3">
+                <div class="col-md-6 col-lg-6">
+                  <label class="form-control-label">Employee Number*</label> <input
+                  class="form-control" id="datetimepicker" type="text"
+                  value="Employee Number">
+                </div>
+                <div class="col-md-6 col-lg-6 mg-t-20 mg-md-t-0">
+                  <label class="form-control-label">Status* </label> <input
+                  class="form-control" id="status" type="text" value="Active">
+                </div>
+              </div>
+              <div class="col-md-12 mt-3">
+                <label>Employee Group*</label>
+                <input class="form-control" id="Task Name" placeholder="Select Employee Group"
+                       type="text">
+              </div>
+
+              <div class="col-md-12 col-lg-12 mt-3">
+                <label>Profile Picture</label>
+                <input class="dropify" type="file"/>
+
+              </div>
+
+
+              <div class="col-md-12 mt-3">
+                <label>User Access</label>
+                <select class="form-control">
+                  <option value="">Access 1</option>
+                  <option value="">Access 2</option>
+                </select>
+              </div>
+              <div class="col-md-12 mt-4 mb-3">
+                <button class="btn btn-success" type="submit">Submit</button>
+                <button class="btn btn-secondary" type="submit">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+

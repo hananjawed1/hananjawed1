@@ -1,0 +1,153 @@
+<style>  
+    .borderCSS {
+        border: 1px solid black;
+    }
+  </style>
+
+<div *ngIf="loading" class="row">
+    <div class="col-md-12">
+      <div class="alert alert-warning">
+        <span class="spinner-border spinner-border-sm mr-1"></span>
+        Loading....
+      </div>
+    </div>
+</div>
+
+<div *ngIf="loading == false">
+    <table style="width: 70%; margin-left: 15%; margin-top: 5%;">
+        <tr>
+            <th style="width: 80%;"></th>
+            <th style="width: 20%; text-align: center;"><h3>INVOICE</h3></th>
+        </tr>
+        <tr>
+            <td style="width: 80%;"></td>
+            <td style="width: 20%; text-align: center;">
+                <table class="borderCSS" style="width: 100%; float: right;">
+                    <thead>
+                      <tr>
+                        <th class="borderCSS" style="background-color: lightgrey;">DATE</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="borderCSS">{{clientDetails.invoiceDate != null ? (clientDetails.invoiceDate |  date:'MM/dd/yyyy') : (currentDate |  date:'MM/dd/yyyy')}}</td>
+                      </tr>
+                    </tbody>
+                  </table> 
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 80%;">
+                <table style="width: 60%;">
+                    <tr>
+                      <th style="background-color: lightgrey; padding: 5px;">Bill TO : </th>
+                    </tr>
+                    <tr>
+                        <td style="padding-top: 8px;"><font style="font-weight: 900;">Application Number : </font>{{clientDetails.applicationNumber != null && clientDetails.applicationNumber != '' ? clientDetails.applicationNumber : 'NA' }}</td>
+                    </tr>
+                    <tr>
+                        <td><font style="font-weight: 900;">Trade Licence Number : </font>{{clientDetails.tradeLicenceNumber != null && clientDetails.tradeLicenceNumber != '' ? clientDetails.tradeLicenceNumber : 'NA'}}</td>
+                    </tr>
+                    <tr>
+                        <td><font style="font-weight: 900;">Entity Name : </font> {{clientDetails.entityName != null && clientDetails.entityName != '' ? clientDetails.entityName : 'NA'}}</td>
+                    </tr>
+                    <tr>
+                        <td><font style="font-weight: 900;">Business Location : </font> {{clientDetails.businessLocation != null && clientDetails.businessLocation != '' ? clientDetails.businessLocation : 'NA'}}</td>
+                    </tr>
+                    <tr>
+                        <td><font style="font-weight: 900;">Business Type : </font> {{clientDetails.businessTypeString != null && clientDetails.businessTypeString != '' ? clientDetails.businessTypeString : 'NA'}}</td>
+                    </tr>
+                    <tr>
+                        <td><font style="font-weight: 900;">Email : </font> {{clientDetails.user.email != null && clientDetails.user.email != '' ? clientDetails.user.email : 'NA'}}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-bottom: 8px;"><font style="font-weight: 900;">Phone Number : </font>{{clientDetails.user.phoneNumber != null && clientDetails.user.phoneNumber != '' ? clientDetails.user.phoneNumber : 'NA'}}</td>
+                    </tr>
+                </table>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <table  id="items" style="border: 1px solid; width:100%">
+                    <thead>
+                      <tr>
+                        <th colspan="2" style="text-align: center; width: 80%; border: 1px solid black; background-color: lightgrey;">Description</th>
+                        <th style="border: 1px solid black; text-align: center; background-color: lightgrey;">Amount (AED)</th>
+                      </tr>
+                    </thead>
+                    <tbody style="border: 1px solid;">
+                        <tr>
+                            <td colspan="2" style="border-right: 1px solid black; padding: 10px;" *ngIf="clientDetails?.star == 1">{{siteLabel?.star5}}</td>
+                            <td colspan="2" style="border-right: 1px solid black; padding: 10px;" *ngIf="clientDetails?.star == 2">{{siteLabel?.star4}}</td>
+                            <td colspan="2" style="border-right: 1px solid black; padding: 10px;" *ngIf="clientDetails?.star == 3">{{siteLabel?.star3}}</td>
+                            <td colspan="2" style="border-right: 1px solid black; padding: 10px;" *ngIf="clientDetails?.star == 4">{{siteLabel?.less3Star}}</td>
+                            <td colspan="2" style="border-right: 1px solid black; padding: 10px;" *ngIf="clientDetails?.star == 5">{{siteLabel?.hotelApartmentStar}}</td>
+                            <td colspan="2" style="border-right: 1px solid black; padding: 10px;" *ngIf="clientDetails?.star == 6">{{siteLabel?.restaurantsStar}}</td>
+                            <td colspan="2" style="border-right: 1px solid black; padding: 10px;" *ngIf="clientDetails?.star == 7">{{siteLabel?.reexportStar}}</td>
+                            <td colspan="2" style="border-right: 1px solid black; padding: 10px;" *ngIf="clientDetails?.star == 8">{{siteLabel?.floatingStar}}</td>
+                            <td colspan="2" style="border-right: 1px solid black; padding: 10px;" *ngIf="clientDetails?.star == 9">{{siteLabel?.shopStar}}</td>
+                            <td colspan="2" style="border-right: 1px solid black; padding: 10px;" *ngIf="clientDetails?.star == 10" style="word-wrap: break-word !important; white-space: break-spaces;">{{siteLabel?.importExportStar}}</td>
+                            <td colspan="2" style="border-right: 1px solid black; padding: 10px;" *ngIf="clientDetails?.star == 11">{{siteLabel?.campStar}}</td>
+                            <td colspan="2" style="border-right: 1px solid black; padding: 10px;" *ngIf="clientDetails?.star == 12">{{siteLabel?.hospitalityStar}}</td>
+                            
+                            <td style="border-right: 1px solid black; text-align: right; padding: 10px;" *ngIf="clientDetails?.star == 1">150,020</td>
+                            <td style="border-right: 1px solid black; text-align: right; padding: 10px;" *ngIf="clientDetails?.star == 2">100,020</td>
+                            <td style="border-right: 1px solid black; text-align: right; padding: 10px;" *ngIf="clientDetails?.star == 3">70,020</td>
+                            <td style="border-right: 1px solid black; text-align: right; padding: 10px;" *ngIf="clientDetails?.star == 4">45,020</td>
+                            <td style="border-right: 1px solid black; text-align: right; padding: 10px;" *ngIf="clientDetails?.star == 5">40,020</td>
+                            <td style="border-right: 1px solid black; text-align: right; padding: 10px;" *ngIf="clientDetails?.star == 6">25,020</td>
+                            <td style="border-right: 1px solid black; text-align: right; padding: 10px;" *ngIf="clientDetails?.star == 7">25,020</td>
+                            <td style="border-right: 1px solid black; text-align: right; padding: 10px;" *ngIf="clientDetails?.star == 8">25,020</td>
+                            <td style="border-right: 1px solid black; text-align: right; padding: 10px;" *ngIf="clientDetails?.star == 9">25,020</td>
+                            <td style="border-right: 1px solid black; text-align: right; padding: 10px;" *ngIf="clientDetails?.star == 10">500,020</td>
+                            <td style="border-right: 1px solid black; text-align: right; padding: 10px;" *ngIf="clientDetails?.star == 11">25,020</td>
+                            <td style="border-right: 1px solid black; text-align: right; padding: 10px;" *ngIf="clientDetails?.star == 12">25,020</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right: 1px solid black;" colspan="2">&nbsp;</td>
+                            <td style="border-right: 1px solid black;">&nbsp;</td>
+                        </tr>
+                    </tbody>
+                    <tfoot style="border: 1px solid;">
+                      <tr>
+                        <th style="border: 1px solid black; text-align: center; width: 60%;">Thank You</th>
+                        <th style="border: 1px solid black; text-align: center">TOTAL</th>
+                        <td style="border-right: 1px solid black; text-align: right; padding: 10px;" *ngIf="clientDetails?.star == 1">150,020</td>
+                        <td style="border-right: 1px solid black; text-align: right; padding: 10px;" *ngIf="clientDetails?.star == 2">100,020</td>
+                        <td style="border-right: 1px solid black; text-align: right; padding: 10px;" *ngIf="clientDetails?.star == 3">70,020</td>
+                        <td style="border-right: 1px solid black; text-align: right; padding: 10px;" *ngIf="clientDetails?.star == 4">45,020</td>
+                        <td style="border-right: 1px solid black; text-align: right; padding: 10px;" *ngIf="clientDetails?.star == 5">40,020</td>
+                        <td style="border-right: 1px solid black; text-align: right; padding: 10px;" *ngIf="clientDetails?.star == 6">25,020</td>
+                        <td style="border-right: 1px solid black; text-align: right; padding: 10px;" *ngIf="clientDetails?.star == 7">25,020</td>
+                        <td style="border-right: 1px solid black; text-align: right; padding: 10px;" *ngIf="clientDetails?.star == 8">25,020</td>
+                        <td style="border-right: 1px solid black; text-align: right; padding: 10px;" *ngIf="clientDetails?.star == 9">25,020</td>
+                        <td style="border-right: 1px solid black; text-align: right; padding: 10px;" *ngIf="clientDetails?.star == 10">500,020</td>
+                        <td style="border-right: 1px solid black; text-align: right; padding: 10px;" *ngIf="clientDetails?.star == 11">25,020</td>
+                        <td style="border-right: 1px solid black; text-align: right; padding: 10px;" *ngIf="clientDetails?.star == 12">25,020</td>
+                        <td style="border-right: 1px solid black; text-align: right; padding: 10px;" *ngIf="clientDetails?.star == null">0</td>
+                      </tr>
+                    </tfoot>
+                  
+                  </table>
+            </td>
+        </tr>
+        <tr>
+          <td colspan="3" style="font-weight: 900; font-size: large; padding-top: 20px; padding-bottom: 10px;">Payment Option</td>
+        </tr>
+        <tr>
+            <td colspan="3">
+              <table  id="items" style="border: 1px solid; width:100%">
+                    <tr>
+                      <th style="border: 1px solid black; text-align: left; width: 60%; padding: 10px;">Cash on CID Reception</th>
+                      <td style="border-right: 1px solid black; border-bottom: 1px solid black; text-align: left; padding: 10px;"></td>                      
+                    </tr>          
+                    <tr>
+                      <th style="border: 1px solid black; text-align: left; width: 60%; padding: 10px;">Dubai Smart Payment</th>
+                      <td style="border-right: 1px solid black; text-align: left; padding: 10px;"><a target="blank" href="https://www.smartdubai.ae/">https://www.smartdubai.ae/</a></td>
+                    </tr>
+                </table>
+          </td>
+        </tr>
+    </table>   
+</div> 

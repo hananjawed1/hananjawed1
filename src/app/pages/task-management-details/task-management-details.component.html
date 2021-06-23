@@ -1,0 +1,296 @@
+<div class="container-fluid">
+<!-- breadcrumb -->
+<div class="breadcrumb-header justify-content-between">
+    <div class="my-auto">
+      <div class="d-flex">
+        <h4 class="content-title mb-0 my-auto">{{siteLabel.taskManagementDetails}}</h4>
+      </div>
+    </div>
+  </div>
+  <!-- breadcrumb -->
+
+
+<div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="d-flex justify-content-between align-items-center flex-wrap p-2 border-bottom" style="background-color: #008755;">
+        <div>
+          <h5 class="font-weight-bold display-5" style="color: white;">{{siteLabel.taskInformation}}</h5>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <tr>
+            <th>{{siteLabel.taskName}}</th>
+            <td>{{objTaskDetails?.taskName}}</td>
+          </tr>
+          <tr>
+            <th>{{siteLabel.taskDescription}}</th>
+            <td>{{objTaskDetails?.taskDescription}}</td>
+          </tr>
+          <tr>
+            <th>{{siteLabel.startDate}}</th>
+            <td>{{objTaskDetails?.startDate}}</td>
+          </tr>
+          <tr>
+            <th>{{siteLabel.endDate}}</th>
+            <td>{{objTaskDetails?.endDate}}</td>
+          </tr>
+          <tr>
+            <th>{{siteLabel.priorityLevel}}</th>
+            <td *ngIf='objTaskDetails?.priorityLevel===1'>{{siteLabel.high}}</td>
+            <td *ngIf='objTaskDetails?.priorityLevel===2'>{{siteLabel.medium}}</td>
+            <td *ngIf='objTaskDetails?.priorityLevel===3'>{{siteLabel.low}}</td>
+            
+          </tr>
+          <tr>
+            <th>{{siteLabel.inspection}}</th>
+            <td *ngIf='objTaskDetails?.inspection===1'>{{siteLabel.normalInspection}}</td>
+            <td *ngIf='objTaskDetails?.inspection===2'>{{siteLabel.surpriseInspection}}</td>
+          </tr>
+          <tr>
+            <th>{{siteLabel.taskType}}</th>
+            <td *ngIf='objTaskDetails?.taskType != null'>{{objTaskDetails.taskType}}</td>
+            <td *ngIf='objTaskDetails?.taskType == null'>-</td>
+          </tr>
+          <tr>
+            <th>{{siteLabel.status}}</th>
+            <td *ngIf='objTaskDetails?.status===1'>{{siteLabel.new}}</td>
+            <td *ngIf='objTaskDetails?.status===2'>{{siteLabel.inProgress}}</td>
+            <td *ngIf='objTaskDetails?.status===3'>{{siteLabel.accepted}}</td>
+            <td *ngIf='objTaskDetails?.status===4'>{{siteLabel.atLocation}}</td>
+            <td *ngIf='objTaskDetails?.status===5'>{{siteLabel.completed}}</td>
+            <td *ngIf='objTaskDetails?.status===6'>{{siteLabel.cancelled}}</td>
+            <td *ngIf='objTaskDetails?.status===7'>{{siteLabel.rejected}}</td>
+            <td *ngIf='objTaskDetails?.status===8'>{{siteLabel.closedByAdmin}}</td>
+            <td *ngIf='objTaskDetails?.status===9'>{{siteLabel.returned}}</td>
+          </tr>
+          <tr *ngIf='objTaskDetails?.status===9'>
+            <th>{{siteLabel.returnNotes}}</th>
+            <td *ngIf="objTaskDetails?.returnNote != null && objTaskDetails?.returnNote != ''">{{objTaskDetails?.returnNote}}</td>
+            <td *ngIf="objTaskDetails?.returnNote == null || objTaskDetails?.returnNote == ''">NA</td>
+          </tr>
+          <tr>
+          <tr>
+            <th>{{siteLabel.taskCompletionTime}}</th>
+            <td *ngIf="objTaskDetails?.timedifference != ''">{{objTaskDetails?.timedifference}}</td>
+            <td *ngIf="objTaskDetails?.timedifference == ''">NA</td>
+          </tr>
+          <tr>
+            <th>{{siteLabel.location}}</th>
+            <td>{{objTaskDetails?.location}}</td>
+          </tr>
+          <tr>
+            <th>{{siteLabel.systemEmployees}}</th>
+            <td>{{employeeNameList}}</td>
+          </tr>
+          <tr>
+            <th>{{siteLabel.empGroup}}</th>
+            <td>{{employeeGroupNameList}}</td>
+          </tr>
+          <tr>
+            <th>{{siteLabel.assignChecklistGroup}}</th>
+            <td *ngIf="assignCheckListDetails == ''">NA</td>
+            <td *ngIf="assignCheckListDetails != ''">
+              <table style="width: 100%;">
+                <tr *ngFor='let assignChecklist of assignCheckListDetails'>
+                  <td style="width: 20%;">{{assignChecklist.name}}</td>
+                  <td style="width: 80%;">
+                    <table style="width: 100%;">                     
+                      <tr *ngFor='let checklistOptions of assignChecklist.checkListOptionsDetails'>
+                        <div><label>{{siteLabel.question}}: </label> &nbsp;{{checklistOptions.question}}</div>
+                        <div *ngIf="checklistOptions.finalAnswer != ''"><label> {{siteLabel.answer}}: </label>&nbsp;{{checklistOptions.finalAnswer}}</div>
+                        <div *ngIf="checklistOptions.finalAnswer == ''"><label> {{siteLabel.answer}}: </label>&nbsp;NA</div>
+                        <hr>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table> 
+            </td>
+          </tr>
+          <tr>
+            <th>{{siteLabel.taskNotes}}</th>
+            <td *ngIf="notesDetails == ''">NA</td>
+            <td *ngIf="notesDetails != ''">
+              <table>
+                <tr *ngFor="let notes of notesDetails">
+                  <td>{{notes.taskNote}}</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <th>{{siteLabel.taskImages}}</th>
+            <td *ngIf="imageDetails.length == 0">NA</td>
+            <td *ngIf="imageDetails.length > 0">
+              <table>
+                <tr *ngFor="let item of imageDetails">
+                  <td>
+                    <a class="btn btn-info ml-2" data-target="#exampleModalTaskImage"
+                      data-toggle="modal" (click)="showTaskImage(item)">{{siteLabel.showAttachment}}</a>
+                      {{item.taskImageOrVideo.split("/")[7]}}
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <th>{{siteLabel.taskVideo}}</th>
+            <td *ngIf="videoDetails.length == 0">NA</td>
+            <td *ngIf="videoDetails.length > 0">
+              <table>
+                <tr *ngFor="let item of videoDetails">
+                  <td>
+                    <a class="btn btn-info ml-2" data-target="#exampleModalVideo"
+                      data-toggle="modal" (click)="playTaskVideo(item)">{{siteLabel.playVideo}}</a>
+                      {{item.taskImageOrVideo.split("/")[7]}}
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2"><a class="btn btn-danger" (click)="exportToPdf()">Export To PDF</a></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="d-flex justify-content-between align-items-center flex-wrap p-2 border-bottom" style="background-color:#F14236;">
+        <div>
+          <h5 class="font-weight-bold display-5" style="color: white;">{{siteLabel.status}}</h5>
+        </div>
+      </div>
+      <div class="card-body">
+        <form [formGroup]='historyGroup' id="task_form" method="post" name="task_form">
+          <label>{{siteLabel.changeStatusTo}} </label>
+          <select formControlName='status' [(ngModel)]='taskHistoryVM.status' class="form-control" name="Status">
+            <option  [ngValue]="0" selected >{{siteLabel.selectStatus}}</option>                              
+            <option [ngValue]=StatusForTask.New>{{siteLabel.new}}</option>
+            <option [ngValue]=StatusForTask.InProgress>{{siteLabel.inProgress}}</option>
+            <option [ngValue]=StatusForTask.Accepted>{{siteLabel.accepted}}</option>
+            <option [ngValue]=StatusForTask.AtLocation>{{siteLabel.atLocation}}</option>
+            <option [ngValue]=StatusForTask.Completed>{{siteLabel.completed}}</option>
+            <option [ngValue]=StatusForTask.Cancelled>{{siteLabel.cancelled}}</option>
+            <option [ngValue]=StatusForTask.Rejected>{{siteLabel.rejected}}</option>
+            <option [ngValue]=StatusForTask.ClosedByAdmin>{{siteLabel.closedByAdmin}}</option>
+            <option [ngValue]=StatusForTask.Returned>{{siteLabel.returned}}</option>    
+          </select>
+
+          <br><br>
+          <textarea formControlName='message' class="form-control" [(ngModel)]='taskHistoryVM.message' id="message_box" name="message_box" placeholder="Message"></textarea> 
+          <br>
+          <button class="btn btn-success mt-2" (click)='updateTaskStatus()'>{{siteLabel.accept}}</button>
+          <button class="btn btn-danger mt-2">{{siteLabel.reject}}</button>
+          <br>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="d-flex justify-content-between align-items-center flex-wrap p-2 border-bottom" style="background-color: #008755;">
+        <div>
+          <h5 class="font-weight-bold display-5" style="color: white;">{{siteLabel.requestHistory}}</h5>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-5">
+            <select [(ngModel)]='historySearchVM.status' class="form-control" name="historyStatus" (change)='getHistory(0)'>
+              <option [ngValue]="0" selected >{{siteLabel.selectStatus}}</option>   
+              <option [ngValue]=StatusForTask.New>{{siteLabel.new}}</option>                           
+              <option [ngValue]=StatusForTask.InProgress>{{siteLabel.inProgress}}</option>
+              <option [ngValue]=StatusForTask.Accepted>{{siteLabel.accepted}}</option>
+              <option [ngValue]=StatusForTask.AtLocation>{{siteLabel.atLocation}}</option>
+              <option [ngValue]=StatusForTask.Completed>{{siteLabel.completed}}</option>
+              <option [ngValue]=StatusForTask.Cancelled>{{siteLabel.cancelled}}</option>
+              <option [ngValue]=StatusForTask.Rejected>{{siteLabel.rejected}}</option>
+              <option [ngValue]=StatusForTask.ClosedByAdmin>{{siteLabel.closedByAdmin}}</option>
+              <option [ngValue]=StatusForTask.Returned>{{siteLabel.returned}}</option>    
+            </select>
+          </div>
+
+          <div class="col-md-5">
+              <input [(ngModel)]="historySearchVM.date" class="form-control" name="date" placeholder="Date" type="date" (change)='getHistory(0)'>
+          </div>
+        </div>
+
+        <div *ngIf="loading1" class="row">
+          <div class="col-md-12">
+            <div class="alert alert-warning">
+              <span class="spinner-border spinner-border-sm mr-1"></span>
+              Loading....
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="loading1===false" class="table-responsive" style="margin-top: 20px;">
+          <table class="table text-md-nowrap dataTable no-footer ">
+            <thead class="thead-dark">
+              <tr>
+                <th class="wd-15p border-bottom-0">{{siteLabel.taskName}}</th>
+                <th class="wd-15p border-bottom-0">{{siteLabel.notes}}</th>
+                <th class="wd-15p border-bottom-0">{{siteLabel.creationDate}}</th>
+                <th class="wd-25p border-bottom-0">{{siteLabel.status}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor='let i of history'>
+                <td>{{i.taskManagement.taskName}}</td>
+                <td>{{i.notes}}</td>
+                <td>{{i.taskManagement.creationDateString}}</td>
+                <td>
+                  <label *ngIf='i.status===1' class="badge badge-pill badge-success">{{siteLabel.new}}</label>
+                  <label *ngIf='i.status===2' class="badge badge-pill badge-success">{{siteLabel.inProgress}}</label>
+                  <label *ngIf='i.status===3' class="badge badge-pill badge-warning">{{siteLabel.accepted}}</label>
+                  <label *ngIf='i.status===4' class="badge badge-pill badge-success">{{siteLabel.atLocation}}</label>
+                  <label *ngIf='i.status===5' class="badge badge-pill badge-warning">{{siteLabel.completed}}</label>
+                  <label *ngIf='i.status===6' class="badge badge-pill badge-success">{{siteLabel.cancelled}}</label>
+                  <label *ngIf='i.status===7' class="badge badge-pill badge-warning">{{siteLabel.rejected}}</label> 
+                  <label *ngIf='i.status===8' class="badge badge-pill badge-warning">{{siteLabel.closedByAdmin}}</label> 
+                  <label *ngIf='i.status===9' class="badge badge-pill badge-warning">{{siteLabel.returned}}</label>  
+                </td>
+              </tr>
+            </tbody>
+            <tfoot class="thead-dark">
+              <tr>
+                <th>{{history?history.length:0}} {{siteLabel.total}}</th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+            <ul class="pagination mt-3 mb-0 justify-content-end" [hidden]="(loading || pagesCount < 2)">
+              <li class="page-item">
+                <a class="page-link" [hidden]="page == 0" href="javascript:void(0)" (click)="getHistory(0)">{{siteLabel.first}}</a>
+              </li>
+              <li class="paginate_button page-item previous">
+                <a class="page-link" href="javascript:void(0)" [hidden]="page == 0" (click)="getHistory(page-1)">
+                  {{siteLabel.previous}}
+                </a>
+              </li>
+              <li class="page-item" *ngFor='let n of range()'
+                  [class]="{active: n == page}">
+                <a class="page-link" href="javascript:void(0)" (click)="getHistory(n)" *ngIf="n != page">{{n+1}}</a>
+                <a class="page-link" href="javascript:void(0)" *ngIf="n == page">{{n+1}}</a>
+              </li>
+              <li class="paginate_button page-item next">
+                <a class="page-link" href="javascript:void(0)" [hidden]="page == pagesCount - 1" (click)="getHistory(page+1)">
+                  {{siteLabel.next}}
+                </a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="javascript:void(0)" [hidden]="page == pagesCount - 1" (click)="getHistory(pagesCount - 1)">{{siteLabel.last}}</a>
+              </li>
+            </ul>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,110 @@
+<div class="container-fluid">
+
+  <!-- breadcrumb -->
+  <div class="breadcrumb-header justify-content-between">
+    <div class="my-auto">
+      <div class="d-flex">
+        <h4 class="content-title mb-0 my-auto">{{siteLabel.addAgent}}</h4>
+      </div>
+    </div>
+
+  </div>
+  <!-- breadcrumb -->
+
+  <!-- row opened -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card" id="tabs-style4">
+        <div class="card-body">
+          <form [formGroup]='formAgent' id="employee_form" name="employee_form">
+            <div class="form-body">
+              <div class="panel panel-primary tabs-style-2">
+                <div class="row">
+                  <div class="row row-sm-12 col-md-12 mt-3">
+                    <div class="col-md-6 col-lg-6">
+                      <label for="name">{{siteLabel.agentName}}*</label> 
+                      <input formControlName='name' [(ngModel)]='objAgent.name' class="form-control" id="name" name="name" placeholder="Name"
+                         type="text">
+                         <span *ngIf="formAgent.get('name').invalid && (formAgent.get('name').dirty || formAgent.get('name').touched)"
+                          class="alert alert-danger">Please Enter Name</span> 
+                    </div>
+                    <div class="col-md-6 col-lg-6 mg-t-20 mg-md-t-0">
+                      <label for="phone_no">{{siteLabel.phoneNumber}}*</label>
+                      <input formControlName='phoneNumber' [(ngModel)]='objAgent.phoneNumber' maxlength="10" pattern="\d{10}" class="form-control" id="phone_no" name="phone_no" placeholder="Phone Number"
+                         type="text">
+                         <span *ngIf="formAgent.get('phoneNumber').invalid && (formAgent.get('phoneNumber').dirty || formAgent.get('phoneNumber').touched)"
+                            class="alert alert-danger">Please Enter Phone Number</span> 
+                    </div>
+                  </div>
+                  <div class="row row-sm-12 col-md-12 mt-3">
+                    <div class="col-md-6 col-lg-6">
+                      <label for="email">{{siteLabel.email}}*</label>
+                      <input formControlName='email' [(ngModel)]='objAgent.email' class="form-control" id="email" name="email" placeholder="Email"
+                         type="text">
+                         <span *ngIf="formAgent.get('email').invalid && (formAgent.get('email').dirty || formAgent.get('email').touched)"
+                      class="alert alert-danger">Please Enter Email</span>    
+                    </div>
+                    <div class="col-md-6 col-lg-6 mg-t-20 mg-md-t-0">
+                      <label for="password">{{siteLabel.password}}*</label>
+                      <input formControlName='password' [(ngModel)]='objAgent.password' class="form-control" id="password" name="password"
+                         placeholder="Password" type="password">
+                         <span *ngIf="formAgent.get('password').invalid && (formAgent.get('password').dirty || formAgent.get('password').touched)"
+                      class="alert alert-danger">Please Enter Password</span> 
+                    </div>
+                  </div>
+                  <div class="row row-sm-12 col-md-12 mt-3">
+                    <div class="col-md-6 col-lg-6">
+                      <label for="confirm_password">{{siteLabel.confirmPassword}}*</label>
+                      <input formControlName='confirmPassword' [(ngModel)]='objAgent.confirmPassword' class="form-control" id="confirm_password" name="confirm_password"
+                         placeholder="Confirm Password" type="password">
+                         <span *ngIf="formAgent.get('confirmPassword').invalid && (formAgent.get('confirmPassword').dirty || formAgent.get('confirmPassword').touched)"
+                          class="alert alert-danger">Please Enter Confirm Password</span>
+                          <span *ngIf="formAgent.get('confirmPassword').value !=formAgent.get('password').value && (formAgent.get('confirmPassword').dirty || formAgent.get('confirmPassword').touched)"
+                          class="alert alert-danger">Confirm & Password does not match</span> 
+                    </div>
+                    <div class="col-md-6 col-lg-6 mg-t-20 mg-md-t-0">
+                      <label for="agentdetails">{{siteLabel.notes}}</label>
+                      <input formControlName='notes' [(ngModel)]='objAgent.notes' class="form-control" id="agentdetails" name="agentdetails"
+                             placeholder="Notes " type="text">
+                    </div>
+                  </div>
+                  <div class="col-md-8 col-lg-8 mt-3">
+                    <label for="logo">{{siteLabel.logo}}*</label>
+                    <input formControlName='filelogo' (change)="onChange($event)"  class="form-control" id="logo" name="logo" type="file">   
+                  </div>
+                  <div class="col-md-2 col-lg-2 mt-3 border">
+                    <img [src]="preview" style="width: 250px"/>
+                  </div>
+                  <div class="col-md-12 mt-3">
+                    <label>Status</label>
+                    <select class="form-control">
+                      <option value="">Active</option>
+                      <option value="">InActive</option>
+                    </select>
+                  </div>
+                  <div class="col-md-12 mt-4 mb-3">
+                    <button class="btn btn-success"
+                            [disabled]='!formAgent.valid || loading' (click)='saveAgent()'>
+                      <i class="btn-icon-prepend"
+                        data-feather="save">
+                      </i>
+                      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                      {{siteLabel.submit}}
+                    </button>
+                    <button class="btn btn-light" type="button">
+                      <i class="btn-icon-prepend"
+                        data-feather="x"></i>
+                      {{siteLabel.cancel}}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!--/div-->
+  </div>
+  <!-- /row -->
+</div>

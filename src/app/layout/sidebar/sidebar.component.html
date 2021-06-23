@@ -1,0 +1,138 @@
+<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+<aside class="app-sidebar sidebar-scroll">
+  <div class="main-sidebar-header active bg-primary">
+    <a [routerLink]="['/dashboard']" class="desktop-logo logo-light active">
+      <img alt="logo" class="main-logo" src="assets/img/brand/logo1_white.png" style="height: 2.5rem"></a>
+    <a [routerLink]="['/dashboard']" class="desktop-logo logo-dark active">
+      <img alt="logo" class="main-logo dark-theme" src="assets/img/brand/logo1_white.png"></a>
+    <a [routerLink]="['/dashboard']" class="logo-icon mobile-logo icon-light active">
+      <img alt="logo" class="logo-icon" src="assets/img/brand/dubai-police-icon.png">
+    </a>
+    <a [routerLink]="['/dashboard']" class="logo-icon mobile-logo icon-dark active">
+      <img alt="logo" class="logo-icon dark-theme" src="assets/img/brand/dubai-police-icon.png">
+    </a>
+  </div>
+  <div class="main-sidemenu">
+    <div class="app-sidebar__user clearfix">
+    </div>
+    <ul class="side-menu">
+      <li class="side-item side-item-category">{{siteLabel.main}}</li>
+      <li class="slide">
+        <a [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="'active'" [routerLink]="['/dashboard']" class="side-menu__item">
+          <i class="fa fa-tachometer-alt side-menu__icon"></i>
+          <span class="side-menu__label">{{siteLabel.dashboard.dashboard}}</span>
+        </a>
+      </li>
+      <li class="side-item side-item-category">{{siteLabel.requests}}</li>
+      <li class="slide">
+        <a [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="'active'" [routerLink]="['/membership-request']" class="side-menu__item">
+          <i class="fa fa-check-circle side-menu__icon"></i>
+          <span class="side-menu__label">{{siteLabel.membershipRequest}}</span>
+        </a>
+      </li>
+      <li class="slide">
+        <a [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="'active'" [routerLink]="['/file-opening']" class="side-menu__item">
+          <i class="fa fa-file side-menu__icon"></i>
+          <span class="side-menu__label">{{siteLabel.fileOpening}}</span>
+        </a>
+      </li>
+      <!-- <ng-container *ngIf="isFullAdmin()">
+        <li class="slide">
+          <a [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="'active'" [routerLink]="['/manage-inspection-request']" class="side-menu__item">
+            <i class="fa fa-id-card side-menu__icon"></i>
+            <span class="side-menu__label">{{siteLabel.inspectionRequest}}</span>
+          </a>
+        </li>
+      </ng-container> -->
+      <li class="slide">
+        <a [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="'active'" [routerLink]="['/manage-Licence']" class="side-menu__item">
+          <i class="fa fa-id-card side-menu__icon"></i>
+          <span class="side-menu__label">{{siteLabel.manageLicense}}</span>
+        </a>
+      </li>
+      <li class="slide">
+        <a [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="'active'" [routerLink]="['/membership-waiting']" class="side-menu__item">
+          <i class="fa fa-file side-menu__icon"></i>
+          <span class="side-menu__label">{{siteLabel.waitingForHighAdmin}}</span>
+        </a>
+      </li>
+
+      <li class="side-item side-item-category">{{siteLabel.systemEmployees}}</li>
+      <li class="slide">
+        <a [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="'active'" [routerLink]="['/manage-employee']" class="side-menu__item">
+          <i class="fa fa-user-circle side-menu__icon"></i>
+          <span class="side-menu__label">{{siteLabel.manageEmployees}}</span>
+        </a>
+      </li>
+
+      <li class="slide">
+        <a [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="'active'" [routerLink]="['/checklist-management']" class="side-menu__item">
+          <i class="fa fa-tasks side-menu__icon"></i>
+          <span class="side-menu__label">{{siteLabel.checklistManagement}}</span>
+        </a>
+      </li>
+      <li class="slide">
+        <a [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="'active'" [routerLink]="['/task-management']" class="side-menu__item">
+          <i class="fa fa-rocket side-menu__icon"></i>
+          <span class="side-menu__label">{{siteLabel.taskManagement}}</span>
+        </a>
+      </li>
+
+      <li class="side-item side-item-category">{{siteLabel.agents}}</li>
+      <li class="slide">
+        <a [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="'active'" [routerLink]="['/agents']"
+           class="side-menu__item">
+          <i class="fa fa-users side-menu__icon"></i>
+          <span class="side-menu__label">{{siteLabel.manageAgents}}</span>
+        </a>
+      </li>
+      <li class="slide">
+        <a [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="'active'" [routerLink]="['/sales-point-user']"
+           class="side-menu__item">
+          <i class="fa fa-signal side-menu__icon"></i>
+          <span class="side-menu__label">{{siteLabel.salesPointUsers}}</span>
+        </a>
+      </li>
+      <li class="slide">
+        <a [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="'active'" [routerLink]="['/purchase']"
+           class="side-menu__item">
+          <i class="fa fa-hourglass side-menu__icon"></i>
+          <span class="side-menu__label">{{siteLabel.purchases}}</span>
+        </a>
+      </li>
+      <!-- <li class="slide">
+        <a [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="'active'" [routerLink]="['/card-statuses']"
+           class="side-menu__item">
+          <i class="fa fa-id-card side-menu__icon"></i>
+          <span class="side-menu__label">{{siteLabel.manageCardStatuses}}</span>
+        </a>
+      </li> -->
+
+      <li class="side-item side-item-category">{{siteLabel.reports}}</li>
+      <li class="slide">
+        <a [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="'active'" [routerLink]="['/membership-report']"
+           class="side-menu__item">
+          <i class="fa fa-id-card side-menu__icon"></i>
+          <span class="side-menu__label">{{siteLabel.membershipReports}}</span>
+        </a>
+      </li>
+      <li class="slide">
+        <a [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="'active'" [routerLink]="['/financial-report']"
+           class="side-menu__item">
+          <i class="fa fa-chart-line side-menu__icon"></i>
+          <span class="side-menu__label">{{siteLabel.addFinancialReports}}</span>
+        </a>
+      </li>
+
+      <li class="side-item side-item-category">{{siteLabel.notifications}}</li>
+      <li class="slide">
+        <a [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="'active'" [routerLink]="['/notification']"
+           class="side-menu__item">
+          <i class="fa fa-bell side-menu__icon"></i>
+          <span class="side-menu__label">{{siteLabel.manageNotifications}}</span>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+</aside>

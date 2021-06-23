@@ -1,0 +1,218 @@
+<div class="container-fluid">
+
+  <!-- breadcrumb -->
+  <div class="breadcrumb-header justify-content-between">
+    <div class="my-auto">
+      <div class="d-flex">
+        <h4 class="content-title mb-0 my-auto">{{siteLabel.agentsList}}</h4>
+      </div>
+    </div>
+    <div class="d-flex my-xl-auto right-content">
+      <div class="pr-1 mb-3 mb-xl-0">
+        <a [routerLink]="['/add-agent']" class="btn btn-primary">{{siteLabel.addNew}} </a>
+      </div>
+    </div>
+  </div>
+  <!-- breadcrumb -->
+
+  <!-- row opened -->
+  <div class="row row-sm">
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row row-sm mb-4">
+            <div class="col-lg-3 mb-2">
+              <input class="form-control" [(ngModel)]='objSearchAgent.name' (input)='this.getAgents(0)'
+              placeholder="{{siteLabel.searchByFullName}}" type="text">
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <input class="form-control" [(ngModel)]='objSearchAgent.phone' (input)='this.getAgents(0)'
+                   placeholder="{{siteLabel.searchByPhone}}" type="text">
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <input class="form-control" [(ngModel)]='objSearchAgent.email' (input)='this.getAgents(0)'
+              placeholder="{{siteLabel.searchByEmail}}" type="text">
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <select class="form-control" [(ngModel)]=objSearchAgent.status (change)='this.getAgents(0)'>
+                <option [ngValue]=0 selected>{{siteLabel.searchByStatus}}</option>
+                <option [ngValue]=StatusEnums.Active>{{siteLabel.active}}</option>
+                <option [ngValue]=StatusEnums.InActive>{{siteLabel.inactive}}</option>
+              </select>
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <button class="bg-primary btn text-white">{{siteLabel.reset}}</button>
+            </div>
+          </div>
+
+
+          <div class="table-responsive">
+            <div *ngIf="loading" class="row">
+              <div class="col-md-12">
+                <div class="alert alert-warning">
+                  <span class="spinner-border spinner-border-sm mr-1"></span>
+                  Loading....
+                </div>
+              </div>
+            </div>
+
+            <table *ngIf="loading===false" class="table text-md-nowrap dataTable no-footer" id="example1">
+              <thead class="thead-dark">
+              <tr>
+                <th class="wd-15p border-bottom-0">{{siteLabel.agentName}}</th>
+                <th class="wd-15p border-bottom-0">{{siteLabel.email}}</th>
+                <th class="wd-15p border-bottom-0">{{siteLabel.phoneNumber}}</th>
+                <th class="wd-25p border-bottom-0">{{siteLabel.status}}</th>
+                <th class="wd-5p border-bottom-0">{{siteLabel.action}}</th>
+              </tr>
+              </thead>
+              <tbody *ngIf='agents'>
+              <tr *ngFor='let a of agents'>
+                <td>{{a.user.name}}</td>
+                <td>{{a.user.email}}</td>
+                <td>{{a.user.phoneNumber}}</td>
+                <td>
+                  <label *ngIf='a.user.status===1' class="badge badge-pill badge-success">{{siteLabel.active}}</label>
+                  <label *ngIf='a.user.status===2' class="badge badge-pill badge-warning">{{siteLabel.inactive}}</label>
+                </td>
+                <td>
+                  <div class='btn-group'>
+                    <button aria-expanded="true" aria-haspopup="true" class="btn btn-danger dropdown-toggle btn-xs" data-toggle="dropdown">
+                      Action
+                    </button>
+                    <div class='dropdown-menu animated flipInX btn-sm'>
+                      <a class="dropdown-item" (click)='InActivateAgent(a)' href="javascript:void(0)">
+                        <span *ngIf='a.user.status===1'>{{siteLabel.active}}</span>
+                        <span *ngIf='a.user.status===2'>{{siteLabel.inactive}}</span>
+                      </a>
+                      <a class="dropdown-item" (click)='viewAgentDetails(a)' data-target="#exampleModalLong" data-toggle="modal" href="javascript:void(0)">
+                        View Details
+                      </a>
+                      <a class="dropdown-item" (click)='uploadLogoAgentId(a.agentId)' data-target="#updateLogoModal" data-toggle="modal" href="javascript:void(0)">
+                        {{siteLabel.updateLogo}}
+                      </a>
+                      <!--<a class="dropdown-item" (click)='editAgent(a)'>Edit Agent</a>-->
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+              <tfoot class="thead-dark">
+                <tr>
+                  <th>Total {{agents?agents.length:0}}</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </tfoot>
+            </table>
+            <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+              <ul class="pagination mt-3 mb-0 justify-content-end" [hidden]="(loading || pagesCount < 2)">
+                <li class="page-item">
+                  <a class="page-link" [hidden]="page == 0" href="javascript:void(0)" (click)="getAgents(0)">{{siteLabel.first}}</a>
+                </li>
+                <li class="paginate_button page-item previous">
+                  <a class="page-link" href="javascript:void(0)" [hidden]="page == 0" (click)="getAgents(page-1)">
+                    {{siteLabel.previous}}
+                  </a>
+                </li>
+                <li class="page-item" *ngFor='let n of range()'
+                    [class]="{active: n == page}">
+                  <a class="page-link" href="javascript:void(0)" (click)="getAgents(n)" *ngIf="n != page">{{n+1}}</a>
+                  <a class="page-link" href="javascript:void(0)" *ngIf="n == page">{{n+1}}</a>
+                </li>
+                <li class="paginate_button page-item next">
+                  <a class="page-link" href="javascript:void(0)" [hidden]="page == pagesCount - 1" (click)="getAgents(page+1)">
+                    {{siteLabel.next}}
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="javascript:void(0)" [hidden]="page == pagesCount - 1" (click)="getAgents(pagesCount - 1)">{{siteLabel.last}}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/div-->
+  </div>
+  <!-- /row -->
+</div>
+
+<div aria-hidden="true" aria-labelledby="exampleModalLongTitle" class="modal fade" id="exampleModalLong" role="dialog"
+     tabindex="-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{siteLabel.agentDetails}}</h5>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+
+          <table *ngIf='AgentDetails' class="table table-striped">
+            <tr>
+              <th>{{siteLabel.role}}</th> 
+              <td>{{AgentDetails.user.role}}</td>
+            </tr>
+            <tr>
+              <th>{{siteLabel.name}}</th>
+              <td>{{AgentDetails.user.name}}</td>
+            </tr>
+            <tr>
+              <th>{{siteLabel.email}}</th>
+              <td>{{AgentDetails.user.email}}</td>
+            </tr>
+            <tr>
+              <th>{{siteLabel.phoneNo}}</th>
+              <td>{{AgentDetails.user.phoneNumber}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-dismiss="modal" type="button">{{siteLabel.close}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div aria-hidden="true" aria-labelledby="updateLogoModal" class="modal fade" id="updateLogoModal" role="dialog" tabindex="-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateLogoModal">{{siteLabel.updateLogo}}</h5>
+        <button aria-label="Close" class="close" (click)='removedLastAttachment()' data-dismiss="modal" #closebutton type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          <div class="col-md-10">
+            <div class="form-group">
+              <label for="logo">{{siteLabel.logo}}*</label>
+              <input (change)="onChange($event)" #attachments class="form-control" id="logo" name="logo" type="file">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <img [src]="preview" style="width: 250px"/>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success" [disabled]="loadingLogo" (click)='uploadLogo()' type="button">
+          <span *ngIf="loadingLogo" class="spinner-border spinner-border-sm mr-1"></span>
+          {{siteLabel.update}}
+        </button>
+        <button class="btn btn-secondary" data-dismiss="modal" (click)='removedLastAttachment()' type="button">{{siteLabel.close}}</button>
+      </div>
+    </div>
+  </div>
+</div>

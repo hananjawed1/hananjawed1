@@ -1,0 +1,244 @@
+<div class="container-fluid">
+
+  <!-- breadcrumb -->
+  <div class="breadcrumb-header justify-content-between">
+    <div class="my-auto">
+      <div class="d-flex">
+        <h4 class="content-title mb-0 my-auto">{{siteLabel.dashboard.viewPurchases}}</h4>
+      </div>
+    </div>
+  </div>
+  <!-- breadcrumb -->
+
+
+  <!-- <div class="row row-sm">
+
+    <div class="col-lg-6 col-xl-3 col-md-6 col-12">
+      <div class="card bg-primary-gradient text-white ">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="icon1 mt-2 text-center">
+                <i class="fe fe-pie-chart tx-40"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mt-0 text-center">
+                <span class="text-white">Today</span>
+                <h2 class="text-white mb-0">332</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-xl-3 col-md-6 col-12">
+      <div class="card bg-danger-gradient text-white">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="icon1 mt-2 text-center">
+                <i class="fe fe-pie-chart tx-40"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mt-0 text-center">
+                <span class="text-white">Last 7 Days</span>
+                <h2 class="text-white mb-0">500</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-xl-3 col-md-6 col-12">
+      <div class="card bg-success-gradient text-white">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="icon1 mt-2 text-center">
+                <i class="fe fe-pie-chart tx-40"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mt-0 text-center">
+                <span class="text-white">This Month</span>
+                <h2 class="text-white mb-0">2300</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-xl-3 col-md-6 col-12">
+      <div class="card bg-warning-gradient text-white">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="icon1 mt-2 text-center">
+                <i class="fe fe-pie-chart tx-40"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mt-0 text-center">
+                <span class="text-white">Last Month</span>
+                <h2 class="text-white mb-0">5500</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+
+  <!-- row opened -->
+  <div class="row row-sm">
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row row-sm mb-4">
+            <div class="col-lg-3 mb-2">
+              <input class="form-control" placeholder="Search By Invoice Number" [(ngModel)]='searchPurchasesVM.invoiceNumber' (input)='searchPurchases(0)' type="text">
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <input class="form-control" [(ngModel)]='searchPurchasesVM.membershipNumber' (input)='searchPurchases(0)' placeholder="Search By Membership Number" type="text">
+            </div>
+
+            <div class="col-md-3">
+              <input class="form-control" [(ngModel)]='searchPurchasesVM.fromAmount' (input)='searchPurchases(0)' placeholder="From Amount" type="text">
+            </div>
+  
+            <div class="col-md-3">
+              <input class="form-control" placeholder="To Amount" [(ngModel)]='searchPurchasesVM.toAmount' (input)='searchPurchases(0)' type="text">
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <select class="form-control" [(ngModel)]='searchPurchasesVM.agentId' (change)="searchPurchases(0)">
+                <option value="0" selected>{{siteLabel.searchByAgent}}</option>
+                <option *ngFor="let i of agents" value={{i.agentId}}>{{i.user?.name}}</option>
+              </select>
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <select class="form-control" [(ngModel)]='searchPurchasesVM.locationId' (change)="searchPurchases(0)">
+                <option value="0" selected>{{siteLabel.searchByLocation}}</option>
+                <option *ngFor="let i of locations" value={{i?.locationId}}>{{i?.name}}</option>
+              </select>
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <select class="form-control" [(ngModel)]='searchPurchasesVM.salesPointUserId' (change)="searchPurchases(0)">
+                <option value="0" selected>{{siteLabel.searchBySalesPointUser}}</option>
+                <option *ngFor="let i of salesPoint" value={{i.salesPointUserId}}>{{i.user.name}}</option>
+              </select>
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">From Date</span>
+                </div>
+                <input class="form-control" placeholder="{{siteLabel.fromDate}}" [(ngModel)]='searchPurchasesVM.fromDate' (input)='changeDate()' type="date">
+              </div>
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">To Date</span>
+                </div>
+                <input class="form-control" placeholder="{{siteLabel.toDate}}" [(ngModel)]='searchPurchasesVM.toDate' (input)='changeDate()' type="date">
+              </div>
+            </div>
+
+
+            <div class="col-lg-12 mb-2">
+              <!-- <button class="bg-primary btn text-white" (click)="exportPDF()">Export To PDF</button> -->
+              <button class="bg-primary btn text-white" (click)="exportToExcel()">Export To Excel</button>
+              <button class="bg-primary btn text-white" (click)='resetSearch()'>{{siteLabel.reset}}</button>
+            </div>
+          </div>
+
+
+          <div class="table-responsive">
+            <div *ngIf="loading" class="row">
+              <div class="col-md-12">
+                <div class="alert alert-warning">
+                  <span class="spinner-border spinner-border-sm mr-1"></span>
+                  Loading....
+                </div>
+              </div>
+            </div>
+            <table class="table text-md-nowrap dataTable no-footer" id="example1">
+              <thead class="thead-dark">
+                <tr>
+                  <th class="wd-15p border-bottom-0">{{siteLabel.invoiceNumber}}</th>
+                  <th class="wd-15p border-bottom-0">{{siteLabel.membershipNumber}}</th>
+                  <th class="wd-15p border-bottom-0">{{siteLabel.purchasedAmount}}</th>
+                  <th class="wd-15p border-bottom-0">{{siteLabel.dateTime}}</th>
+                  <th class="wd-15p border-bottom-0">{{siteLabel.agent}}</th>
+                  <th class="wd-15p border-bottom-0">{{siteLabel.locations}}</th>
+                  <th class="wd-15p border-bottom-0">{{siteLabel.totalSalesPoint}}</th>
+                  <th class="wd-15p border-bottom-0">{{siteLabel.notes}}</th>
+                </tr>
+              </thead>
+              <tbody *ngIf='purchases'>
+                <tr *ngFor='let p of purchases' >
+                  <td>{{p.invoiceNumber}}</td>
+                  <td>{{p.memberships.membershipNumber}}</td>
+                  <td>{{p.totalAmount}} DHS</td>
+                  <td>{{p.creationDateString}}</td>
+                  <td>{{p.salesPointUser.agent.user.name}}</td>
+                  <td>{{p.salesPointUser.locations.name}}</td>
+                  <td>{{p.salesPointUser.user.name}}</td>
+                  <td>{{p.notes}}</td>
+                </tr>
+              </tbody>
+              <tfoot class="thead-dark">
+                <tr>
+                  <th>{{siteLabel.total}} {{purchases?purchases.length:0}}</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </tfoot>
+            </table>
+            <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+              <ul class="pagination mt-3 mb-0 justify-content-end" [hidden]="(loading || pagesCount < 2)">
+                <li class="page-item">
+                  <a class="page-link" [hidden]="page == 0" href="javascript:void(0)" (click)="searchPurchases(0)">{{siteLabel.first}}</a>
+                </li>
+                <li class="paginate_button page-item previous">
+                  <a class="page-link" href="javascript:void(0)" [hidden]="page == 0" (click)="searchPurchases(page-1)">
+                    {{siteLabel.previous}}
+                  </a>
+                </li>
+                <li class="page-item" *ngFor='let n of range()'
+                    [class]="{active: n == page}">
+                  <a class="page-link" href="javascript:void(0)" (click)="searchPurchases(n)" *ngIf="n != page">{{n+1}}</a>
+                  <a class="page-link" href="javascript:void(0)" *ngIf="n == page">{{n+1}}</a>
+                </li>
+                <li class="paginate_button page-item next">
+                  <a class="page-link" href="javascript:void(0)" [hidden]="page == pagesCount - 1" (click)="searchPurchases(page+1)">
+                    {{siteLabel.next}}
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="javascript:void(0)" [hidden]="page == pagesCount - 1" (click)="searchPurchases(pagesCount - 1)">{{siteLabel.last}}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/div-->
+  </div>
+  <!-- /row -->
+</div>

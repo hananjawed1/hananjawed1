@@ -1,0 +1,303 @@
+<div class="container-fluid">
+
+    <!-- breadcrumb -->
+    <div class="breadcrumb-header justify-content-between">
+      <div class="my-auto">
+        <div class="d-flex">
+          <h4 class="content-title mb-0 my-auto">{{siteLabel.editMEMBERSHIP}}</h4>
+        </div>
+      </div>
+    </div>
+    <!-- breadcrumb -->
+  
+    <!-- row opened -->
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="card" id="tabs-style4">
+            <form [formGroup]='formAgent' name="profile_form" id="profile_form">
+                <div class="card-body">
+                    <div class="panel panel-primary tabs-style-2">
+                        <div class="row">
+                            <div class="row row-sm-12 col-md-12 mt-3">
+                                <div class="col-md-6 col-lg-6">
+                                    <label class="form-control-label">{{siteLabel?.typeofMembership}}*</label> 
+                                    <select class="form-control" formControlName='membershipTypeId' [(ngModel)]='objAgent.membershipTypeId'>
+                                        <option selected value="0">{{siteLabel?.typeofMembership}}</option>
+                                        <option *ngFor="let i of membershipTypes" value={{i.membershipTypeId}}>{{i.name}}</option>
+                                    </select>
+                                    <span *ngIf="formAgent.get('membershipTypeId').invalid && (formAgent.get('membershipTypeId').dirty || formAgent.get('membershipTypeId').touched)" 
+                                        class="alert alert-danger">
+                                    </span>
+                                </div>
+                                <div class="col-md-6 col-lg-6 mg-t-20 mg-md-t-0">
+                                    <label class="form-control-label">Request category*</label> 
+                                    <select class="form-control" formControlName='requestCategory' [(ngModel)]='objAgent.requestCategory'>
+                                        <option selected value="0">Request Category</option>
+                                        <option *ngFor="let i of requestCategory" value={{i.id}}>{{i.name}}</option>
+                                    </select>
+                                    <span *ngIf="formAgent.get('requestCategory').invalid && (formAgent.get('requestCategory').dirty || formAgent.get('requestCategory').touched)"
+                                        class="alert alert-danger">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row row-sm-12 col-md-12 mt-3">
+                                <div class="col-md-6 col-lg-6">
+                                    <label class="form-control-label">{{siteLabel?.fullName}}*</label> 
+                                    <input class="form-control" type="text" [(ngModel)]='objAgent.fullName' name="FullName" formControlName='fullName' class="form-control" placeholder="Full Name">
+                                    <span *ngIf="formAgent.get('fullName').invalid && (formAgent.get('fullName').dirty || formAgent.get('fullName').touched)"
+                                        class="alert alert-danger">{{siteLabel?.pleaseEnterName}}
+                                    </span>
+                                </div>
+                                <div class="col-md-6 col-lg-6 mg-t-20 mg-md-t-0">
+                                    <label class="form-control-label">{{siteLabel?.gender}}</label> 
+                                    <select class="form-control" formControlName='gender' [(ngModel)]='objAgent.gender'>
+                                        <option ngvalue=0>{{siteLabel?.gender}}</option>
+                                        <option [value]='GenderEnums.Male'>Male</option>
+                                        <option [value]='GenderEnums.Female'>Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row row-sm-12 col-md-12 mt-3">
+                                <div class="col-md-6 col-lg-6">
+                                    <label class="form-control-label">{{siteLabel?.address}}*</label> 
+                                    <input class="form-control" type="text" [(ngModel)]='objAgent.address' name="address"
+                                            formControlName='address' class="form-control" placeholder="Address">
+                                    <span *ngIf="formAgent.get('address').invalid && (formAgent.get('address').dirty || formAgent.get('address').touched)"
+                                            class="alert alert-danger">
+                                        {{siteLabel?.pleaseenteraddress}}
+                                    </span>
+                                </div>
+                                <div class="col-md-6 col-lg-6 mg-t-20 mg-md-t-0">
+                                    <label class="form-control-label">{{siteLabel?.phoneNumber}}*</label> 
+                                    <input class="form-control" type="text" [(ngModel)]='objAgent.phoneNumber' name="phoneNumber"
+                                            formControlName='phoneNumber' class="form-control" placeholder="Phone Number">
+
+                                    <span *ngIf="formAgent.get('phoneNumber').invalid && (formAgent.get('phoneNumber').dirty || formAgent.get('address').touched)"
+                                            class="alert alert-danger">
+                                        {{siteLabel?.pleaseEnterPhoneNumber}}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row row-sm-12 col-md-12 mt-3">
+                                <div class="col-md-6 col-lg-6">
+                                    <label class="form-control-label">{{siteLabel?.emailAddress}}*</label> 
+                                    <input class="form-control" formControlName='email' [(ngModel)]='objAgent.email' class="form-control" id="email"
+                                            name="email" placeholder="Email" type="text">
+                                    <span *ngIf="formAgent.get('email').invalid && (formAgent.get('email').dirty || formAgent.get('email').touched)"
+                                            class="alert alert-danger">
+                                        {{siteLabel?.pleaseEnterEmail}}
+                                    </span>
+                                </div>
+                                <div class="col-md-6 col-lg-6 mg-t-20 mg-md-t-0">
+                                    <label class="form-control-label">{{siteLabel?.birthDate}}*</label> 
+                                    <input class="form-control" formControlName='birthDate' [(ngModel)]="objAgent.birthDate" class="form-control"
+                                            id="birthDate" name="birthDate" placeholder="Birth date" type="date">
+                                    <span *ngIf="formAgent.get('birthDate').invalid && (formAgent.get('birthDate').dirty || formAgent.get('birthDate').touched)"
+                                            class="alert alert-danger">{{siteLabel?.pleaseEnterBirthDate}}</span>
+                                </div>
+                            </div>
+
+                            <div class="row row-sm-12 col-md-12 mt-3">
+                                <div class="col-md-6 col-lg-6">
+                                    <label class="form-control-label">{{siteLabel?.registrationDate}}*</label> 
+                                    <input formControlName='registrationDate' [(ngModel)]="objAgent.registrationDate" class="form-control"
+                                            id="registrationDate" name="registrationDate" placeholder="Registration Date" type="date">
+                                    <span *ngIf="formAgent.get('registrationDate').invalid && (formAgent.get('registrationDate').dirty || formAgent.get('registrationDate').touched)"
+                                            class="alert alert-danger">{{siteLabel?.registrationDate}}</span>
+                                </div>
+                                <div class="col-md-6 col-lg-6 mg-t-20 mg-md-t-0">
+                                    <label class="form-control-label">{{siteLabel?.expirationDate}}*</label> 
+                                    <input formControlName='expirationDate'  [attr.disabled]="true"
+                                            [(ngModel)]="objAgent.expirationDate" class="form-control" id="expirationDate"
+                                            name="expirationDate" placeholder="Expiration Date" type="date">
+                                    <span *ngIf="formAgent.get('expirationDate').invalid && (formAgent.get('expirationDate').dirty || formAgent.get('expirationDate').touched)"
+                                            class="alert alert-danger">{{siteLabel?.expirationDate}}</span>
+                                </div>
+                            </div>
+
+                            <div class="row row-sm-12 col-md-12 mt-3">
+                                <div class="col-md-6 col-lg-6">
+                                    <label class="form-control-label">Nationality*</label> 
+                                    <input type="text" [(ngModel)]='objAgent.nationName' name="NationName"
+                                            formControlName='nationName' class="form-control" placeholder="Nationality">
+
+                                    <span *ngIf="formAgent.get('nationName').invalid && (formAgent.get('nationName').dirty || formAgent.get('nationName').touched)"
+                                            class="alert alert-danger">Please Enter Nationality</span>
+                                </div>
+                                <div class="col-md-6 col-lg-6 mg-t-20 mg-md-t-0">
+                                    <label class="form-control-label">{{siteLabel?.membershipNumber}}*</label> 
+                                    <input type="text" [(ngModel)]='objAgent.membershipNumber' name="membershipNumber"
+                                            formControlName='membershipNumber' class="form-control" placeholder="MembershipNumber">
+
+                                    <span *ngIf="objAgent.membershipNumber === ''" class="alert alert-danger">
+                                        {{siteLabel?.membershipNumberIsRequired}}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="row row-sm-12 col-md-12 mt-3">
+                                <div class="col-md-6 col-lg-6">
+                                    <label class="form-control-label">Religion*</label> 
+                                    <input type="text" [(ngModel)]='objAgent.religionName' name="religionName"
+                                            formControlName='religionName' class="form-control" placeholder="Religion">
+
+                                    <span *ngIf="formAgent.get('religionName').invalid && (formAgent.get('religionName').dirty || formAgent.get('religionName').touched)"
+                                            class="alert alert-danger">Please Enter Religion</span>
+                                </div>
+                                <div class="col-md-6 col-lg-6 mg-t-20 mg-md-t-0">
+                                    <label class="form-control-label">{{siteLabel?.monthlySalary}}</label> 
+                                    <input formControlName='salary' [(ngModel)]='objAgent.salary' class="form-control" id="agentdetails" name="salary"
+                                        placeholder="Monthly Salary" type="text">
+                                </div>
+                            </div>
+
+                            <div class="row row-sm-12 col-md-12 mt-3">
+                                <div class="col-md-6 col-lg-6">
+                                    <label class="form-control-label">{{siteLabel?.monthlyLimit}}</label> 
+                                    <input formControlName='limit' [(ngModel)]='objAgent.limit' class="form-control" id="agentdetails" name="limit"
+                                        placeholder="Monthly Limit" type="text">
+                                </div>
+                                <div class="col-md-6 col-lg-6 mg-t-20 mg-md-t-0">
+                                    <label class="form-control-label">{{siteLabel?.emiratesIDNumber}}</label> 
+                                    <input formControlName='emiratesIDNumber' [(ngModel)]='objAgent.emiratesIDNumber'
+                                        class="form-control" id="emiratesIDNumber" name="limit" placeholder="{{siteLabel?.emiratesIDNumber}}" type="text">
+                                </div>
+                            </div>
+
+                            <div class="row row-sm-12 col-md-12 mt-3">
+                                <div class="col-md-6 col-lg-6">
+                                    <label class="form-control-label">{{siteLabel?.passportNumber}}</label> 
+                                    <input formControlName='passportNumber' [(ngModel)]='objAgent.passportNumber' class="form-control"
+                                        id="passportNumber" name="passportNumber" placeholder="{{siteLabel?.passportNumber}}" type="text">
+                                </div>
+                                <div class="col-md-6 col-lg-6 mg-t-20 mg-md-t-0">
+                                    <label class="form-control-label">{{siteLabel?.occupation}}</label> 
+                                    <input type="text" [(ngModel)]='objAgent.occupation' name="Occupation"
+                                        formControlName='occupation' class="form-control" placeholder="Occupation">
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 mt-3">
+                                <label>{{siteLabel?.visaResidency}}</label>
+                                <input type="text" [(ngModel)]='objAgent.visaResidency' name="Visa Residency"
+                                        formControlName='visaResidency' class="form-control" placeholder="Visa Residency">
+                            </div>
+
+                            <div class="col-md-12 mt-3 row">
+                                <label class="col-sm-2 col-form-label">{{siteLabel?.passportAttachment}}*</label>
+                                <div class="col-sm-7">
+                                    <input formControlName='filepassport' (change)="onChangePassport($event)" class="form-control" id="filepassport" name="filepassport" type="file">
+                                  </div>
+                                  <div class="col-sm-2" *ngIf="objAgent.passportAttachment!='' && objAgent.membershipId > 0">
+                                    <a class="btn btn-primary" data-target="#exampleModalLong" data-toggle="modal" style="color: white;"
+                                       (click)="showDocument(objAgent.passportAttachment)">{{siteLabel?.view}}</a>
+                                  </div>
+                            </div>
+            
+                            <div class="col-md-12 col-lg-12 mt-3 row">
+                                <label class="col-sm-2 col-form-label">{{siteLabel?.visaAttachment}}*</label>
+                                <div class="col-sm-7">
+                                    <input formControlName='filevisa' (change)="onChangeVisa($event)" class="form-control" id="filevisa" name="filevisa" type="file">
+                                </div>
+                                <div class="col-sm-2">
+                                    <a *ngIf="objAgent.visaAttachment!='' && objAgent.membershipId > 0" class="btn btn-primary" style="color: white;"
+                                        data-target="#exampleModalLong" data-toggle="modal" (click)="showDocument(objAgent.visaAttachment)">{{siteLabel?.view}}</a>
+                                </div>
+                            </div>
+            
+                            <div class="col-md-12 col-lg-12 mt-3 row">
+                                <label class="col-sm-2 col-form-label">{{siteLabel?.profilePicture}}</label>
+                                <div class="col-sm-7">
+                                    <input formControlName='fileprofilePic' type="file" (change)="handleFileSelect($event)" class="form-control" id="fileprofilePic" name="fileprofilePic" type="file">
+                                </div>            
+                                <div class="col-sm-2" *ngIf="objAgent.profilePic!='' && objAgent.membershipId > 0">
+                                    <a class="btn btn-primary" style="color: white;" data-target="#exampleModalLong" data-toggle="modal"
+                                        (click)="showDocument(objAgent.visaAttachment)">{{siteLabel?.view}}</a>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-lg-12 mt-3 row">
+                                <label class="col-sm-2 col-form-label">{{siteLabel?.other}}</label>
+                                <div class="col-sm-7">
+                                    <input formControlName='fileAttachment1' (change)="onChangeAttachment1($event)" class="form-control" id="fileAttachment1" name="fileAttachment1" type="file">
+                                </div>
+                                <div class="col-sm-2" *ngIf="objAgent.attachment1!='' && objAgent.membershipId > 0">
+                                    <a class="btn btn-primary" style="color: white;" data-target="#exampleModalLong" data-toggle="modal"
+                                       (click)="showDocument(objAgent.attachment1)">{{siteLabel?.view}}</a>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-lg-12 mt-3 row">
+                                <label class="col-sm-2 col-form-label">{{siteLabel?.other}}</label>
+                                <div class="col-sm-7">
+                                    <input formControlName='fileAttachment2' (change)="onChangeAttachment2($event)" class="form-control" id="fileAttachment2" name="fileAttachment2" type="file">
+                                </div>
+                                <div class="col-sm-2" *ngIf="objAgent.attachment2!='' && objAgent.membershipId > 0">
+                                    <a class="btn btn-primary" style="color: white;" data-target="#exampleModalLong" data-toggle="modal"
+                                       (click)="showDocument(objAgent.attachment2)">{{siteLabel?.view}}</a>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-lg-12 mt-3 row">
+                                <label class="col-sm-2 col-form-label">{{siteLabel?.other}}</label>
+                                <div class="col-sm-7">
+                                    <input formControlName='fileAttachment3' (change)="onChangeAttachment3($event)"
+                                           class="form-control" id="fileAttachment3" name="fileAttachment3" type="file">
+                                </div>
+                                <div class="col-sm-2" *ngIf="objAgent.attachment3!='' && objAgent.membershipId > 0">
+                                    <a class="btn btn-primary" style="color: white;" data-target="#exampleModalLong" data-toggle="modal"
+                                       (click)="showDocument(objAgent.attachment3)">{{siteLabel?.view}}</a>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 mt-3">
+                                <label>{{siteLabel?.notes}}</label>
+                                <textarea class="form-control" name="notes" id="description" formControlName='notes' [(ngModel)]='objAgent.notes'
+                                    placeholder="Description" rows="5"></textarea>
+                            </div>
+
+                            <div class="col-md-12 mt-4 mb-3">
+                                <button class="btn btn-primary" [disabled]='!formAgent.valid || loading' (click)='saveAgent()'>
+                                    <i class="btn-icon-prepend" data-feather="save"></i>
+                                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                    {{siteLabel?.submit}}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+      </div>
+      <!--/div-->
+    </div>
+    <!-- /row -->
+  </div>
+  <div aria-hidden="true" aria-labelledby="exampleModalLongTitle" class="modal fade" id="exampleModalLong" role="dialog"
+     tabindex="-1">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{siteLabel?.image}}</h5>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <img src="{{imagePath}}" alt="Image"
+                 class="img-responsive">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-facebook"
+           href="{{imagePath}}" target="_blank"
+           download="file">Download</a>
+        &nbsp;
+        <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

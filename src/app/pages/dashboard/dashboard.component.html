@@ -1,0 +1,652 @@
+<div class="container-fluid">
+
+  <!-- breadcrumb -->
+  <div class="breadcrumb-header justify-content-between">
+    <div class="left-content">
+      <div>
+        <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">{{siteLabel.hi}} {{currentUser.name}}, {{siteLabel.welcomeBack}}!</h2>
+        <p class="mg-b-0">{{siteLabel.systemMonitoring}}</p>
+      </div>
+    </div>
+  </div>
+  <!-- /breadcrumb -->
+
+  <!-- row -->
+  <div class="row row-sm">
+    <div class="col-12 mb-3">
+      <div class="my-auto">
+        <div class="d-flex"><h4 class="content-title mb-0 my-auto">{{siteLabel.dashboard.membershipRequest}}</h4></div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-xl-3 col-md-6 col-12">
+      <div class="card bg-primary-gradient text-white ">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="icon1 mt-2 text-center">
+                <i class="fe fe-users tx-40"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mt-0 text-center">
+                <span class="text-white">{{siteLabel.dashboard.totalRequests}}</span>
+                <h2 class="text-white mb-0">{{membershipRequest.totalRequest}}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+    <div class="col-lg-6 col-xl-3 col-md-6 col-12">
+      <div class="card bg-danger-gradient text-white">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="icon1 mt-2 text-center">
+                <i class="fe fe-users tx-40"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mt-0 text-center">
+                <span class="text-white">{{siteLabel.highAdmin}}</span>
+                <h2 class="text-white mb-0">{{membershipRequest.waiting}}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-xl-3 col-md-6 col-12">
+      <div class="card bg-success-gradient text-white">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="icon1 mt-2 text-center">
+                <i class="fe fe-users tx-40"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mt-0 text-center">
+                <span class="text-white"> {{siteLabel.dashboard.approvedRequests}} </span>
+                <h2 class="text-white mb-0">{{membershipRequest.approvedRequest}}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-xl-3 col-md-6 col-12">
+      <div class="card bg-warning-gradient text-white">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="icon1 mt-2 text-center">
+                <i class="fe fe-users tx-40"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mt-0 text-center">
+                <span class="text-white">{{siteLabel.dashboard.freezed}}</span>
+                <h2 class="text-white mb-0">{{membershipRequest.freezed}}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- row closed -->
+
+  <div class="row row-sm">
+    <div class="col-md-6">
+      <div class="card mg-b-md-20">
+        <div class="card-body">
+          <div class="main-content-label mg-b-5" style="color: #000000">
+            Agents & Salespoint
+          </div>
+          <div class="morris-donut-wrapper-demo" id="morrisDonut1"></div>
+        </div>
+      </div>
+    </div><!-- col-6 -->
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <div class="main-content-label mg-b-5">
+            Membership Data
+          </div>
+          <div class="morris-donut-wrapper-demo" id="morrisDonut2"></div>
+        </div>
+      </div>
+    </div><!-- col-6 -->
+  </div>
+
+  <div class="row row-sm">
+    <div class="col-xl-3 col-lg-6 col-sm-6 col-md-6">
+      <div class="card text-center">
+        <div class="card-body ">
+          <div class="feature widget-2 text-center mt-0 mb-3">
+            <i class="ti-bar-chart project bg-primary-transparent mx-auto text-primary "></i>
+          </div>
+          <h6 class="mb-1 text-muted">{{siteLabel.dashboard.printedCards}}</h6>
+          <h3 class="font-weight-semibold">{{membershipRequest.totalPrintedCards}}</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-sm-6 col-md-6">
+      <div class="card text-center">
+        <div class="card-body ">
+          <div class="feature widget-2 text-center mt-0 mb-3">
+            <i class="ti-pie-chart project bg-pink-transparent mx-auto text-pink "></i>
+          </div>
+          <h6 class="mb-1 text-muted">{{siteLabel.dashboard.penddingCards}}</h6>
+          <h3 class="font-weight-semibold">{{membershipRequest.totalPenddingCards}}</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-sm-6 col-md-6">
+      <div class="card text-center">
+        <div class="card-body">
+          <div class="feature widget-2 text-center mt-0 mb-3">
+            <i class="ti-pulse  project bg-teal-transparent mx-auto text-teal "></i>
+          </div>
+          <h6 class="mb-1 text-muted">{{siteLabel.dashboard.totalPurchases}}</h6>
+          <h3 class="font-weight-semibold">{{agentSummaryAll.totalPurchases}}</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-sm-6 col-md-6">
+      <div class="card text-center">
+        <div class="card-body ">
+          <div class="feature widget-2 text-center mt-0 mb-3">
+            <i class="ti-stats-up project bg-success-transparent mx-auto text-success "></i>
+          </div>
+          <h6 class="mb-1 text-muted">{{siteLabel.dashboard.purchasedAmount}}</h6>
+          <h3 class="font-weight-semibold">{{agentSummaryAll.totalAmountPurchases}}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="row row-sm">
+    <div class="col-md-6">
+      <div class="card mg-b-20">
+        <div class="card-body">
+          <div class="main-content-label mg-b-5">
+            Membership Request Per Week Status
+
+          </div>
+          <div class="total-revenue mb-5">
+            <div>
+              <label><span style="background-color: #f7557a"></span>AE</label>
+            </div>
+            <div>
+
+              <label><span style="background-color: #007bff"></span>MMI</label>
+            </div>
+          </div>
+          <div class="chartjs-wrapper-demo mt-5">
+            <canvas id="chartLine1"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 ">
+      <div class="card mg-b-20">
+        <div class="card-body">
+          <div class="main-content-label mg-b-5">
+            Membership Request – Last 6 Months
+          </div>
+          <div class="total-revenue mb-5">
+            <div>
+              <label><span style="background-color: #f7557a"></span>AE</label>
+            </div>
+            <div>
+
+              <label><span style="background-color: #007bff"></span>MMI</label>
+            </div>
+          </div>
+          <div class="chartjs-wrapper-demo mt-5">
+            <canvas id="chartArea1"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+
+  <div class="row row-sm">
+    <div class="col-xl-4 col-md-12 col-lg-12">
+      <div class="card h-100">
+        <div class="card-header pb-1">
+          <h3 class="card-title mb-2">Recent Requests</h3>
+        </div>
+        <div class="card-body p-0 customers mt-1">
+          <div class="list-group list-lg-group list-group-flush" *ngFor="let i of memberShipRequestAndfileOpeningData">
+            <div class="list-group-item list-group-item-action" href="javascript:;">
+              <div class="media mt-0">
+                <div class="media-body">
+                  <div class="d-flex align-items-center" *ngIf="i.title == 'File Opening Request'">
+                    <div class="mt-0" style="width: 75%;">
+                      <h5 class="mb-1 tx-15">{{i.name}}</h5>
+                      <p class="mb-0 tx-13 text-muted" style="color:#FFFFFF">{{i.id}}<span class="text-success ml-2" style="color:#008755"><strong
+                        style="color:#008755;">File Opening Request</strong></span></p>
+                    </div>
+                    <span class="ml-auto wd-45p fs-16 mt-2">
+                      <div class="wd-100p" id="spark1"></div>
+										</span>
+                  </div>
+                  <div class="d-flex align-items-center" *ngIf="i.title == 'Membership Request'">
+                    <div class="mt-1" style="width: 75%;">
+                      <h5 class="mb-1 tx-15">{{i.name}}</h5>
+                      <p class="mb-0 tx-13 text-muted" style="color:#FFFFFF">{{i.id}}<span class="text-success ml-2" style="color:#008755"><strong
+                        style="color:#0584E4;">Membership Request</strong></span></p>
+                    </div>
+                    <span class="ml-auto wd-45p fs-16 mt-2">
+                      <div class="wd-100p" id="spark2"></div>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="list-group list-lg-group list-group-flush">
+            <div class="list-group-item list-group-item-action" href="javascript:;">
+              <div class="media mt-0">
+                <div class="media-body">
+                  <div class="d-flex align-items-center">
+                    <div class="mt-0">
+                      <h5 class="mb-1 tx-15">Business Bay Hotel</h5>
+                      <p class="mb-0 tx-13 text-muted" style="color:#FFFFFF">#1234<span class="text-success ml-2" style="color:#008755"><strong
+                        style="color:#008755;">File Opening Request</strong></span></p>
+                    </div>
+                    <span class="ml-auto wd-45p fs-16 mt-2">
+                      <div class="wd-100p" id="spark1"></div>
+										</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="list-group-item list-group-item-action" href="javascript:;">
+              <div class="media mt-0">
+
+                <div class="media-body">
+                  <div class="d-flex align-items-center">
+                    <div class="mt-1">
+                      <h5 class="mb-1 tx-15">Jimmy Changa</h5>
+                      <p class="mb-0 tx-13 text-muted" style="color:#FFFFFF">#1234<span class="text-success ml-2"
+                                                                                        style="color:#008755"><strong
+                        style="color:#0584E4;">Membership Request</strong></span></p>
+
+                    </div>
+                    <span class="ml-auto wd-45p fs-16 mt-2">
+															<div class="wd-100p" id="spark2"></div>
+														</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="list-group-item list-group-item-action" href="javascript:;">
+              <div class="media mt-0">
+
+                <div class="media-body">
+                  <div class="d-flex align-items-center">
+                    <div class="mt-1">
+                      <h5 class="mb-1 tx-15">Tulip Hotel</h5>
+                      <p class="mb-0 tx-13 text-muted" style="color:#FFFFFF">#1234<span class="text-success ml-2"
+                                                                                        style="color:#008755"><strong
+                        style="color:#008755;">File Opening Request</strong></span></p>
+                    </div>
+                    <span class="ml-auto wd-45p fs-16 mt-2">
+                      <div class="wd-100p" id="spark3"></div>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="list-group-item list-group-item-action" href="javascript:;">
+              <div class="media mt-0">
+
+                <div class="media-body">
+                  <div class="d-flex align-items-center">
+                    <div class="mt-1">
+                      <h5 class="mb-1 tx-15">Manuel Labor</h5>
+                      <p class="mb-0 tx-13 text-muted" style="color:#FFFFFF">#1234<span class="text-success ml-2"
+                                                                                        style="color:#008755"><strong
+                        style="color:#0584E4;">Membership Request</strong></span></p>
+
+                    </div>
+                    <span class="ml-auto wd-45p fs-16 mt-2">
+															<div class="wd-100p" id="spark4"></div>
+														</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="list-group-item list-group-item-action br-br-7 br-bl-7" href="javascript:;">
+              <div class="media mt-0">
+
+                <div class="media-body">
+                  <div class="d-flex align-items-center">
+                    <div class="mt-1">
+                      <h5 class="mb-1 tx-15">Ajman Hotel</h5>
+                      <p class="mb-0 tx-13 text-muted" style="color:#FFFFFF">#1234<span class="text-success ml-2"
+                                                                                        style="color:#008755"><strong
+                        style="color:#008755;">File Opening Request</strong></span></p>
+                    </div>
+                    <span class="ml-auto wd-45p fs-16 mt-2">
+															<div class="wd-100p" id="spark5"></div>
+														</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4 col-md-12 col-lg-6">
+      <div class="card h-100">
+        <div class="card-header pb-1">
+          <h3 class="card-title mb-2">Membership Activity</h3>
+
+        </div>
+        <div class="product-timeline card-body pt-2 mt-1">
+          <ul class="timeline-1 mb-0">
+            <li class="mt-0"><i
+              class="ti-pie-chart bg-primary-gradient text-white product-icon"></i> <span
+              class="font-weight-semibold mb-4 tx-14 ">Total Request</span> <a class="float-right tx-11 text-muted"
+                                                                               href="javascript:">3
+              Mins ago</a>
+              <p class="mb-0 text-muted tx-12">{{membershipRequest.totalRequest}} Total Request</p>
+            </li>
+            <li class="mt-0"><i
+              class="mdi mdi-cart-outline bg-danger-gradient text-white product-icon"></i>
+              <span class="font-weight-semibold mb-4 tx-14 ">Total Licenses</span> <a class="float-right tx-11 text-muted"
+                                                                                   href="javascript:">35
+                Mins ago</a>
+              <p class="mb-0 text-muted tx-12">{{fileOpening.totalRequest}} Total Licenses</p>
+            </li>
+            <!-- <li class="mt-0"><i
+              class="ti-bar-chart-alt bg-success-gradient text-white product-icon"></i> <span
+              class="font-weight-semibold mb-4 tx-14 ">Toatal Revenue</span> <a class="float-right tx-11 text-muted"
+                                                                                href="javascript:">50
+              mins ago</a>
+              <p class="mb-0 text-muted tx-12">23.5K New Revenue</p>
+            </li>
+            <li class="mt-0"><i class="ti-wallet bg-warning-gradient text-white product-icon"></i>
+              <span class="font-weight-semibold mb-4 tx-14 ">Toatal Profit</span> <a class="float-right tx-11 text-muted"
+                                                                                     href="javascript:">1
+                hour ago</a>
+              <p class="mb-0 text-muted tx-12">3k New profit</p>
+            </li> -->
+            <li class="mt-0"><i class="si si-eye bg-purple-gradient text-white product-icon"></i>
+              <span class="font-weight-semibold mb-4 tx-14 ">Customer Visits</span> <a class="float-right tx-11 text-muted"
+                                                                                       href="javascript:">3
+                hours ago</a>
+              <p class="mb-0 text-muted tx-12">15% increased</p>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-4 col-md-12 col-lg-6">
+      <div class="card">
+        <div class="card-header pb-0">
+          <h3 class="card-title mb-2">Recent Task Update</h3>
+          <p class="tx-12 mb-0 text-muted">Employees & Clients</p>
+        </div>
+        <div class="card-body sales-info ot-0 pt-0 pb-0">
+          <div class="ht-150" id="chart"></div>
+          <div class="row sales-infomation pb-0 mb-0 mx-auto wd-100p">
+            <div class="col-md-6 col">
+              <p class="mb-0 d-flex"><span class="legend bg-primary brround"></span>Completed</p>
+              <h3 class="mb-1">{{taskManagementCounts.completed}}</h3>
+              <div class="d-flex">
+                <p class="text-muted ">33 Mins Ago</p>
+              </div>
+            </div>
+            <div class="col-md-6 col">
+              <p class="mb-0 d-flex"><span class="legend bg-info brround"></span>Pending</p>
+              <h3 class="mb-1">{{taskManagementCounts.pending}}</h3>
+              <div class="d-flex">
+                <p class="text-muted">33 Mins Ago</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card ">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="d-flex align-items-center pb-2">
+                <p class="mb-0">Total Active Employee</p>
+              </div>
+              <h4 class="font-weight-bold mb-2">{{activeEmpCount}}</h4>
+              <div class="progress progress-style progress-sm">
+                <div aria-valuemax="78" aria-valuemin="0" aria-valuenow="78"
+                     class="progress-bar bg-primary-gradient wd-80p" role="progressbar"></div>
+              </div>
+            </div>
+            <div class="col-md-6 mt-4 mt-md-0">
+              <div class="d-flex align-items-center pb-2">
+                <p class="mb-0">Total Active Clients</p>
+              </div>
+              <h4 class="font-weight-bold mb-2">{{activeClientCount}}</h4>
+              <div class="progress progress-style progress-sm">
+                <div aria-valuemax="45" aria-valuemin="0" aria-valuenow="45"
+                     class="progress-bar bg-danger-gradient wd-75" role="progressbar"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+
+  <div class="row row-sm">
+    <div class="col-12 mb-3">
+      <div class="my-auto">
+        <div class="d-flex"><h4 class="content-title mb-0 my-auto">{{siteLabel.dashboard.fileOpeningRequest}}</h4></div>
+      </div>
+    </div>
+    <div class="col-xl-4 col-lg-6 col-md-6 col-xm-12">
+      <div class="card overflow-hidden sales-card bg-success-gradient">
+        <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
+          <div class="">
+            <h6 class="mb-3 tx-12 text-white">{{siteLabel.dashboard.totalFileOpenings}}</h6>
+          </div>
+          <div class="pb-0 mt-0">
+            <div class="d-flex">
+              <div class="">
+                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{fileOpening.totalRequest}}</h4>
+                <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
+              </div>
+              <span class="float-right my-auto ml-auto">
+												<i class="fas fa-arrow-circle-up text-white"></i>
+												<span class="text-white op-7"> +427</span>
+											</span>
+            </div>
+          </div>
+        </div>
+        <span class="pt-1" id="compositeline"><canvas height="30" style="display: inline-block; width: 392px; height: 30px; vertical-align: top;"
+                                                      width="392"></canvas></span>
+      </div>
+    </div>
+    <div class="col-xl-4 col-lg-6 col-md-6 col-xm-12">
+      <div class="card overflow-hidden sales-card bg-danger-gradient">
+        <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
+          <div class="">
+            <h6 class="mb-3 tx-12 text-white">{{siteLabel.dashboard.pendingFileOpenings}}</h6>
+          </div>
+          <div class="pb-0 mt-0">
+            <div class="d-flex">
+              <div class="">
+                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{fileOpening.totalPendingRequest}}</h4>
+                <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
+              </div>
+              <span class="float-right my-auto ml-auto">
+												<i class="fas fa-arrow-circle-down text-white"></i>
+												<span class="text-white op-7"> -23.09%</span>
+											</span>
+            </div>
+          </div>
+        </div>
+        <span class="pt-1" id="compositeline2"><canvas height="30" style="display: inline-block; width: 392px; height: 30px; vertical-align: top;"
+                                                       width="392"></canvas></span>
+      </div>
+    </div>
+    <div class="col-xl-4 col-lg-6 col-md-6 col-xm-12">
+      <div class="card overflow-hidden sales-card bg-primary-gradient">
+        <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
+          <div class="">
+            <h6 class="mb-3 tx-12 text-white">{{siteLabel.dashboard.approvedFileOpenings}}</h6>
+          </div>
+          <div class="pb-0 mt-0">
+            <div class="d-flex">
+              <div class="">
+                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{fileOpening.totalApprovedLicense}}</h4>
+                <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
+              </div>
+              <span class="float-right my-auto ml-auto">
+												<i class="fas fa-arrow-circle-up text-white"></i>
+												<span class="text-white op-7"> 52.09%</span>
+											</span>
+            </div>
+          </div>
+        </div>
+        <span class="pt-1" id="compositeline3"><canvas height="30" style="display: inline-block; width: 392px; height: 30px; vertical-align: top;"
+                                                       width="392"></canvas></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row row-sm">
+    <div class="col-xl-6 col-lg-6 col-sm-6 col-md-6">
+      <div class="card text-center overflow-hidden sales-card bg-primary-gradient">
+        <div class="card-body ">
+          <div class="feature widget-2 text-center mt-0 mb-3">
+            <i class="ti-bar-chart project bg-primary-transparent mx-auto text-primary "></i>
+          </div>
+          <h6 class="mb-1 text-muted" style="color: white !important;">{{siteLabel.dashboard.newLicenses}}</h6>
+          <h3 class="font-weight-semibold" style="color: white !important;">{{fileOpening.totalNewLicense}}</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-sm-6 col-md-6">
+      <div class="card text-center overflow-hidden bg-success-gradient">
+        <div class="card-body ">
+          <div class="feature widget-2 text-center mt-0 mb-3">
+            <i class="ti-pie-chart project bg-pink-transparent mx-auto text-pink "></i>
+          </div>
+          <h6 class="mb-1 text-muted" style="color: white !important;">{{siteLabel.dashboard.reviewalLicenses}}</h6>
+          <h3 class="font-weight-semibold" style="color: white !important;">{{fileOpening.totalRenewalLicense}}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row row-sm">
+    
+    <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
+      <div class="card overflow-hidden sales-card bg-primary-gradient">
+        <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
+          <div class="">
+            <h6 class="mb-3 tx-12 text-white">{{siteLabel.dashboard.hotels}}</h6>
+          </div>
+          <div class="pb-0 mt-0">
+            <div class="d-flex">
+              <div class="">
+                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{fileOpening.totalHotel}}</h4>
+                <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
+              </div>
+              <span class="float-right my-auto ml-auto">
+												<i class="fas fa-arrow-circle-up text-white"></i>
+												<span class="text-white op-7"> 52.09%</span>
+											</span>
+            </div>
+          </div>
+        </div>
+        <span class="pt-1" id="compositeline3"><canvas height="30" style="display: inline-block; width: 392px; height: 30px; vertical-align: top;"
+                                                       width="392"></canvas></span>
+      </div>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
+      <div class="card overflow-hidden sales-card bg-danger-gradient">
+        <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
+          <div class="">
+            <h6 class="mb-3 tx-12 text-white">{{siteLabel.dashboard.bars}}</h6>
+          </div>
+          <div class="pb-0 mt-0">
+            <div class="d-flex">
+              <div class="">
+                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{fileOpening.totalBar}}</h4>
+                <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
+              </div>
+              <span class="float-right my-auto ml-auto">
+												<i class="fas fa-arrow-circle-down text-white"></i>
+												<span class="text-white op-7"> -152.3</span>
+											</span> 
+            </div>
+          </div>
+        </div>
+        <span class="pt-1" id="compositeline4"><canvas height="30" style="display: inline-block; width: 392px; height: 30px; vertical-align: top;"
+                                                       width="392"></canvas></span>
+      </div>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
+      <div class="card overflow-hidden sales-card bg-success-gradient">
+        <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
+          <div class="">
+            <h6 class="mb-3 tx-12 text-white">{{siteLabel.dashboard.clubs}}</h6>
+          </div>
+          <div class="pb-0 mt-0">
+            <div class="d-flex">
+              <div class="">
+                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{fileOpening.totalClub}}</h4>
+                <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
+              </div>
+              <span class="float-right my-auto ml-auto">
+												<i class="fas fa-arrow-circle-down text-white"></i>
+												<span class="text-white op-7"> -152.3</span>
+											</span> 
+            </div>
+          </div>
+        </div>
+        <span class="pt-1" id="compositeline4"><canvas height="30" style="display: inline-block; width: 392px; height: 30px; vertical-align: top;"
+                                                       width="392"></canvas></span>
+      </div>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
+      <div class="card overflow-hidden sales-card bg-warning-gradient">
+        <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
+          <div class="">
+            <h6 class="mb-3 tx-12 text-white">{{siteLabel.dashboard.restaurants}}</h6>
+          </div>
+          <div class="pb-0 mt-0">
+            <div class="d-flex">
+              <div class="">
+                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{fileOpening.totalRestaurant}}</h4>
+                <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
+              </div>
+              <span class="float-right my-auto ml-auto">
+												<i class="fas fa-arrow-circle-down text-white"></i>
+												<span class="text-white op-7"> -152.3</span>
+											</span> 
+            </div>
+          </div>
+        </div>
+        <span class="pt-1" id="compositeline4"><canvas height="30" style="display: inline-block; width: 392px; height: 30px; vertical-align: top;"
+                                                       width="392"></canvas></span>
+      </div>
+    </div>
+  </div>
+
+</div>

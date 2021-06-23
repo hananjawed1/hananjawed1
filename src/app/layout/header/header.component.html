@@ -1,0 +1,221 @@
+<div class="main-header sticky side-header nav nav-item header_bg">
+  <div class="container-fluid">
+    <div class="main-header-left ">
+      <div class="responsive-logo">
+        <a [routerLink]="['/']"><img alt="logo" class="logo-1" src="/assets/img/brand/logo.png"></a>
+        <a [routerLink]="['/']"><img alt="logo" class="dark-logo-1" src="/assets/img/brand/logo-white.png"></a>
+        <a [routerLink]="['/']"><img alt="logo" class="logo-2" src="/assets/img/brand/favicon.png"></a>
+        <a [routerLink]="['/']"><img alt="logo" class="dark-logo-2" src="/assets/img/brand/favicon.png"></a>
+      </div>
+      <div class="app-sidebar__toggle" data-toggle="sidebar">
+        <a class="open-toggle" href="javascript:"><i class="header-icon fe fe-align-left"></i></a>
+        <a class="close-toggle" href="javascript:"><i class="header-icons fe fe-x"></i></a>
+      </div>
+
+    </div>
+
+    <div class="main-header-right">
+
+      <div class="nav nav-item  navbar-nav-right ml-auto">
+        <div class="nav-link" id="bs-example-navbar-collapse-1">
+          <form class="navbar-form" role="search">
+            <div class="input-group">
+              <input class="form-control" placeholder="Search" type="text">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="reset">
+                  <i class="fas fa-times"></i>
+                </button>
+                <button class="btn btn-default nav-link resp-btn" type="submit">
+                  <svg class="feather feather-search header-icon-svgs"
+                       fill="none" stroke="currentColor" stroke-linecap="round"
+                       stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
+                       xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"></circle><line
+                    x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
+                </button>
+              </span>
+            </div>
+          </form>
+        </div>
+
+        <!-- <div class="dropdown nav-item main-header-message ">
+          <a class="new nav-link" href="javascript:">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8a8.5 8.5 0 0 1-7.6 4.7a8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8a8.5 8.5 0 0 1 4.7-7.6a8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></g><rect x="0" y="0" width="24" height="24" fill="rgba(0, 0, 0, 0)" /></svg>
+            <span class=" pulse-danger"></span>
+          </a>
+          <div class="dropdown-menu">
+            <div class="menu-header-content bg-primary text-left">
+              <div class="d-flex">
+                <h6 class="dropdown-title mb-1 tx-15 text-white font-weight-semibold">Chat</h6>
+                <span class="badge badge-pill badge-warning ml-auto my-auto float-right" *ngIf="chatLength > 0" [routerLink] (click)="markAsRead()">Mark All Read</span>
+              </div>
+              <p class="dropdown-title-text subtext mb-0 text-white op-6 pb-0 tx-12 ">You have {{chatLength}} unread messages</p>
+            </div>
+            <div class="main-message-list chat-scroll">
+              <ng-container *ngFor='let a of notifications'>
+                <ng-container *ngIf="a.routerLink === '/chat'">
+                    <a class="dropdown-item" href="javascript:">
+                        <div class="content">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p>
+                                    {{(a.subject.length>6)? (a.subject | slice:0:6)+'..':(a.subject)}}
+                                </p>
+                                <p class="sub-text text-muted">{{a.creationDateString}}</p>
+                            </div>
+                            <p class="sub-text text-muted">{{a.requestedBy}}</p>
+                        </div>
+                    </a>
+                </ng-container>
+              </ng-container>
+            </div>
+            <div class="dropdown-footer d-flex align-items-center justify-content-center">
+              <div>
+                <a href="javascript:">Open Full Chat</a>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+        <nav class="navbar navbar-dark default-color">
+          <form class="form-inline my-2 my-sm-0 ml-auto">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn  btn-md my-2 my-sm-0 ml-2 " style="background: white;" type="submit">Search</button>
+
+          </form>
+        </nav>
+        <a class="new nav-link text-white" style="font-size:14px;margin-top:9px" href="javascript:;"
+          (click)="toggleRTL()">
+          AR
+        </a>
+
+        <div class="dropdown nav-item main-header-message ">
+          <a [routerLink]="['/notification']" class="new nav-link"  >
+            <svg class="feather feather-mail header-icon-svgs" fill="none"
+                 stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <span style="font-size: 10px !important;top: -5px;right: -4px" class="text-white badge badge-danger side-badge">10</span>
+          </a>
+           <div class="dropdown-menu">
+            <!-- <div class="menu-header-content bg-primary text-left">
+              <div class="d-flex">
+                <h6 class="dropdown-title mb-1 tx-15 text-white font-weight-semibold">
+                  Messages</h6>
+                <span class="badge badge-pill badge-warning ml-auto my-auto float-right">Mark All Read</span>
+              </div>
+              <p class="dropdown-title-text subtext mb-0 text-white op-6 pb-0 tx-12 ">You have {{notifyLength}}
+                unread messages</p>
+            </div> -->
+              <div class="main-message-list chat-scroll">
+                <!-- <ng-container *ngFor='let a of notifications'>
+                  <ng-container *ngIf="a.routerLink !== '/chat'">
+                      <a class="p-3 d-flex border-bottom" href="javascript:">
+                          <div class="content">
+                              <div class="d-flex justify-content-between align-items-center">
+                                  <p>
+                                      {{(a.subject.length>6)? (a.subject | slice:0:6)+'..':(a.subject)}}
+                                  </p>
+                                  <p class="sub-text text-muted">{{a.creationDateString}}</p>
+                              </div>
+                              <p class="sub-text text-muted">{{a.requestedBy}}</p>
+                          </div>
+                      </a>
+                  </ng-container>
+                </ng-container> -->
+              </div>
+            <!-- <div class="dropdown-footer d-flex align-items-center justify-content-center">
+              <a href="javascript:">View all</a>
+            </div> -->
+          </div> 
+        </div>
+
+        <div class="dropdown nav-item main-header-message">
+          <a class="new nav-link" href="javascript:" (click)="switchRtl()">
+            <svg class="feather feather-maximize header-icon-svgs" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" 
+              focusable="false" width="1em" height="1em" 
+              style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
+              preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+              <g fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><path d="M2 12h20"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10a15.3 15.3 0 0 1-4 10a15.3 15.3 0 0 1-4-10a15.3 15.3 0 0 1 4-10z"/>
+              </g>
+              <rect x="0" y="0" width="24" height="24" fill="rgba(0, 0, 0, 0)" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- <div class="nav-item full-screen fullscreen-button">
+          <a class="new nav-link full-screen-link" href="javascript:">
+            <svg class="feather feather-maximize header-icon-svgs" fill="none"
+                 stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+            </svg>
+          </a>
+        </div> -->
+
+        <div class="dropdown main-profile-menu nav nav-item nav-link">
+          <a class="profile-user d-flex" href=""><img alt="" src="/assets/img/faces/6.jpg"></a>
+          <div class="dropdown-menu" style="min-width: 285px !important;">
+            <div class="main-header-profile bg-primary p-3">
+              <div class="d-flex wd-100p">
+                <div class="main-img-user"><img alt="" class="" src="/assets/img/faces/6.jpg">
+                </div>
+                <div class="ml-3 my-auto">
+                  <h6 style="font-size: 13px !important;">{{currentUser.email}}</h6><span>{{currentUser.role}}</span>
+                </div>
+              </div>
+            </div>
+            <a class="dropdown-item" data-target="#EditProfileModal" data-toggle="modal" href="javascript:void(0)"><i class="bx bxs-edit"></i>Change Password</a>
+            <!-- <a class="dropdown-item" href="javascript:"><i class="bx bx-cog"></i> Dark Themes</a>
+            <a class="dropdown-item" href="javascript:"><i class="bx bxs-inbox"></i>Inbox</a>
+            <a class="dropdown-item" href="javascript:"><i class="bx bx-envelope"></i>Messages</a> -->
+            <a class="dropdown-item" (click)="logout()" href="javascript:"><i class="bx bxs-log-out"></i> Log Out</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div aria-hidden="true" aria-labelledby="UpdateProfileModal" class="modal fade" id="EditProfileModal" role="dialog" tabindex="-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="UpdateProfileModal">Change Password</h5>
+        <button aria-label="Close" class="close" (click)='removedLastAttachment()' data-dismiss="modal" #closebutton type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          <div class="col-md-10">
+              <div class="form-group">
+                  <label>Old Password</label>
+                  <input id="oldPwd" type="password"  class="form-control"  [(ngModel)]='oldPwd'/>
+                </div>
+              
+                <div class="form-group">
+                  <label>New Password</label>
+                   <input id="newPwd" type="password" class="form-control" [(ngModel)]='newPwd'/>
+                </div>
+              
+                <div class="form-group">
+                  <label>Confirm Password</label>
+                   <input  id="confirmPwd" type="password" class="form-control" [(ngModel)]='confirmPwd' />
+                </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success" [disabled]="loadingPrifilePic" (click)='uploadProfilePicture()' type="button">
+          <span *ngIf="loadingPrifilePic" class="spinner-border spinner-border-sm mr-1"></span>
+          Update
+        </button>
+        <button class="btn btn-secondary" data-dismiss="modal" (click)='removedLastAttachment()' type="button">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

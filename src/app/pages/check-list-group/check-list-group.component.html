@@ -1,0 +1,57 @@
+<div class="container-fluid">
+
+    <!-- breadcrumb -->
+  <div class="breadcrumb-header justify-content-between">
+    <div class="my-auto">
+      <div class="d-flex">
+        <h4 class="content-title mb-0 my-auto">{{siteLabel.checklistGroup}}</h4>
+      </div>
+    </div>
+  </div> 
+  <!-- breadcrumb -->
+
+  <!-- row opened -->
+  <div class="row row-sm">
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-body">
+            <form [formGroup]='formGroup' id="group_form" method="post" name="group_form">
+                <div class="form-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name">{{siteLabel.checklistGroup}}*</label>
+                                <input class="form-control" formControlName='name' [(ngModel)]='ObjGroup.name' id="name" name="name" placeholder="Group Name" type="text">
+                                    <span *ngIf="formGroup.get('name').invalid && (formGroup.get('name').dirty || formGroup.get('name').touched)" class="alert alert-danger">
+                                        {{siteLabel.pleaseEnterGroupName}}
+                                    </span>                                             
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="role">{{siteLabel.checkListParentGroup}}</label>
+                                <select class="form-control" formControlName='parentGroupId' [(ngModel)]='ObjGroup.parentGroupId' id="parentGroupId" name="parentGroupId">
+                                    <option value="0">{{siteLabel.selectGroupName}}</option>
+                                    <option *ngFor="let i of checkListGroup" value={{i.groupId}}>
+                                        {{i.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <button class="btn btn-success" [disabled]='!formGroup.valid || loading' (click)='SaveCheckListGroup()'>
+                    <i class="btn-icon-prepend" data-feather="save"></i>
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        {{siteLabel.submit}}
+                </button>
+            </form> 
+      </div>
+    </div>
+    <!--/div-->
+  </div>
+  <!-- /row -->
+
+</div>

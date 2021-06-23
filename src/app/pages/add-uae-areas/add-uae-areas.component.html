@@ -1,0 +1,71 @@
+<div class="container-fluid">
+
+    <!-- breadcrumb -->
+    <div class="breadcrumb-header justify-content-between">
+      <div class="my-auto">
+        <div class="d-flex">
+          <h4 class="content-title mb-0 my-auto">{{siteLabel.addUaeAreas}}</h4>
+        </div>
+      </div>
+    </div>
+    <!-- breadcrumb -->
+  
+    <!-- row opened -->
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="card" id="tabs-style4">
+          <div class="card-body">
+            <form [formGroup]='formGroup' id="area_form"  name="area_form">
+                <div class="form-body">
+                    <div class="panel panel-primary tabs-style-2">
+                        <div class="row">
+                            <div class="row row-sm-12 col-md-12 mt-3">
+                                <div class="col-md-6 col-lg-6">
+                                    <label for="name">{{siteLabel.areaName}}*</label>
+                                    <input class="form-control" [(ngModel)]='objAreaLocation.areaName'  formControlName='areaName' id="areaName" name="areaName"
+                                        placeholder="Area Name" type="text">
+                                    <span *ngIf="formGroup.get('areaName').invalid && (formGroup.get('areaName').dirty || formGroup.get('areaName').touched)"
+                                    class="alert alert-danger">{{siteLabel.enterAreaName}}</span>
+                                </div>
+                                <div class="col-md-6 col-lg-6 mg-t-20 mg-md-t-0">
+                                    <label for="role">{{siteLabel.salesPointLocation}}*</label>
+                                    <ng-select #MyNgSelect bindLabel="name" multiple="true" [clearable]="true" 
+                                        placeholder="{{siteLabel.salesPointLocation}}" [(ngModel)]="objAreaLocation.assignLocation" 
+                                        name="mySelectBox" required [ngModelOptions]="{standalone: true}">
+                                        <ng-option [value]="item.locationId" [disabled]="item.disabled" *ngFor="let item of salesPointUserLocation">
+                                            {{item.name}}
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="row row-sm-12 col-md-12 mt-3">
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label for="status">{{siteLabel.status}}*</label>
+                                        <select class="form-control" [(ngModel)]=objAreaLocation.status formControlName='status' id="status" name="status">
+                                          <option value=''>Please Select Status</option>
+                                          <option [ngValue]=StatusEnums.Active>{{siteLabel.active}}</option>
+                                          <option [ngValue]=StatusEnums.InActive>{{siteLabel.inactive}}</option>
+                                        </select>
+                                        <span *ngIf="formGroup.get('status').invalid && (formGroup.get('status').dirty || formGroup.get('status').touched)"
+                                        class="alert alert-danger">{{siteLabel.selectStatus}}</span>
+                                      </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12 mt-4 mb-3">
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                            <button class="btn btn-secondary" type="submit">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!--/div-->
+    </div>
+    <!-- /row -->
+  </div>
+  

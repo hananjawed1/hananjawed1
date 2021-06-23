@@ -1,0 +1,179 @@
+<style>
+    ::ng-deep body {
+      background: rgb(204,204,204) !important;
+      margin-top: 42px !important;
+      font-family: initial !important;
+      line-height: 2.5 !important;
+      color: #000000 !important;
+    }
+  
+    .a4class{
+      margin: 0 auto !important;
+      width: 29.7cm !important;
+      height: 19cm !important; 
+      background-image: url('./assets/img/backbordernew.jpg') !important;
+      background-size: cover !important;
+      background-repeat: no-repeat !important; 
+    }
+  
+    p{
+      line-height: 1.2em !important; 
+    }
+  
+    .backimg{
+      /* background-color: #ffffff; */
+      background-size: cover !important;
+      background-repeat: no-repeat !important; 
+    }
+  
+    .fistimg{
+      width: 32% !important;
+      margin: 10px 60px !important;
+      position: absolute !important;
+    }
+  
+    .firstlogo {
+      margin-top: 70px !important;
+      width: 50% !important;
+      float: left !important;
+    }
+  
+    .secondimg {
+      float: right !important;
+      width: 27% !important;
+      margin: 10px 60px !important;
+    }
+  
+    h2.maintitle {
+      text-align: center !important;
+      font-size: 50px !important;
+      font-style: italic !important;
+      color: #25254c !important;
+      font-family: initial !important;
+    }
+  
+    .subtitle {
+      text-align: center !important;
+      font-weight: bold !important;
+      font-size: 19px !important;
+    }
+  
+    h1.name {
+      text-align: center !important;
+      font-size: 40px !important;
+    }
+  
+    h3.secondpara {
+      text-align: center !important;
+      font-size: 27px !important;
+    }
+  
+    .footercol1, .footercol2, .footercol3 {
+      height: 100px !important;
+      width: 33% !important;
+      float: left !important;
+      display: block !important;
+    }
+  
+    .footer1 {
+      width: 48% !important;
+      text-align: center !important;
+      margin: 0 auto !important;
+      display: block !important;
+      margin-left: 80px !important;
+    }
+  
+    .footerdiv {
+      margin-top: 30px !important;
+    }
+  
+    img.footer2 {
+      width: 39% !important;
+      margin: 0 auto !important;
+      text-align: center !important;
+      display: block !important;
+    }
+  
+    p.footertxt {
+      text-align: center !important;
+    }
+  
+    img.footer3 {
+      width: 38% !important;
+      margin: 0 auto !important;
+      display: block !important;
+    }
+  
+    ::ng-deep .qrcode{
+      margin-left: 32% !important;
+    }
+  </style>
+  
+  
+  <!---- Front Side Start ---->
+  <div *ngIf="loading" class="row">
+    <div class="col-md-12">
+      <div class="alert alert-warning">
+        <span class="spinner-border spinner-border-sm mr-1"></span>
+        Loading....
+      </div>
+    </div>
+  </div>
+  
+  
+  <div *ngIf="loading == false" class="a4class" style="margin-top: 2%;">
+    <div class="backimg" style="height: 100vh;">      
+        <div>          
+            <!--  -----------------Main Logo image----------------  --> 
+            <div class="firstlogo">
+                <img class="fistimg" src="./assets/img/mainlogo1.png">
+            </div>
+            
+            <!--  -----------------Main Logo image 2----------------  --> 
+            <div class="firstlogo">
+                <img class="secondimg" src="./assets/img/mainlogo2.png">
+            </div>
+        </div>
+        
+        <!--  -----------------Certificate Of Completion----------------  --> 
+        <div>
+            <h2 class="maintitle">Alcohal Licence Certificate</h2>
+        </div>
+        
+        <!--  -----------------This certificate is to certify that----------------  --> 
+        <div style="margin-top: 40px;">
+            <p class="subtitle">This certificate is awarded to : </p>
+        </div>
+  
+        <div>
+            <p class="subtitle">{{clientDetails?.entityName}} , {{clientDetails?.businessTypeString}} , {{clientDetails?.authorizationPerson}} with Amount allowed <u>{{clientDetails.licenceAmount}} Dhs / Month.</u> <br> The Validity of Licence is : <u>  {{ clientDetails?.expiryDate | date:'d' }}{{dateSuffix}} {{ clientDetails?.expiryDate | date:'MMMM y' }}</u></p>
+            <!--  -----------------Description Line 3----------------  --> 
+            <p class="subtitle">The hold of this Licence is permitted to purchase alcholic drink , from authorize importer or dealer <br> of alcholic Drinks in the Emirates of Dubai. </p>
+        </div>
+        
+        <div *ngIf="clientDetails?.certificateNotes != null">
+          <p class="subtitle" style="margin-top: 20px;">{{clientDetails?.certificateNotes}} </p>
+        </div>
+        
+        <div class="footerdiv">
+            <div class="footercol1">              
+              <!--  -----------------Certified image----------------  --> 
+              <img class="footer1" src="./assets/img/certified.png">
+            </div>
+           
+            <div class="footercol2">
+              <!--  -----------------Signature----------------  --> 
+              <img class="footer2" src="./assets/img/Esigns.png">
+              <p class="footertxt" style="margin-top: 15px; font-size: 16px;"><strong> Director</strong></p>
+              <p class="footertxt" style="font-size: 16px;"><strong>General Department of Criminal Investigation</strong></p>
+            </div>
+  
+            <div class="footercol3">
+              <!--  -----------------QR codes----------------  --> 
+              <!-- <img class="footer3" src="./assets/img/QR.png">  -->
+              <qrcode [qrdata]="clientDetails.liquorLicenseNumber" [margin]="0" [elementType]="'img'" [width]="140" [errorCorrectionLevel]="'M'"></qrcode>
+              <!-- <a [href]="href" *ngIf="display" (click)="downloadImage()" download>Download Image</a>     -->
+            </div>
+        </div> 
+    </div> 
+  </div>

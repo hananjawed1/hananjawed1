@@ -1,0 +1,303 @@
+<style>
+  td {
+    font-weight: 500;
+  }
+</style>
+<div class="container-fluid">
+
+  <!-- breadcrumb -->
+  <div class="breadcrumb-header justify-content-between">
+    <div class="my-auto">
+      <div class="d-flex">
+        <h4 class="content-title mb-0 my-auto">{{siteLabel.membershipRequest}}</h4> 
+      </div>
+    </div>
+  </div>
+
+  <div class="row row-sm">
+
+    <div class="col-lg-6 col-xl-3 col-md-6 col-12">
+      <div class="card bg-primary-gradient text-white ">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="icon1 mt-2 text-center">
+                <i class="fe fe-pie-chart tx-40"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mt-0 text-center">
+                <span class="text-white">{{siteLabel.dashboard.totalRequests}}</span>
+                <h2 class="text-white mb-0">{{membershipRequest.totalRequest}}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-xl-3 col-md-6 col-12">
+      <div class="card bg-danger-gradient text-white">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="icon1 mt-2 text-center">
+                <i class="fe fe-pie-chart tx-40"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mt-0 text-center">
+                <span class="text-white">{{siteLabel.newRequest}}</span>
+                <h2 class="text-white mb-0">{{membershipRequest.newRequest}}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-xl-3 col-md-6 col-12">
+      <div class="card bg-success-gradient text-white">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="icon1 mt-2 text-center">
+                <i class="fe fe-pie-chart tx-40"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mt-0 text-center">
+                <span class="text-white">{{siteLabel.dashboard.approvedRequests}}</span>
+                <h2 class="text-white mb-0">{{membershipRequest.approvedRequest}}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-xl-3 col-md-6 col-12">
+      <div class="card bg-warning-gradient text-white">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="icon1 mt-2 text-center">
+                <i class="fe fe-pie-chart tx-40"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mt-0 text-center">
+                <span class="text-white">{{siteLabel.dashboard.pendingRequests}}</span>
+                <h2 class="text-white mb-0">{{membershipRequest.pendingRequest}}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- breadcrumb -->
+
+  <!-- row opened -->
+  <div class="row row-sm">
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row row-sm mb-4">
+            <div class="col-lg-3 mb-2">
+              <input class="form-control" [(ngModel)]='objSearchMembership.name'
+                   (input)='searhMembership(0)' placeholder="{{siteLabel.searchByFullName}}" type="text">
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <input class="form-control" placeholder="{{siteLabel.searchByPhone}}" [(ngModel)]='objSearchMembership.phone' (input)='searhMembership(0)' type="text">
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <input class="form-control" placeholder="{{siteLabel.searchByMembershipId}}" [(ngModel)]='objSearchMembership.membershipId' (input)='searhMembership(0)' type="text">
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <input class="form-control" placeholder="{{siteLabel.emiratesIDNumber}}" [(ngModel)]='objSearchMembership.emiratesIdNumber' (input)='searhMembership(0)' type="text">
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <select class="form-control" [(ngModel)]='objSearchMembership.agentId' (change)="searhMembership(0)">
+                <option value="0" selected>{{siteLabel.searchByAgent}}</option>
+                <option *ngFor="let i of agents" value={{i.agentId}}>
+                  {{i.user.name}}
+                </option>
+              </select>
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <select class="form-control" [(ngModel)]='objSearchMembership.salesPointUserId' (change)="searhMembership(0)">
+                <option value="0" selected>{{siteLabel.salesPointUser}}</option>
+                <option *ngFor="let i of salesPoints" value={{i.salesPointUserId}}>{{i.user.name}}</option>
+              </select>
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <select class="form-control" [(ngModel)]='objSearchMembership.requestCategory' (change)="searhMembership(0)">
+                <option [ngValue]="0" selected>{{siteLabel.requestCategory}}</option>
+                <option *ngFor="let i of requestCategory" value={{i.id}}>{{i.name}}</option>
+              </select>
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <select class="form-control" [(ngModel)]=objSearchMembership.status (change)='searhMembership(0)'>
+                <option [ngValue]="0" selected>{{siteLabel.searchByStatus}}</option>
+                <option *ngFor="let i of StatusEnums" value={{i.membershipStatusDBId}}>{{i.status}}</option>
+              </select>
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <select class="form-control" [(ngModel)]=objSearchMembership.membershipTypeId (change)='searhMembership(0)'>
+                <option [ngValue]="0" selected>{{siteLabel.membershipType}}</option>
+                <option *ngFor="let i of membershipTypes" value={{i.membershipTypeId}}>{{i.name}}</option>
+              </select>
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">{{siteLabel.regDate}}</span>
+                </div>
+                <input aria-describedby="basic-addon1" aria-label="Username" class="form-control" placeholder="mm/dd/yyyy"
+                   [(ngModel)]='objSearchMembership.registerationDate' 
+                      (input)='changeDate()' type="date">
+              </div>
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">{{siteLabel.expDate}}</span>
+                </div>
+                <input aria-describedby="basic-addon1" aria-label="Username" class="form-control" placeholder="mm/dd/yyyy"
+                    [(ngModel)]='objSearchMembership.expirationDate' (input)='changeDate()' type="date">
+              </div>
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <button class="bg-primary btn text-white" (click)="resetSearch()">Reset</button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <div *ngIf="tableLoading" class="alert alert-warning">
+              <span class="spinner-border spinner-border-sm mr-1"></span>
+              Loading....
+            </div>
+
+            <table *ngIf="tableLoading===false" class="table text-md-nowrap dataTable no-footer">
+              <thead class="thead-dark">
+                <tr>
+                  <th class="wd-15p border-bottom-0">{{siteLabel.fullName}}</th>
+                  <th class="wd-15p border-bottom-0">{{siteLabel.phone}}</th>
+                  <th class="wd-15p border-bottom-0">{{siteLabel.membershipId}}</th>
+                  <th class="wd-15p border-bottom-0">{{siteLabel.agent}}</th>
+                  <th class="wd-15p border-bottom-0">{{siteLabel.status}}</th>
+                  <th class="wd-5p border-bottom-0">{{siteLabel.action}}</th>
+                </tr>
+              </thead>
+              <tbody *ngIf='members'>
+                <tr *ngFor='let m of members'>
+                  <td>{{m.fullName}}</td>
+                  <td>{{m.phoneNumber}}</td>
+                  <td>{{m.membershipNumber}}</td>
+                  <td>{{m.salesPointUser.agent.user.name}}</td>
+                  <td>
+                    <span class="badge badge-pill {{m.statusColor}}">{{m.statusString}}</span>
+                  </td>
+                  <td>
+                    <div class="btn-icon-list">
+                      <button class="btn btn-primary btn-icon" routerLink="/member-details/{{m.membershipId}}">
+                        <i class="typcn typcn-eye"></i>
+                      </button>
+                      <!-- <button class="btn btn-danger btn-icon" routerLink="/edit-membership/{{m.membershipId}}">
+                        <i class="typcn typcn-pencil"></i>
+                      </button> -->
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot class="thead-dark">
+                <tr>
+                  <th>{{siteLabel.recordsPerRow}} : {{members?members.length:0}} &nbsp;&nbsp;&nbsp; {{siteLabel.totalRecords}} : {{totalCount}}</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </tfoot>
+            </table>
+            
+            <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+              <ul class="pagination mt-3 mb-0 justify-content-end" [hidden]="(loading || pagesCount < 2)">
+                <li class="page-item">
+                  <a class="page-link" [hidden]="page == 0" href="javascript:void(0)" (click)="searhMembership(0)">{{siteLabel.first}}</a>
+                </li>
+                <li class="paginate_button page-item previous">
+                  <a class="page-link" href="javascript:void(0)" [hidden]="page == 0" (click)="searhMembership(page-1)">
+                    {{siteLabel.previous}}
+                  </a>
+                </li>
+                <li class="page-item" *ngFor='let n of range()'
+                    [class]="{active: n == page}">
+                  <a class="page-link" href="javascript:void(0)" (click)="searhMembership(n)" *ngIf="n != page">{{n+1}}</a>
+                  <a class="page-link" href="javascript:void(0)" *ngIf="n == page">{{n+1}}</a>
+                </li>
+                <li class="paginate_button page-item next">
+                  <a class="page-link" href="javascript:void(0)" [hidden]="page == pagesCount - 1" (click)="searhMembership(page+1)">
+                    {{siteLabel.next}}
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="javascript:void(0)" [hidden]="page == pagesCount - 1" (click)="searhMembership(pagesCount - 1)">{{siteLabel.last}}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          
+
+            <!-- <table class="table text-md-nowrap" id="example1">
+              <thead>
+              <tr>
+                <th class="wd-15p border-bottom-0">Name</th>
+                <th class="wd-15p border-bottom-0">Phone</th>
+                <th class="wd-20p border-bottom-0">MembershipID</th>
+                <th class="wd-15p border-bottom-0">Agent</th>
+                <th class="wd-10p border-bottom-0">Status</th>
+                <th class="wd-5p border-bottom-0">Action</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>Bella</td>
+                <td>5252525252</td>
+                <td>UBBBAXX</td>
+                <td>AE - AFRican EASTERN</td>
+                <td><span class="badge badge-pill badge-info">New</span></td>
+                <td>
+                  <div class="btn-icon-list">
+                    <a [routerLink]="['/member-details']">
+                      <button class="btn btn-primary btn-icon"><i
+                        class="typcn typcn-eye"></i></button>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+
+              </tbody>
+            </table> -->
+
+            <!-- <table class="table text-md-nowrap" id="example2">
+        </div>
+      </div>
+    </div>
+    <!--/div-->
+  </div>
+  <!-- /row -->
+</div>

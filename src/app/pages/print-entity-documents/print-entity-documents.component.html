@@ -1,0 +1,895 @@
+<style>  
+    .borderCSS {
+        border: 1px solid black;
+    }
+  </style>
+
+<div *ngIf="loading" class="row">
+    <div class="col-md-12">
+      <div class="alert alert-warning">
+        <span class="spinner-border spinner-border-sm mr-1"></span>
+        Loading....
+      </div>
+    </div>
+</div>
+
+<div *ngIf="loading == false">
+    <table style="width: 70%; margin-left: 15%; margin-top: 5%;">
+        <tr>
+            <td colspan="3">
+                <table  id="items" style="border: 1px solid; width:100%">                    
+                    <tbody style="border: 1px solid;" >
+                        <tr *ngIf="docPdf.tourismCertificate!=null && docPdf.tourismCertificate!=''">
+                            <div *ngFor="let item of docPdf.tourismCertificate.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'">
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.municipalityCertificate!='' && docPdf.municipalityCertificate!=null">
+                            <div *ngFor="let item of docPdf.municipalityCertificate.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                            </div>
+                        </tr>
+                       
+                        <tr *ngIf="docPdf.requestLetterToServeAlcoholicBeverages!=null && docPdf.requestLetterToServeAlcoholicBeverages!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.requestLetterToServeAlcoholicBeverages.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.noObjectionFromTheOwner!=null && docPdf.noObjectionFromTheOwner!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.noObjectionFromTheOwner.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.monthlyConsumption!=null && docPdf.monthlyConsumption!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.monthlyConsumption.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.nationalIdentityForCommercialLicense!=null && docPdf.nationalIdentityForCommercialLicense!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.nationalIdentityForCommercialLicense.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.nationalIdentityOfThePerson!=null && docPdf.nationalIdentityOfThePerson!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.nationalIdentityOfThePerson.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.memorandumOfTheEstablishment!=null && docPdf.memorandumOfTheEstablishment!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.memorandumOfTheEstablishment.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.ownershipCertificate!=null && docPdf.ownershipCertificate!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.ownershipCertificate.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.leaseAgreement!=null && docPdf.leaseAgreement!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.leaseAgreement.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.classificationCertificate!=null && docPdf.classificationCertificate!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.classificationCertificate.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.interiorAndExteriorPictures!=null && docPdf.interiorAndExteriorPictures!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.interiorAndExteriorPictures.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.floorplan!=null && docPdf.floorplan!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.floorplan.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.noObjectionLetter!=null && docPdf.noObjectionLetter!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.noObjectionLetter.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.goodConductCertificate!=null && docPdf.goodConductCertificate!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.goodConductCertificate.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+
+                        <!-- hotel  -->
+
+                        <tr *ngIf="docPdf.hotelNoObjectionLetter!=null && docPdf.hotelNoObjectionLetter!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.hotelNoObjectionLetter.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.hotelOwnershipCertificate!=null && docPdf.hotelOwnershipCertificate!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.hotelOwnershipCertificate.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.hotelLeaseAgreement!=null && docPdf.hotelLeaseAgreement!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.hotelLeaseAgreement.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.hotelEstablishmentContract!=null && docPdf.hotelEstablishmentContract!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.hotelEstablishmentContract.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.hotelTouristLicense!=null && docPdf.hotelTouristLicense!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.hotelTouristLicense.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.hotelClassificationCertificate!=null && docPdf.hotelClassificationCertificate!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.hotelClassificationCertificate.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.hotelPassports!=null && docPdf.hotelPassports!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.hotelPassports.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.hotelFacilityManagementLetter!=null && docPdf.hotelFacilityManagementLetter!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.hotelFacilityManagementLetter.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.hotelPhotos!=null && docPdf.hotelPhotos!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.hotelPhotos.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.hotelCriminalInvestigation!=null && docPdf.hotelCriminalInvestigation!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.hotelCriminalInvestigation.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+
+                        <!-- restaurant -->
+
+                        <tr *ngIf="docPdf.restaurantNoObjectionLetter!=null && docPdf.restaurantNoObjectionLetter!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.restaurantNoObjectionLetter.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.restaurantOwnershipCertificate!=null && docPdf.restaurantOwnershipCertificate!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.restaurantOwnershipCertificate.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.restaurantLeaseAgreement!=null && docPdf.restaurantLeaseAgreement!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.restaurantLeaseAgreement.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.restaurantEstablishmentContract!=null && docPdf.restaurantEstablishmentContract!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.restaurantEstablishmentContract.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.restaurantCommercialLicense!=null && docPdf.restaurantCommercialLicense!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.restaurantCommercialLicense.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.restaurantClassificationCertificate!=null && docPdf.restaurantClassificationCertificate!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.restaurantClassificationCertificate.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.restaurantPassports!=null && docPdf.restaurantPassports!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.restaurantPassports.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.restaurantFacilityManagementLetter!=null && docPdf.restaurantFacilityManagementLetter!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.restaurantFacilityManagementLetter.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.restaurantCriminalInvestigation!=null && docPdf.restaurantCriminalInvestigation!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.restaurantCriminalInvestigation.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.restaurantPhotos!=null && docPdf.restaurantPhotos!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.restaurantPhotos.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                    
+                        <!-- hotelApartment -->
+
+                        <tr *ngIf="docPdf.hotelApartmentNoObjectionLetter!=null && docPdf.hotelApartmentNoObjectionLetter!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.hotelApartmentNoObjectionLetter.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.hotelApartmentOwnershipCertificate!=null && docPdf.hotelApartmentOwnershipCertificate!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.hotelApartmentOwnershipCertificate.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.hotelApartmentLeaseAgreement!=null && docPdf.hotelApartmentLeaseAgreement!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.hotelApartmentLeaseAgreement.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.hotelApartmentEstablishmentContract!=null && docPdf.hotelApartmentEstablishmentContract!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.hotelApartmentEstablishmentContract.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.hotelApartmentTouristLicense!=null && docPdf.hotelApartmentTouristLicense!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.hotelApartmentTouristLicense.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.hotelApartmentClassificationCertificate!=null && docPdf.hotelApartmentClassificationCertificate!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.hotelApartmentClassificationCertificate.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.hotelApartmentPassports!=null && docPdf.hotelApartmentPassports!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.hotelApartmentPassports.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.hotelApartmentFacilityManagementLetter!=null && docPdf.hotelApartmentFacilityManagementLetter!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.hotelApartmentFacilityManagementLetter.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.hotelApartmentCriminalInvestigation!=null && docPdf.hotelApartmentCriminalInvestigation!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.hotelApartmentCriminalInvestigation.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.hotelApartmentPhotos!=null && docPdf.hotelApartmentPhotos!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.hotelApartmentPhotos.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+
+                        <!-- club -->
+
+                        <tr *ngIf="docPdf.clubNoObjectionLetter!=null && docPdf.clubNoObjectionLetter!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.clubNoObjectionLetter.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.clubOwnershipCertificate!=null && docPdf.clubOwnershipCertificate!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.clubOwnershipCertificate.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.clubRentalContract!=null && docPdf.clubRentalContract!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.clubRentalContract.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.clubArticles!=null && docPdf.clubArticles!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.clubArticles.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.clubCommercialLicense!=null && docPdf.clubCommercialLicense!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.clubCommercialLicense.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.clubRegistrationCertificate!=null && docPdf.clubRegistrationCertificate!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.clubRegistrationCertificate.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.clubPassports!=null && docPdf.clubPassports!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.clubPassports.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.clubAdministration!=null && docPdf.clubAdministration!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.clubAdministration.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.clubCriminalInvestigation!=null && docPdf.clubCriminalInvestigation!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.clubCriminalInvestigation.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.clubPhotos!=null && docPdf.clubPhotos!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.clubPhotos.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+
+                        <!-- reExport -->
+
+                        <tr *ngIf="docPdf.reExportNoObjectionLetter!=null && docPdf.reExportNoObjectionLetter!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.reExportNoObjectionLetter.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.reExportTradeLicense!=null && docPdf.reExportTradeLicense!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.reExportTradeLicense.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.reExportPassport!=null && docPdf.reExportPassport!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.reExportPassport.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.reExportCompanyContract!=null && docPdf.reExportCompanyContract!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.reExportCompanyContract.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.reExportOwnershipCertificate!=null && docPdf.reExportOwnershipCertificate!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.reExportOwnershipCertificate.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.reExportConformityCertificate!=null && docPdf.reExportConformityCertificate!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.reExportConformityCertificate.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.reExportStorageStandards!=null && docPdf.reExportStorageStandards!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.reExportStorageStandards.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.reExportWarehouseCertificate!=null && docPdf.reExportWarehouseCertificate!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.reExportWarehouseCertificate.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.reExportSketchLocation!=null && docPdf.reExportSketchLocation!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.reExportSketchLocation.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.reExportPermitCertificate!=null && docPdf.reExportPermitCertificate!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.reExportPermitCertificate.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.reExportCriminalInvestigation!=null && docPdf.reExportCriminalInvestigation!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.reExportCriminalInvestigation.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+
+                        <!-- floating -->
+
+                        <tr *ngIf="docPdf.floatingCompanyContract!=null && docPdf.floatingCompanyContract!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.floatingCompanyContract.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.floatingCommercialLicense!=null && docPdf.floatingCommercialLicense!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.floatingCommercialLicense.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.floatingPassport!=null && docPdf.floatingPassport!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.floatingPassport.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.floatingLeaseContract!=null && docPdf.floatingLeaseContract!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.floatingLeaseContract.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.floatingNoObjection!=null && docPdf.floatingNoObjection!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.floatingNoObjection.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.floatingOwnership!=null && docPdf.floatingOwnership!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.floatingOwnership.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.floatingInsuranceCertificate!=null && docPdf.floatingInsuranceCertificate!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.floatingInsuranceCertificate.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.floatingManningCertificate!=null && docPdf.floatingManningCertificate!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.floatingManningCertificate.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.floatingVessel!=null && docPdf.floatingVessel!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.floatingVessel.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.floatingClassificationCertificate!=null && docPdf.floatingClassificationCertificate!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.floatingClassificationCertificate.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.floatingPermitLetter!=null && docPdf.floatingPermitLetter!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.floatingPermitLetter.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.floatingAlcoholicPermit!=null && docPdf.floatingAlcoholicPermit!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.floatingAlcoholicPermit.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.floatingCriminalInvestigation!=null && docPdf.floatingCriminalInvestigation!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.floatingCriminalInvestigation.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.floatingPhotos!=null && docPdf.floatingPhotos!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.floatingPhotos.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+
+                        <!-- shops -->
+
+                        <tr *ngIf="docPdf.shopsCommercialLicense!=null && docPdf.shopsCommercialLicense!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.shopsCommercialLicense.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.shopsLeaseContract!=null && docPdf.shopsLeaseContract!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.shopsLeaseContract.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.shopsSketchSite!=null && docPdf.shopsSketchSite!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.shopsSketchSite.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+
+                        <!-- camp -->
+
+                        <tr *ngIf="docPdf.campNoObjectionCertificate!=null && docPdf.campNoObjectionCertificate!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.campNoObjectionCertificate.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.campOwnershipCertificate!=null && docPdf.campOwnershipCertificate!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.campOwnershipCertificate.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.campRentalContract!=null && docPdf.campRentalContract!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.campRentalContract.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.campEstablishmentContract!=null && docPdf.campEstablishmentContract!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.campEstablishmentContract.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.campCommercialLicense!=null && docPdf.campCommercialLicense!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.campCommercialLicense.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.campClassificationCertificate!=null && docPdf.campClassificationCertificate!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.campClassificationCertificate.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.campPassport!=null && docPdf.campPassport!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.campPassport.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.campPermitLetter!=null && docPdf.campPermitLetter!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.campPermitLetter.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.campAdministration!=null && docPdf.campAdministration!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.campAdministration.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.campCriminalInvestigation!=null && docPdf.campCriminalInvestigation!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.campCriminalInvestigation.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.campPhotos!=null && docPdf.campPhotos!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.campPhotos.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+
+                        <!-- importExport -->
+
+                        <tr *ngIf="docPdf.importExportPassport!=null && docPdf.importExportPassport!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.importExportPassport.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.importExportTradeLicense!=null && docPdf.importExportTradeLicense!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.importExportTradeLicense.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.importExportNoObjectionCertificate!=null && docPdf.importExportNoObjectionCertificate!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.importExportNoObjectionCertificate.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.importExportCompanyContract!=null && docPdf.importExportCompanyContract!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.importExportCompanyContract.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.importExportConformityCertificate!=null && docPdf.importExportConformityCertificate!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.importExportConformityCertificate.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.importExportLeaseContract!=null && docPdf.importExportLeaseContract!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.importExportLeaseContract.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.importExportCertificateOfFood!=null && docPdf.importExportCertificateOfFood!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.importExportCertificateOfFood.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.importExportWarehouseCertificate!=null && docPdf.importExportWarehouseCertificate!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.importExportWarehouseCertificate.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.importExportSketchLocation!=null && docPdf.importExportSketchLocation!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.importExportSketchLocation.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.importExportManagementLetter!=null && docPdf.importExportManagementLetter!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.importExportManagementLetter.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr *ngIf="docPdf.importExportCertificateOfCriminal!=null && docPdf.importExportCertificateOfCriminal!=''">
+                            <div style="float: left; margin-left: 5px;" *ngFor="let item of docPdf.importExportCertificateOfCriminal.split(',')">
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) != 'pdf'" ><img src="{{item}}"></td>
+                                <td *ngIf="item.substr(item.lastIndexOf('.') + 1) == 'pdf'" >
+                                    <pdf-viewer [src]="item" [render-text]="true" style="display: block;"></pdf-viewer>
+                                </td>
+                            </div>
+                        </tr>
+                  </table>
+            </td>
+        </tr>
+    </table>   
+</div>
+

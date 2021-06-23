@@ -1,0 +1,145 @@
+<div class="container-fluid">
+
+  <!-- breadcrumb -->
+  <div class="breadcrumb-header justify-content-between">
+    <div class="my-auto">
+      <div class="d-flex">
+        <h4 class="content-title mb-0 my-auto">{{siteLabel.checklistOptions}}</h4>
+      </div>
+    </div>
+  </div>
+  <!-- breadcrumb -->
+
+  <!-- row opened -->
+  <div class="row row-sm">
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-body">
+            <form [formGroup]='qusAnsGroupForm' id="group_form" method="post" name="group_form">
+                <button class="btn btn-primary" [disabled]='loading' (click)="addNewQuesAnswer()">
+                        {{siteLabel.addNewQuestion}}
+                </button>  
+                <div formArrayName="qusAnsFormArray" *ngFor="let quesAns of getControls(); let i = index">
+                    <hr>
+                    <div [formGroupName]="i">
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <input class="form-control" formControlName="question"  [id]="'question' + i" placeholder="Question" type="text">                                          
+                                        <span *ngIf="quesAns.get('question').invalid && (quesAns.get('question').dirty || quesAns.get('question').touched)" class="alert alert-danger">
+                                            {{siteLabel.pleaseEnterQuestion}}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2" *ngIf="getControls().length > 1">
+                                    <button type="button" class="btn btn-dnager btn-sm pull-center" title="Remove Checklist Options"
+                                        (click)="removeCheckListOptions(i)">
+                                        <img src="/assets/img/svg/x-square.svg"/>
+                                    </button>
+                                </div>
+                
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input class="form-control" formControlName='answer1'  [id]="'answer1'+ i" placeholder="Answer 1" type="text">
+                                        <span *ngIf="quesAns.get('answer1').invalid && (quesAns.get('answer1').dirty || quesAns.get('answer1').touched)" class="alert alert-danger">
+                                            {{siteLabel.pleaseEnterAnswer1}}
+                                        </span>
+                                    </div>
+                                </div>
+                
+                                <div class="col-md-12"> 
+                                    <div class="form-group">
+                                        <input class="form-control" formControlName='answer2'  [id]="'answer2'+i" placeholder="Answer 2" type="text">
+                                        <span *ngIf="quesAns.get('answer2').invalid && (quesAns.get('answer2').dirty || quesAns.get('answer2').touched)" class="alert alert-danger">
+                                            {{siteLabel.pleaseEnterAnswer2}}
+                                        </span>
+                                    </div>
+                                </div>
+                
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input class="form-control" formControlName='answer3'  [id]="'answer3'+i" placeholder="Answer 3" type="text">                                           
+                                        <span *ngIf="quesAns.get('answer3').invalid && (quesAns.get('answer3').dirty || quesAns.get('answer3').touched)" class="alert alert-danger">
+                                            {{siteLabel.pleaseEnterAnswer3}}
+                                        </span>
+                                    </div>
+                                </div>
+                
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input class="form-control" formControlName='answer4'  [id]="'answer4'+i" placeholder="Answer 4" type="text">                                          
+                                        <span *ngIf="quesAns.get('answer4').invalid && (quesAns.get('answer4').dirty || quesAns.get('answer4').touched)" class="alert alert-danger">
+                                            {{siteLabel.pleaseEnterAnswer4}}
+                                        </span>
+                                    </div>
+                                </div>                                     
+                            </div>
+                        </div>
+                    </div>
+                </div>      
+                <hr>
+                <button class="btn btn-success" [disabled]='!qusAnsGroupForm.valid || loading' (click)='SaveCheckListGroup()'>
+                    <i class="btn-icon-prepend" data-feather="save"></i>
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        {{siteLabel.submit}}
+                </button>
+            </form>   
+        </div>
+        <div class="table-responsive">
+            <div *ngIf="loading" class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-warning">
+                        <span class="spinner-border spinner-border-sm mr-1"></span>
+                        Loading....
+                    </div>
+                </div>
+            </div>  
+
+            <table class="table text-md-nowrap dataTable no-footer" id="example1" *ngIf="loading===false">
+              <thead class="thead-dark">
+              <tr>
+                <th class="wd-15p border-bottom-0">No.</th>
+                <th class="wd-15p border-bottom-0">{{siteLabel.question}}</th>
+                <th class="wd-20p border-bottom-0">{{siteLabel.answer1}}</th>
+                <th class="wd-15p border-bottom-0">{{siteLabel.answer2}}</th>
+                <th class="wd-10p border-bottom-0">{{siteLabel.answer3}}</th>
+                <th class="wd-25p border-bottom-0">{{siteLabel.answer4}}</th>
+                <th class="wd-25p border-bottom-0">{{siteLabel.edit}}</th>
+              </tr>
+              </thead>
+              <tbody *ngIf='checkList'>
+                <tr *ngFor='let checkList of checkList'>
+                    <td>{{checkList.checkListId}}</td>
+                    <td>{{checkList.question}}</td>
+                    <td>{{checkList.answer1}}</td>
+                    <td>{{checkList.answer2}}</td>
+                    <td>{{checkList.answer3}}</td>
+                    <td>{{checkList.answer4}}</td>
+                    <td>
+                        <button class="btn btn-danger btn-xs" (click)="editCheckListOptions(checkList)">
+                            {{siteLabel.edit}}
+                        </button> 
+                    </td>
+                </tr>
+              </tbody>
+              <tfoot class="thead-dark">
+                <tr>
+                  <th> {{siteLabel.total}} {{checkList?checkList.length:0}}</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+      </div>
+    </div>
+    <!--/div-->
+  </div>
+  <!-- /row -->
+</div>

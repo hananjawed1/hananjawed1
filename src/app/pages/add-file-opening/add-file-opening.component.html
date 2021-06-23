@@ -1,0 +1,222 @@
+<div class="container-fluid">
+    <!-- breadcrumb -->
+  <div class="breadcrumb-header justify-content-between">
+    <div class="my-auto">
+      <div class="d-flex">
+        <h4 class="content-title mb-0 my-auto">Add File Opening Request</h4>
+      </div>
+    </div>
+    <div class="d-flex my-xl-auto right-content">
+        <div class="pr-1 mb-3 mb-xl-0">
+          <a [routerLink]="['/view-file-opening']" class="btn btn-primary">View All Request</a>
+        </div>
+    </div>
+
+  </div>
+  <!-- breadcrumb -->
+  <div class="row">
+    <div class="col-xl-12">
+        <div class="card" id="tabs-style4">
+          <div class="card-body">
+            <form [formGroup]='fileRequestForm' name="profile_form" id="profile_form">
+                <div class="form-body">
+                    <div  class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="name">{{siteLabel?.tradeLicenceNumber}}*</label>
+                              <input formControlName="tradeLicenceNumber" class="form-control" id="name"
+                                     placeholder="{{siteLabel?.pleaseEnterTradeLicenceNumber}}"
+                                     type="text" (blur)="processChange($event.target.value)"
+                                     [(ngModel)]='addFileRequest.tradeLicenceNumber'>
+                                    <span *ngIf="fileRequestForm.get('tradeLicenceNumber').invalid && (fileRequestForm.get('tradeLicenceNumber').dirty || fileRequestForm.get('tradeLicenceNumber').touched)"
+                                            class="alert alert-danger">
+                                        {{siteLabel?.pleaseEnterTradeLicenceNumber}}
+                                    </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name">UserName*</label>
+                                <input formControlName="userName" class="form-control" id="username"
+                                placeholder="{{siteLabel?.pleaseEnterTradeLicenceNumber}}"
+                                type="text" 
+                                [(ngModel)]='addFileRequest.userName'>
+                                <!-- <span *ngIf="fileRequestForm.get('userName').invalid && (fileRequestForm.get('userName').dirty || fileRequestForm.get('tradeLicenceNumber').touched)"
+                                        class="alert alert-danger">
+                                    {{siteLabel?.pleaseEnterTradeLicenceNumber}}
+                                </span> -->
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="entityName">Entity Name*</label>
+                            <input class="form-control" id="entityName" name="entityName" placeholder="Entity Name" formControlName='entityName' [(ngModel)]='addFileRequest.entityName' type="text">
+                            <span *ngIf="fileRequestForm.get('entityName').invalid && (fileRequestForm.get('entityName').dirty || fileRequestForm.get('entityName').touched)"
+                                class="alert alert-danger">Please Enter Entity Name</span>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" >
+                              <label for="status">Entity Classification*</label>
+                              <select formControlName="star" class="form-control" id="star" [(ngModel)]="addFileRequest.star">
+                                <option [ngValue]=0>Please Select Star</option>
+                                <option [ngValue]=1>5 STARS - 150,020 AED</option>
+                                <option [ngValue]=2>4 STARS - 100,020 AED</option>
+                                <option [ngValue]=3>3 STARS - 70,020 AED</option>
+                                <option [ngValue]=4>LESS THAN 3 STAR - 45,020 AED</option>
+                                <option [ngValue]=5>Hotel Apartment Except the Resorts, Club , Bars , Lounges - 40,020 AED</option>
+                                <option [ngValue]=6>Restaurants - 25,020 AED</option>
+                                <option [ngValue]=7>Reexport Companies - 250,020 AED</option>
+                                <option [ngValue]=8>Floating Restaurant - 25,020 AED</option>
+                                <option [ngValue]=9>Shops – 250,020 AED</option>
+                                <option [ngValue]=10>Import / Export Companies – 500,020 AED</option>
+                                <option [ngValue]=11>Camp – 25,020 AED</option>
+                                <option [ngValue]=12>Hospitality License – 25,020 AED</option>
+                              </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="role">Entity Category*</label>
+                              <select formControlName="businessType" class="form-control" [(ngModel)]="addFileRequest.businessType" (change)="showData()">
+                                <option value="0" >Please Select Type</option>
+                                <option *ngFor="let i of businessTypes" value={{i.id}}>{{i.name}}</option>
+                              </select>
+                              <span *ngIf="fileRequestForm.get('businessType').invalid && (fileRequestForm.get('businessType').dirty || fileRequestForm.get('businessType').touched)" class="alert alert-danger">
+                                    "Please Select Type"
+                              </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="email">{{siteLabel?.email}}*</label>
+                              <input formControlName="email" class="form-control" id="email"
+                                     placeholder="{{siteLabel?.pleaseEnterEmail}}"
+                                     type="text" [(ngModel)]='addFileRequest.email'>
+                              <span *ngIf="fileRequestForm.get('email').invalid && (fileRequestForm.get('email').dirty || fileRequestForm.get('email').touched)"
+                                    class="alert alert-danger">
+                                {{siteLabel?.pleaseEnterEmail}}
+                              </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                            <label for="phone_no">{{siteLabel?.phoneNumber}}*</label>
+                            <input formControlName="phoneNumber" class="form-control" id="phone_no"
+                                    placeholder="{{siteLabel?.phoneNumber}}" type="text"
+                                    [(ngModel)]='addFileRequest.phoneNumber'>
+                            <span *ngIf="fileRequestForm.get('phoneNumber').invalid && (fileRequestForm.get('phoneNumber').dirty || fileRequestForm.get('phoneNumber').touched)"
+                                    class="alert alert-danger">
+                                {{siteLabel?.pleaseEnterPhoneNumber}}
+                            </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="role">{{siteLabel?.parentGroup}}</label>
+                              <select formControlName="groupId"
+                                      [(ngModel)]="addFileRequest.groupId" class="form-control"
+                                      id="role" name="role">
+                                <option value="0">{{siteLabel?.pleaseSelectGroup}}</option>
+                                <option *ngFor="let i of groups"
+                                        value={{i.groupId}}>
+                                  {{i.name}}
+                                </option>
+                              </select>
+                              <span *ngIf="fileRequestForm.get('groupId').invalid && (fileRequestForm.get('groupId').dirty || fileRequestForm.get('groupId').touched)"
+                                    class="alert alert-danger">
+                                {{siteLabel?.pleaseSelectGroup}}
+                              </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="role">{{siteLabel?.requestType}}</label>
+                              <select formControlName="requestType" class="form-control" [(ngModel)]="addFileRequest.requestType">
+                                <option value="0">{{siteLabel?.pleaseSelectType}}</option>
+                                <option *ngFor="let i of requestTypes"
+                                        value={{i.id}}>
+                                  {{i.name}}
+                                </option>
+                              </select>
+                              <span *ngIf="fileRequestForm.get('requestType').invalid && (fileRequestForm.get('requestType').dirty || fileRequestForm.get('requestType').touched)"
+                                    class="alert alert-danger">
+                                {{siteLabel?.pleaseSelectType}}
+                              </span>
+                            </div> 
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="role">{{siteLabel?.requestedBy}}</label>
+                              <select formControlName="requestBy" class="form-control" [(ngModel)]="addFileRequest.requestBy">
+                                <option value="0">{{siteLabel?.pleaseSelectBy}}</option>
+                                <option [ngValue]=1>{{siteLabel?.owner}}</option>
+                                <option [ngValue]=2>{{siteLabel?.partner}}</option>
+                                <option [ngValue]=3>{{siteLabel?.pro}}</option>
+                                <option [ngValue]=4>{{siteLabel?.manager}}</option>
+                              </select>
+                              <span *ngIf="fileRequestForm.get('requestBy').invalid && (fileRequestForm.get('requestBy').dirty || fileRequestForm.get('requestBy').touched)"
+                                    class="alert alert-danger">
+                                {{siteLabel?.pleaseSelectBy}}
+                              </span>
+                            </div> 
+                        </div>
+                        <div class="col-md-6"  *ngIf="addFileRequest.requestBy != 0">
+                            <div class="form-group">
+                              <label>{{siteLabel?.emiratesIDNumber}}</label>
+                              <input formControlName='emiratesIDNumber' [(ngModel)]='addFileRequest.emiratesIDNumber'
+                                     class="form-control" id="emiratesIDNumber" name="limit"
+                                     placeholder="EmiratesIDNumber" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="role">{{siteLabel?.categoryType}}</label>
+                              <select class="form-control" formControlName="categoryType" [(ngModel)]="addFileRequest.categoryType"  >
+                                <option value="0">{{siteLabel?.pleaseSelectType}}</option>
+                                <option [ngValue]=1>{{siteLabel?.owned}}</option>
+                                <option [ngValue]=2>{{siteLabel?.leased}}</option>
+                              </select>
+                              <span *ngIf="fileRequestForm.get('categoryType').invalid && (fileRequestForm.get('categoryType').dirty || fileRequestForm.get('categoryType').touched)"
+                                    class="alert alert-danger">
+                                {{siteLabel?.pleaseSelectType}}
+                              </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6" *ngIf="addFileRequest.categoryType === 2">
+                            <div class="form-group">
+                              <label for="role">{{siteLabel?.parentEntityName}}</label>
+                              <input type="text" class="form-control" formControlName="name" [(ngModel)]="addFileRequest.name"  placeholder="{{siteLabel?.name}}">
+                            </div>
+                        </div>
+                        <div class="col-md-6" *ngIf="addFileRequest.categoryType === 2">
+                            <div class="form-group">
+                                <label for="role">{{siteLabel?.parentLicenceNumber}}</label>
+                                <input type="text" class="form-control" formControlName="parentLicenceNumber" [(ngModel)]="addFileRequest.parentLicenceNumber" 
+                                    placeholder="{{siteLabel?.parentLicenceNumber}}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="role">{{siteLabel?.tradeLicenseCopy}}</label>
+                              <input id="file" type="file" (change)="onChangeUploadDocument($event)" class="form-control">
+                            </div>
+                            <div class="form-group" style="font-size: revert;">
+                              <span style="color: red;">(PDF, JPG, PNG Only) (Max Size 1 MB)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn btn-success" [disabled]='!fileRequestForm.valid || loading'
+                (click)='saveFileOpening()'>
+          <i class="btn-icon-prepend"
+             data-feather="save"></i>
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          {{siteLabel?.submit}}
+        </button>
+        <button class="btn btn-light" type="button"><i class="btn-icon-prepend" data-feather="x"></i> Cancel</button>
+            </form>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

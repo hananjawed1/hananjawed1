@@ -1,0 +1,79 @@
+<div class="container-fluid">
+
+    <!-- breadcrumb -->
+    <div class="breadcrumb-header justify-content-between">
+      <div class="my-auto">
+        <div class="d-flex">
+          <h4 class="content-title mb-0 my-auto">{{siteLabel.addNewNotification}}</h4>
+        </div>
+      </div>
+  
+    </div>
+</div>
+
+
+ <!-- row opened -->
+ <div class="row">
+    <div class="col-xl-12">
+        <div class="card" id="tabs-style4">
+            <div class="card-body">
+                <form id="profile_form" [formGroup]='formLocation'  method="post" name="profile_form">
+                    <div class="form-body">
+                        <div class="row">
+                        <div class="col-xl-12">
+                            <div class="form-group">
+                            <label>Notification To*</label>
+                            <!--<select>
+                                <option selected>Select your Group</option>
+                                <option>AE</option>
+                                <option>MMI</option>
+                            </select>-->
+                            <select class="form-control" id="role" name="role"
+                                    [(ngModel)]='newNotification.agentId' formControlName='agentId'>
+                                <option value="">Please Select Agent</option>
+                                <option [ngValue]="ag.agentId" *ngFor='let ag of allAgents'>{{ag.user.name}}</option>
+                            </select>
+                            <span *ngIf="formLocation.get('agentId').invalid && (formLocation.get('agentId').dirty || formLocation.get('agentId').touched)"
+                                    class="alert alert-danger">Please Select Agent</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                            <label>Subject*</label>
+
+                            <input class="form-control" id="Subject"
+                                    name="Subject"
+                                    placeholder="Subject" type="text"
+                                    [(ngModel)]='newNotification.subject'
+                                    formControlName='subject'>
+
+                            <span
+                                    *ngIf="formLocation.get('subject').invalid && (formLocation.get('subject').dirty || formLocation.get('subject').touched)"
+                                    class="alert alert-danger">Please Enter Subject</span>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                            <label for="Message">Message </label>
+                            <textarea class="form-control" id="Message" name="Message"
+                                        [(ngModel)]='newNotification.message'
+                                        formControlName='message' placeholder="Description" rows="5"></textarea>
+                            <span *ngIf="formLocation.get('message').invalid && (formLocation.get('message').dirty || formLocation.get('message').touched)"
+                                    class="alert alert-danger">Please Enter Message</span>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <button class="btn btn-success" type="submit"
+                            [disabled]='!formLocation.valid || loading' (click)='SaveLocation()'>
+                        <i class="btn-icon-prepend" data-feather="save"></i>
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        {{siteLabel.submit}}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

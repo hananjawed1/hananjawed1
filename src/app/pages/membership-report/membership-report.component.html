@@ -1,0 +1,211 @@
+<div class="container-fluid">
+  <!-- breadcrumb -->
+  <div class="breadcrumb-header justify-content-between">
+    <div class="my-auto">
+      <div class="d-flex">
+        <h4 class="content-title mb-0 my-auto">{{siteLabel.membershipReports}}</h4>
+      </div>
+    </div>
+  </div>
+  <!-- breadcrumb -->
+
+  <!-- <div class="row row-sm">
+    <div class="col-lg-6 col-xl-3 col-md-6 col-12">
+      <div class="card bg-primary-gradient text-white ">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="icon1 mt-2 text-center">
+                <i class="fe fe-pie-chart tx-40"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mt-0 text-center">
+                <span class="text-white">Today</span>
+                <h2 class="text-white mb-0">332</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-xl-3 col-md-6 col-12">
+      <div class="card bg-danger-gradient text-white">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="icon1 mt-2 text-center">
+                <i class="fe fe-pie-chart tx-40"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mt-0 text-center">
+                <span class="text-white">Last 7 Days</span>
+                <h2 class="text-white mb-0">500</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-xl-3 col-md-6 col-12">
+      <div class="card bg-success-gradient text-white">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="icon1 mt-2 text-center">
+                <i class="fe fe-pie-chart tx-40"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mt-0 text-center">
+                <span class="text-white">This Month</span>
+                <h2 class="text-white mb-0">2300</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-xl-3 col-md-6 col-12">
+      <div class="card bg-warning-gradient text-white">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="icon1 mt-2 text-center">
+                <i class="fe fe-pie-chart tx-40"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mt-0 text-center">
+                <span class="text-white">Last Month</span>
+                <h2 class="text-white mb-0">5500</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+    <!-- row opened -->
+    <div class="row row-sm">
+      <div class="col-xl-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="row row-sm mb-4">
+              <div class="col-lg-3 mb-2">
+                <select class="form-control" [(ngModel)]=objSearchMembership.status (change)='searchMembership(0)'>
+                  <option [ngValue]="0" selected>{{siteLabel.searchByStatus}}</option>
+                  <option *ngFor="let i of StatusEnums" value={{i.membershipStatusDBId}}>{{i.status}}</option>
+                </select>
+              </div>
+              <div class="col-lg-3 mb-2">
+                <select class="form-control" [(ngModel)]='objSearchMembership.requestCategory' (change)="searchMembership(0)">
+                  <option [ngValue]="0" selected>{{siteLabel.requestCategory}}</option>
+                  <option *ngFor="let i of requestCategory" value={{i.id}}>{{i.name}}</option>
+                </select>
+              </div>
+  
+              <div class="col-lg-3 mb-2">
+                <select class="form-control" [(ngModel)]=objSearchMembership.membershipTypeId (change)='searchMembership(0)'>
+                  <option [ngValue]="0" selected>{{siteLabel.membershipType}}</option>
+                  <option *ngFor="let i of membershipTypes" value={{i.membershipTypeId}}>{{i.name}}</option>
+                </select>
+              </div>
+  
+  
+              <div class="col-lg-3 mb-2">
+                <select class="form-control" [(ngModel)]='objSearchMembership.agentId' (change)="searchMembership(0)">
+                  <option value="0" selected>{{siteLabel.searchByAgent}}</option>
+                  <option *ngFor="let i of agents" value={{i.agentId}}>{{i.user.name}}</option>
+                </select>
+              </div>
+  
+  
+              <div class="col-lg-3 mb-2">
+                <select class="form-control" [(ngModel)]='objSearchMembership.salesPointUserId' (change)="searchMembership(0)">
+                  <option value="0" selected>{{siteLabel.salesPointUser}}</option>
+                  <option *ngFor="let i of salesPoints" value={{i.salesPointUserId}}>{{i.user.name}}</option>
+                </select>
+              </div>
+  
+              <div class="col-lg-3 mb-2">
+                <select class="form-control" [(ngModel)]='objSearchMembership.cardStatus' (change)='searchMembership(0)'>
+                  <option value="0" selected>{{siteLabel.searchByCards}}</option>
+                  <option value="1" selected>{{siteLabel.printedCardsStatus}}</option>
+                  <option value="2" selected>{{siteLabel.pendingCardsStatus}}</option>
+                </select>
+              </div>
+  
+              <div class="col-lg-3 mb-2">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">From Date</span>
+                  </div>
+                    <input class="form-control" placeholder="From. Date" [(ngModel)]='objSearchMembership.fromDate' (input)='changeDate()' type="date"> 
+                </div>
+              </div>
+  
+              <div class="col-lg-3 mb-2">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1">To Date</span>
+                    </div>
+                    <input class="form-control" placeholder="To. Date" [(ngModel)]='objSearchMembership.toDate' (input)='changeDate()' type="date">
+                </div>
+              </div>
+             
+  
+              <div class="col-lg-3 mb-2">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">From Approved</span>
+                  </div>
+                    <input class="form-control" placeholder="From Apprvd" [(ngModel)]='objSearchMembership.fromApprovedDate' (input)='changeDate()' type="date">
+                </div>
+              </div>
+  
+              <div class="col-lg-3 mb-2">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">To Approved</span>
+                  </div>
+                  <input class="form-control" placeholder="To Apprvd" [(ngModel)]='objSearchMembership.toApprovedDate' (input)='changeDate()' type="date">
+                </div>
+              </div>
+  
+              <div class="col-lg-6 mb-2">
+                <button class="bg-primary btn text-white" (click)="resetSearch()">{{siteLabel.reset}}</button>
+              </div>
+            </div>
+  
+  
+            <div class="table-responsive">
+              <div *ngIf="loading" class="alert alert-warning">
+                <span class="spinner-border spinner-border-sm mr-1"></span>
+                Loading....
+              </div>
+              <table *ngIf="loading===false" class="table text-md-nowrap dataTable no-footer" id="example1">
+                <thead class="thead-dark">
+                <tr>
+                  <th class="wd-15p border-bottom-0">{{siteLabel.NO}}</th>
+                  <th class="wd-15p border-bottom-0">{{siteLabel.totalRequests}}</th>
+                  <th class="wd-10p border-bottom-0">EXPORT TO EXCEL</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>{{this.memberShipCount}}</td>
+                    <td *ngIf="this.memberShipCount!==0"><button class="btn btn-info" (click)="exportToExcel()">EXPORT TO EXCEL</button></td>
+                    <td *ngIf="this.memberShipCount===0"><button disabled class="btn btn-info">EXPORT TO EXCEL</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/div-->
+</div>

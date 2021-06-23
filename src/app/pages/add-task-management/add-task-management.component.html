@@ -1,0 +1,180 @@
+<div class="container-fluid">
+
+    <!-- breadcrumb -->
+    <div class="breadcrumb-header justify-content-between">
+      <div class="my-auto">
+        <div class="d-flex">
+          <h4 class="content-title mb-0 my-auto">{{siteLabel.addTaskManagement}}</h4>
+        </div>
+      </div>
+  
+    </div>
+    <!-- breadcrumb -->
+    <!-- row opened -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card" id="tabs-style4">
+        <div class="card-body">
+           <form [formGroup]='formTask' id="task_form" method="post" name="task_form">
+            <div class="form-body">
+                <div class="row">
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>{{siteLabel.taskName}}</label>
+                      <input type="text" [(ngModel)]='objTask.taskName' id="taskName" name="taskName" formControlName='taskName' class="form-control" placeholder="Task Name">
+                    </div>
+                  </div>
+    
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>{{siteLabel.taskDescription}}</label>
+                      <textarea class="form-control" name="TaskDescription" formControlName='taskDescription' [(ngModel)]='objTask.taskDescription' placeholder="Task Description"></textarea>
+                    </div>
+                  </div>
+                                 
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label >{{siteLabel.startDate}}</label>
+                      <input formControlName='startDate' [(ngModel)]="objTask.startDate" class="form-control" name="StartDate" placeholder="Start date" type="datetime-local">
+                    </div>
+                  </div>
+      
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>{{siteLabel.endDate}}</label>
+                      <input formControlName='endDate' [(ngModel)]="objTask.endDate" class="form-control" name="EndDate" placeholder="End date" type="datetime-local">
+                    </div>
+                  </div>
+    
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>{{siteLabel.priorityLevel}}</label>
+                      <select class="form-control" formControlName='priorityLevel' [(ngModel)]='objTask.priorityLevel' name= 'PriorityLevel'>
+                        <option selected value="0">{{siteLabel.selectPriority}}</option>
+                        <option [ngValue]=PriorityLevel.High>{{siteLabel.high}}</option>
+                        <option [ngValue]=PriorityLevel.Medium>{{siteLabel.medium}}</option>
+                        <option [ngValue]=PriorityLevel.Low>{{siteLabel.low}}</option>
+                      </select>
+                    </div>
+                  </div>
+    
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>{{siteLabel.typeOfInspection}}</label>
+                      <select class="form-control" formControlName='inspection' [(ngModel)]='objTask.inspection' name='Inspection'>
+                        <option selected value="0">{{siteLabel.selectInspection}}</option>
+                        <option [ngValue]=InspectionType.NormalInspection>{{siteLabel.normalInspection}}</option>
+                        <option [ngValue]=InspectionType.SurpriseInspection>{{siteLabel.surpriseInspection}}</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>{{siteLabel.addLocation}}</label>
+                      <input type="text" class="form-control"  name="Location" placeholder="Add Location" formControlName="location" [(ngModel)]='objTask.location' (keydown.enter)="$event.preventDefault()" #search>             
+                    </div>
+                  
+                    <div class="form-group">              
+                      <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom" style="height: 600px;">
+                        <!-- <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true" (dragEnd)="markerDragEnd($event)"></agm-marker> -->
+                        <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+                      </agm-map>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12" >
+                    <div class="form-group">
+                      <label>{{siteLabel.status}}</label>
+                      <select formControlName='status' [(ngModel)]='objTask.status' class="form-control" name="Status">
+                        <option  [ngValue]="0" selected >{{siteLabel.selectStatus}}</option>   
+                        <option [ngValue]=StatusForTask.New>{{siteLabel.new}}</option>                           
+                        <option [ngValue]=StatusForTask.InProgress>{{siteLabel.inProgress}}</option>
+                        <option [ngValue]=StatusForTask.Accepted>{{siteLabel.accepted}}</option>
+                        <option [ngValue]=StatusForTask.AtLocation>{{siteLabel.atLocation}}</option>
+                        <option [ngValue]=StatusForTask.Completed>{{siteLabel.completed}}</option>
+                        <option [ngValue]=StatusForTask.Cancelled>{{siteLabel.cancelled}}</option>
+                        <option [ngValue]=StatusForTask.Rejected>{{siteLabel.rejected}}</option>
+                        <option [ngValue]=StatusForTask.ClosedByAdmin>{{siteLabel.closedByAdmin}}</option>
+                        <option [ngValue]=StatusForTask.Returned>{{siteLabel.returned}}</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12" *ngIf="objTask.status == 9">
+                    <div class="form-group">
+                      <label>Return Notes</label>
+                      <textarea class="form-control" id="returnNote" name="returnNote" [ngModelOptions]="{standalone: true}" [(ngModel)]='objTask.returnNote' placeholder="Return Note"></textarea>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="role">{{siteLabel.systemEmployees}}*</label>
+                      <ng-select #MyNgSelect2 bindLabel="name" multiple="true" [clearable]="true"
+                          placeholder="{{siteLabel.selectEmployees}}" [(ngModel)]="objTask.employeeIds" 
+                          
+                          name="mySelectBox2" id="mySelectBox2" required [ngModelOptions]="{standalone: true}">
+                          <ng-option [value]="item.employeeId" [disabled]="item.disabled" *ngFor="let item of employeeList">
+                              {{item.user.name}}
+                          </ng-option>
+                      </ng-select>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="role">{{siteLabel.empGroup}}*</label>
+                      <ng-select #MyNgSelect1 bindLabel="name" bindValue="groupId" multiple="true" [clearable]="true"
+                          placeholder="{{siteLabel.selectEmpGroup}}" [(ngModel)]="objTask.empGroupIds" 
+                          
+                          name="mySelectBox1" id="mySelectBox1" required [ngModelOptions]="{standalone: true}">
+                          <ng-option [value]=""></ng-option>
+                          <ng-option [value]="item.groupId" [disabled]="item.disabled" *ngFor="let item of employeeGroup">
+                              {{item.name}}
+                          </ng-option>
+                      </ng-select>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="role">{{siteLabel.assignChecklistGroup}}*</label>
+                      <ng-select #MyNgSelect3 bindLabel="name" multiple="true" [clearable]="true"
+                          
+                          placeholder="{{siteLabel.assignChecklistGroup}}" [(ngModel)]="objTask.assignChecklistIds" 
+                          name="mySelectBox3"  id="mySelectBox3"  required [ngModelOptions]="{standalone: true}">
+                          <ng-option [value]="item.assignCheckListId" [disabled]="item.disabled" *ngFor="let item of assignCheckListGroup">
+                              {{item.name}}
+                          </ng-option>
+                      </ng-select>
+                    </div>
+                  </div>
+
+                  <!-- <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="logo">Task Image*</label>
+                      <input class="form-control" id="taskImage" name="taskImage" type="file" multiple=""
+                         (change)="onChangeTaskImage($event,'taskImage')" > 
+                         <input  formControlName="file" id="file"  type="file"  multiple class="form-control"
+                            (change)="onFileChange($event)">
+                    </div>
+                  </div> -->
+
+                </div>
+            </div>
+            <hr>
+            <button class="btn btn-success" [disabled]='!formTask.valid || loading' (click)='saveTask()'>
+              <i class="btn-icon-prepend" data-feather="save"></i>
+              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>{{siteLabel.submit}}
+            </button>
+        </form>
+        </div>
+      </div>
+    </div>
+    <!--/div-->
+  </div>
+  <!-- /row -->
+</div>
+

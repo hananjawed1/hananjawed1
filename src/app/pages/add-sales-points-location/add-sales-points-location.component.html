@@ -1,0 +1,94 @@
+<div class="container-fluid">
+    <!-- breadcrumb -->
+    <div class="breadcrumb-header justify-content-between">
+        <div class="my-auto">
+          <div class="d-flex">
+            <h4 class="content-title mb-0 my-auto">{{siteLabel.addLocation}}</h4>
+          </div>
+        </div>
+      </div>
+      <!-- breadcrumb -->
+
+     
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card" id="tabs-style4">
+                <div class="card-body">
+                    <form [formGroup]='formLocation' id="employee_form"  name="employee_form">
+                        <div class="form-body">
+                            <div class="panel panel-primary tabs-style-2">
+                                <div class="row">
+                                    <div class="row row-sm-12 col-md-12 mt-3">
+                                        <div class="col-md-6 col-lg-6">
+                                            <label for="role">{{siteLabel.agent}}*</label>
+                                            <select class="form-control" id="role" name="role" [(ngModel)]='objLocation.agentId' formControlName='agentId'>
+                                              <option [ngValue]="0" selected>Please Select Agent</option>
+                                              <option [ngValue]="ag.agentId" *ngFor='let ag of allAgents' >{{ag.user.name}}</option>
+                                            </select>
+                                            <span *ngIf="formLocation.get('agentId').invalid && (formLocation.get('agentId').dirty || formLocation.get('agentId').touched)"
+                                                class="alert alert-danger">Please Select Agent</span>
+                                        </div>
+                                        <div class="col-md-6 col-lg-6">
+                                            <label for="name">{{siteLabel.locationName}}*</label>
+                                            <input class="form-control" [(ngModel)]='objLocation.name'  formControlName='name' id="name" name="name"
+                                                    placeholder="Name" type="text">
+                                            <span *ngIf="formLocation.get('name').invalid && (formLocation.get('name').dirty || formLocation.get('name').touched)"
+                                            class="alert alert-danger">Please Enter Location Name</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="row row-sm-12 col-md-12 mt-3">
+                                        <div class="col-md-6 col-lg-6">
+                                            <label for="phone_no">{{siteLabel.phoneNumber}}*</label>
+                                            <input class="form-control" [(ngModel)]='objLocation.phoneNumber' maxlength="10" pattern="\d{10}" formControlName='phoneNumber' id="phone_no" name="phone_no" placeholder="Phone Number" type="text">
+                                            <span *ngIf="formLocation.get('phoneNumber').invalid && (formLocation.get('phoneNumber').dirty || formLocation.get('phoneNumber').touched)"
+                                            class="alert alert-danger">Please Enter 10 Digit Phone Number</span>
+                                        </div>
+                                        <div class="col-md-6 col-lg-6">
+                                            <label for="email">{{siteLabel.email}}</label>
+                                            <input class="form-control" [(ngModel)]='objLocation.email' formControlName='email' id="email" name="email" placeholder="Email" type="text">
+                                            <span *ngIf="formLocation.get('email').invalid && (formLocation.get('email').dirty || formLocation.get('email').touched)"
+                                            class="alert alert-danger">Please Enter Email</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="row row-sm-12 col-md-12 mt-3">
+                                        <div class="col-md-6 col-lg-6">
+                                            <label for="status">{{siteLabel.status}}*</label>
+                                            <select class="form-control" [(ngModel)]=objLocation.status formControlName='status' id="status" name="status">
+                                              <option [ngValue]='0' selected>Please Select Status</option>
+                                              <option [ngValue]=StatusEnums.Active>Active</option>
+                                              <option [ngValue]=StatusEnums.InActive>InActive</option>
+                                            </select>
+                                            <span *ngIf="formLocation.get('status').invalid && (formLocation.get('status').dirty || formLocation.get('status').touched)"
+                                            class="alert alert-danger">Please Select Status </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="row row-sm-12 col-md-12 mt-3">
+                                        <div class="col-md-12 col-lg-12">
+                                            <button *ngIf="locationId == 0" class="btn btn-primary" [disabled]='!formLocation.valid || loading' (click)='SaveLocation()'>
+                                                <i class="btn-icon-prepend" data-feather="save"></i>
+                                                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>{{siteLabel.submit}}
+                                              </button>
+                                              <button *ngIf="locationId != 0" class="btn btn-success" [disabled]='!formLocation.valid || loading' (click)='UpdateLocation()'>
+                                                <i class="btn-icon-prepend" data-feather="save"></i>
+                                                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>{{siteLabel.submit}}
+                                              </button>
+                                              <button class="btn btn-light" (click)='formLocation.reset()'><i class="btn-icon-prepend" data-feather="x"></i>
+                                                {{siteLabel.cancel}}
+                                              </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

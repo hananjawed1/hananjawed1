@@ -1,0 +1,351 @@
+<div class="container-fluid">
+
+  <!-- breadcrumb -->
+  <div class="breadcrumb-header justify-content-between">
+    <div class="my-auto">
+      <div class="d-flex">
+        <h4 class="content-title mb-0 my-auto">{{siteLabel.employeeList}}</h4>
+      </div>
+    </div>
+    <div class="d-flex my-xl-auto right-content">
+      <div class="pr-1 mb-3 mb-xl-0">
+        <a [routerLink]="['/add-employee']" class="btn btn-primary">{{siteLabel.addNew}}</a>
+      </div>
+    </div>
+  </div> 
+  <!-- breadcrumb -->
+
+  <div class="row row-sm">
+
+    <div class="col-lg-6 col-xl-3 col-md-6 col-12">
+      <div class="card bg-primary-gradient text-white ">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="icon1 mt-2 text-center">
+                <i class="fe fe-pie-chart tx-40"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mt-0 text-center">
+                <span class="text-white">{{siteLabel.totalAdmins}}</span>
+                <h2 class="text-white mb-0">{{employeeRequest.admin}}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-xl-3 col-md-6 col-12">
+      <div class="card bg-danger-gradient text-white">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="icon1 mt-2 text-center">
+                <i class="fe fe-pie-chart tx-40"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mt-0 text-center">
+                <span class="text-white">{{siteLabel.totalSubAdmin}}</span>
+                <h2 class="text-white mb-0">{{employeeRequest.subAdmin}}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-xl-3 col-md-6 col-12">
+      <div class="card bg-success-gradient text-white">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="icon1 mt-2 text-center">
+                <i class="fe fe-pie-chart tx-40"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mt-0 text-center">
+                <span class="text-white">{{siteLabel.totalReceptions}}</span>
+                <h2 class="text-white mb-0">{{employeeRequest.receptions}}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-xl-3 col-md-6 col-12">
+      <div class="card bg-warning-gradient text-white">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="icon1 mt-2 text-center">
+                <i class="fe fe-pie-chart tx-40"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mt-0 text-center">
+                <span class="text-white">{{siteLabel.totalAccounts}}</span>
+                <h2 class="text-white mb-0">{{employeeRequest.totalAccounts}}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- row opened -->
+  <div class="row row-sm">
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row row-sm mb-4">
+            <div class="col-lg-3 mb-2">
+              <input class="form-control" [(ngModel)]='objSearchEmpl.name' (input)='searchEmployee(0)'
+              placeholder="{{siteLabel.searchByFullName}}" type="text"/>
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <input class="form-control" [(ngModel)]='objSearchEmpl.phone' (input)='searchEmployee(0)'
+              placeholder="{{siteLabel.searchByPhone}}" type="text"/>
+            </div>
+
+
+            <div class="col-lg-3 mb-2">
+              <input class="form-control" [(ngModel)]='objSearchEmpl.email' (input)='searchEmployee(0)'
+              placeholder="{{siteLabel.searchByEmail}}" type="text"/>
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <input class="form-control" [(ngModel)]='objSearchEmpl.employeeNumber'
+              (input)='searchEmployee(0)' placeholder="{{siteLabel.searchByEmployeeNumber}}" type="text"/>
+            </div>
+
+
+            <div class="col-lg-3 mb-2">
+              <select class="form-control" [(ngModel)]=objSearchEmpl.status (change)='searchEmployee(0)'>
+                <option [ngValue]=0 selected>{{siteLabel.searchByStatus}}</option>
+                <option [ngValue]=StatusEnums.Active>{{siteLabel.active}}</option>
+                <option [ngValue]=StatusEnums.InActive>{{siteLabel.inactive}}</option>
+                <!--<option [ngValue]=StatusEnums.Approved>Approved</option>
+                <option [ngValue]=StatusEnums.Rejected>Rejected</option>-->
+              </select>
+            </div>
+
+
+            <div class="col-lg-3 mb-2">
+              <select class="form-control" id="role" name="role" [(ngModel)]='objSearchEmpl.role' (change)='searchEmployee(0)'>
+                <option value="">{{siteLabel.searchByRole}}</option>
+                <option *ngFor="let i of roles" value={{i.id}}>{{i.name}}</option>
+              </select>
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <button class="bg-primary btn text-white" (click)='resetSearch()'>{{siteLabel.reset}}</button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <div *ngIf="loading" class="row">
+              <div class="col-md-12">
+                <div class="alert alert-warning">
+                  <span class="spinner-border spinner-border-sm mr-1"></span>
+                  Loading....
+                </div>
+              </div>
+            </div>
+            <table *ngIf="loading===false" class="table text-md-nowrap dataTable no-footer" id="example1" >
+              <thead class="thead-dark">
+              <tr>
+                <th class="wd-15p border-bottom-0">{{siteLabel.role}}</th>
+                <th class="wd-15p border-bottom-0">{{siteLabel.userAccess}}</th>
+                <th class="wd-20p border-bottom-0">{{siteLabel.name}}</th>
+                <th class="wd-15p border-bottom-0">{{siteLabel.email}}</th>
+                <th class="wd-10p border-bottom-0">{{siteLabel.phoneNumber}}</th>
+                <th class="wd-25p border-bottom-0">{{siteLabel.employeeNumber}}</th>
+                <th class="wd-25p border-bottom-0">{{siteLabel.status}}</th>
+                <th class="wd-5p border-bottom-0">{{siteLabel.action}}</th>
+              </tr>
+              </thead>
+              <tbody *ngIf='employes'>
+              <tr *ngFor='let emp of employes'>
+                <td>{{emp.user.role}}</td>
+                <td *ngIf="emp.user.userAccess == 0">NA</td>
+                <td *ngIf="emp.user.userAccess == 1">{{siteLabel.masterAdmin}}</td>
+                <td *ngIf="emp.user.userAccess == 2">{{siteLabel.admin}}</td>
+                <td *ngIf="emp.user.userAccess == 3">{{siteLabel.subAdmin}}</td>
+                <td *ngIf="emp.user.userAccess == 4">{{siteLabel.mobileAppAccessOnly}}</td>
+                <td *ngIf="emp.user.userAccess == 5">{{siteLabel.accounts}}</td>
+                <td>{{emp.user.name}}</td>
+                <td>{{emp.user.email}}</td>
+                <td>{{emp.user.phoneNumber}}</td>
+                <td>{{emp.employeeNumber}}</td>
+                <td>
+                  <label *ngIf='emp.user.status===1' class="badge badge-pill badge-success">{{siteLabel.active}}</label>
+                  <label *ngIf='emp.user.status===2' class="badge badge-pill badge-warning">{{siteLabel.inactive}}</label>
+                  <!--<label *ngIf='emp.user.status===3' class="badge badge-success">Approved</label>
+                  <label *ngIf='emp.user.status===4' class="badge badge-danger">Rejected</label>-->
+                </td>
+                <td>
+                  <div class='btn-group'>
+                    <button aria-expanded="true" aria-haspopup="true" class="btn btn-danger dropdown-toggle btn-xs" data-toggle="dropdown">
+                      {{siteLabel.action}}
+                    </button>
+                    <div class='dropdown-menu animated flipInX btn-sm'>
+                      <a class="dropdown-item" (click)='InactivateEmployee(emp)'href="javascript:void(0)">
+                        <span *ngIf='emp.user.status===1'>{{siteLabel.inactive}}</span>
+                        <span *ngIf='emp.user.status===2'>{{siteLabel.active}}</span>
+                      </a>
+                      <a class="dropdown-item" (click)='ViewDetails(emp)' data-target="#exampleModalLong" data-toggle="modal" href="javascript:void(0)">
+                        {{siteLabel.viewDetails}}
+                      </a>
+                      <!--<a class="dropdown-item" (click)='EditEmployee(emp)'>Edit</a>-->
+                      <a *ngIf="emp.user.role == 'Employee'" class="dropdown-item" (click)='UpdateEmployeeID(emp.employeeId)' data-target="#updateProfilePictureModal" data-toggle="modal" href="javascript:void(0)">
+                        {{siteLabel.updateProfile}}
+                      </a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+              <tfoot class="thead-dark">
+              <tr>
+                <th> {{siteLabel.total}} {{employes?employes.length:0}}</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </tfoot>
+            </table>
+            <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+              <ul class="pagination mt-3 mb-0 justify-content-end" [hidden]="(loading || pagesCount < 2)">
+                <li class="page-item">
+                  <a class="page-link" [hidden]="page == 0" href="javascript:void(0)" (click)="searchEmployee(0)">{{siteLabel.first}}</a>
+                </li>
+                <li class="paginate_button page-item previous">
+                  <a class="page-link" href="javascript:void(0)" [hidden]="page == 0" (click)="searchEmployee(page-1)">
+                    {{siteLabel.previous}}
+                  </a>
+                </li>
+                <li class="page-item" *ngFor='let n of range()'
+                    [class]="{active: n == page}">
+                  <a class="page-link" href="javascript:void(0)" (click)="searchEmployee(n)" *ngIf="n != page">{{n+1}}</a>
+                  <a class="page-link" href="javascript:void(0)" *ngIf="n == page">{{n+1}}</a>
+                </li>
+                <li class="paginate_button page-item next">
+                  <a class="page-link" href="javascript:void(0)" [hidden]="page == pagesCount - 1" (click)="searchEmployee(page+1)">
+                    {{siteLabel.next}}
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="javascript:void(0)" [hidden]="page == pagesCount - 1" (click)="searchEmployee(pagesCount - 1)">{{siteLabel.last}}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/div-->
+  </div>
+  <!-- /row -->
+</div>
+
+<div aria-hidden="true" aria-labelledby="exampleModalLongTitle" class="modal fade" id="exampleModalLong" role="dialog"
+     tabindex="-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"> {{siteLabel.employeeDetails}}</h5>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          
+          <table *ngIf='EmployeeDetails' class="table table-striped">
+            <tr>
+              <th>{{siteLabel.role}}</th>
+              <td>{{EmployeeDetails.user.role}}</td>
+            </tr>
+            <tr>
+              <th>{{siteLabel.name}}</th>
+              <td>{{EmployeeDetails.user.name}}</td>
+            </tr>
+            <tr>
+              <th>{{siteLabel.email}}</th>
+              <td>{{EmployeeDetails.user.email}}</td>
+            </tr>
+            <tr>
+              <th>{{siteLabel.phone}}</th>
+              <td>{{EmployeeDetails.user.phoneNumber}}</td>
+            </tr>
+            <tr>
+              <th>{{siteLabel.employeeNumber}}</th>
+              <td>{{EmployeeDetails.employeeNumber}}</td>
+            </tr>
+            <tr>
+              <th>{{siteLabel.empGroup}}</th>
+              <td>{{employeeGroupNameList}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-dismiss="modal" type="button">{{siteLabel.close}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div aria-hidden="true" aria-labelledby="updateProfilePictureModal" class="modal fade" id="updateProfilePictureModal" role="dialog" tabindex="-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateProfilePictureModal">{{siteLabel.updateProfile}}</h5>
+        <button aria-label="Close" class="close" (click)='removedLastAttachment()' data-dismiss="modal" #closebutton type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          <div class="col-md-10">
+            <div class="form-group">
+              <label for="logo">{{siteLabel.profilePicture}}*</label>
+              <input (change)="onChange($event)" #attachments class="form-control" id="profilePic" name="profilePic" type="file">
+            </div>
+          </div>
+          <div class="col-md-10" *ngIf="UserAccess == 1">
+            <div class="form-group">
+              <label for="role">{{siteLabel.userAccess}}</label>
+              <select class="form-control" [(ngModel)]='selectedUserAccess' id="UserAccess" name="UserAccess">
+                <option value="0">{{siteLabel.selectUserAccess}}</option>
+                <option value='2'>{{siteLabel.admin}}</option>
+                <option value='3'>{{siteLabel.subAdmin}}</option>
+                <option value='4'>{{siteLabel.mobileAppAccessOnly}}</option>
+                <option value='5'>{{siteLabel.accounts}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <img [src]="preview" style="width: 250px"/>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success" [disabled]="loadingPrifilePic" (click)='uploadProfilePicture()' type="button">
+          <span *ngIf="loadingPrifilePic" class="spinner-border spinner-border-sm mr-1"></span>
+          {{siteLabel.update}}
+        </button>
+        <button class="btn btn-secondary" data-dismiss="modal" (click)='removedLastAttachment()' type="button">{{siteLabel.close}}</button>
+      </div>
+    </div>
+  </div>
+</div>

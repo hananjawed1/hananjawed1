@@ -1,0 +1,147 @@
+<div class="container-fluid">
+
+    <!-- breadcrumb -->
+    <div class="breadcrumb-header justify-content-between">
+      <div class="my-auto">
+        <div class="d-flex">
+          <h4 class="content-title mb-0 my-auto">{{siteLabel.cardStatusList}}</h4>
+        </div>
+      </div>
+      <div class="d-flex my-xl-auto right-content">
+        <div class="pr-1 mb-3 mb-xl-0">
+          <a [routerLink]="['/add-card-status/0']" class="btn btn-primary">{{siteLabel.addNew}} </a>
+        </div>
+      </div>
+    </div>
+    <!-- breadcrumb -->
+    
+    <!-- row opened -->
+    <div class="row row-sm">
+      <div class="col-xl-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="row row-sm mb-4">
+              <div class="col-lg-3 mb-2">
+                <select [(ngModel)]='objSearchCardStatus.agentId' (change)="searchCardStatus(0)" class="form-control">
+                    <option value="0" selected>{{siteLabel.searchByAgent}}</option>
+                    <option *ngFor="let i of agents" value={{i.agentId}}>
+                      {{i.user.name}}
+                    </option>
+                  </select>
+              </div>
+  
+              <div class="col-lg-3 mb-2">
+                <select [(ngModel)]=objSearchCardStatus.status (change)='searchCardStatus(0)' class="form-control">
+                    <option value="0" selected>{{siteLabel.searchByStatus}}</option>
+                    <option *ngFor="let i of StatusEnums" value={{i.cardStatusTypeId}}>
+                      {{i.status}}
+                    </option>
+                  </select>
+              </div>
+  
+              <div class="col-lg-3 mb-2">
+                <input class="form-control"
+                     placeholder="{{siteLabel.creationDate}}"
+                     [(ngModel)]='objSearchCardStatus.creationDate'
+                     (input)='changeDate()'
+                     type="date">
+              </div>
+  
+              <div class="col-lg-3 mb-2">
+                <input class="form-control"
+                     placeholder="{{siteLabel.searchById}}"
+                     [(ngModel)]='objSearchCardStatus.id' (input)='searchCardStatus(0)'
+                     type="text">
+              </div>
+  
+              <div class="col-lg-3 mb-2">
+                <button class="bg-primary btn text-white">{{siteLabel.reset}}</button>
+              </div>
+            </div>
+  
+  
+            <div class="table-responsive">
+              <div *ngIf="loading" class="row">
+                <div class="col-md-12">
+                  <div class="alert alert-warning">
+                    <span class="spinner-border spinner-border-sm mr-1"></span>
+                    Loading....
+                  </div>
+                </div>
+              </div>
+  
+              <table *ngIf="loading===false" class="table text-md-nowrap dataTable no-footer" id="example1">
+                <thead class="thead-dark">
+                <tr>
+                  <th class="wd-15p border-bottom-0">#</th>
+                  <th class="wd-15p border-bottom-0">{{siteLabel.date}}</th>
+                  <th class="wd-15p border-bottom-0">{{siteLabel.agent}}</th>
+                  <th class="wd-25p border-bottom-0">{{siteLabel.status}}</th>
+                  <th class="wd-15p border-bottom-0">{{siteLabel.action}}</th>
+                </tr>
+                </thead>
+                <tbody *ngIf='cards'>
+                <tr *ngFor='let m of cards'>
+                  <td>{{m.id}}</td>
+                  <td>{{m.creationDate}}</td>
+                  <td>{{m.agent.user.name}}</td>
+                  <td>
+                    <span class="badge badge-pill {{m.statusColor}}">{{m.statusString}}</span>
+                  </td>
+                  <td>
+                    <a class='btn btn-primary btn-xs'
+                         routerLink="/card-status-detail/{{m.cardStatusId}}">
+                        <i class='fa fa-eye'></i>
+                      </a>
+                      &nbsp;
+                      <a routerLink="/edit-card-status/{{m.cardStatusId}}"
+                         class='btn btn-primary btn-xs'>
+                        <i class='typcn typcn-pencil'></i>
+                      </a>
+                  </td>
+                </tr>
+                </tbody>
+                <tfoot class="thead-dark">
+                  <tr>
+                    <th>{{siteLabel.total}} {{cards?cards.length:0}}</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </tfoot>
+              </table>
+              <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                <ul class="pagination mt-3 mb-0 justify-content-end" [hidden]="(loading || pagesCount < 2)">
+                  <li class="page-item">
+                    <a class="page-link" [hidden]="page == 0" href="javascript:void(0)" (click)="searchCardStatus(0)">{{siteLabel.first}}</a>
+                  </li>
+                  <li class="paginate_button page-item previous">
+                    <a class="page-link" href="javascript:void(0)" [hidden]="page == 0" (click)="searchCardStatus(page-1)">
+                      {{siteLabel.previous}}
+                    </a>
+                  </li>
+                  <li class="page-item" *ngFor='let n of range()'
+                      [class]="{active: n == page}">
+                    <a class="page-link" href="javascript:void(0)" (click)="searchCardStatus(n)" *ngIf="n != page">{{n+1}}</a>
+                    <a class="page-link" href="javascript:void(0)" *ngIf="n == page">{{n+1}}</a>
+                  </li>
+                  <li class="paginate_button page-item next">
+                    <a class="page-link" href="javascript:void(0)" [hidden]="page == pagesCount - 1" (click)="searchCardStatus(page+1)">
+                      {{siteLabel.next}}
+                    </a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="javascript:void(0)" [hidden]="page == pagesCount - 1" (click)="searchCardStatus(pagesCount - 1)">{{siteLabel.last}}</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/div-->
+    </div>
+    <!-- /row -->
+  </div>
+    

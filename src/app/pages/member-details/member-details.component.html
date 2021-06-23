@@ -1,0 +1,596 @@
+<div class="container-fluid">
+
+  <!-- breadcrumb -->
+  <div class="breadcrumb-header justify-content-between">
+    <div class="my-auto">
+      <div class="d-flex">
+        <h4 class="content-title mb-0 my-auto">Membership Details</h4>
+      </div>
+    </div>
+    <div class="d-flex my-xl-auto right-content">
+      <div class="pr-1 mb-3 mb-xl-0">
+        <a routerLink="/edit-membership/{{editMemberShipId}}" class="btn btn-primary">Edit Membership</a>
+      </div>
+    </div>
+  </div>
+  <!-- breadcrumb -->
+
+  <!-- row opened -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card" id="tabs-style4">
+        <div class="card-body">
+          <div class="panel panel-primary tabs-style-2">
+            <div class=" tab-menu-heading">
+              <div class="tabs-menu1">
+                <!-- Tabs -->
+                <ul class="nav panel-tabs main-nav-line">
+                  <li><a class="nav-link active" data-toggle="tab" href="#tab1" id="Info">Membership Info</a></li>
+                  <li><a class="nav-link" data-toggle="tab" href="#tab3" id="status">Change Status</a></li>
+                  <li><a class="nav-link" data-toggle="tab" href="#tab4">Request History</a></li>
+                  <li><a class="nav-link" data-toggle="tab" href="#tab5">Purchase History</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="panel-body tabs-menu-body main-content-body-right border">
+              <div class="tab-content">
+                <div class="tab-pane active" id="tab1">
+
+                  <div class="row">
+                    <div class="col-12 border-bottom border-top mb-3  p-3 bg-light">
+                      <div class="main-content-label mb-0">{{siteLabel.personalInformation}}</div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <table class="table">
+                        <tr>
+                          <th scope="row">{{siteLabel.fullName}}</th>
+                          <td>{{objMembershipDetails?.fullName}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">{{siteLabel.phoneNumber}}</th>
+                          <td>{{objMembershipDetails?.phoneNumber}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">{{siteLabel.secondaryPhoneNumber}}</th>
+                          <td *ngIf="objMembershipDetails.secondaryPhoneNumber != null">{{objMembershipDetails?.secondaryPhoneNumber}}</td>
+                          <td *ngIf="objMembershipDetails.secondaryPhoneNumber == null">NA</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">{{siteLabel.address}}</th>
+                          <td>{{objMembershipDetails?.address}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">{{siteLabel.secondaryAddress}}</th>
+                          <td *ngIf="objMembershipDetails.secondaryAddress != null">{{objMembershipDetails?.secondaryAddress}}</td>
+                          <td *ngIf="objMembershipDetails.secondaryAddress == null">NA</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">{{siteLabel.nationality}}</th>
+                          <td>{{objMembershipDetails?.nationName}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">{{siteLabel.birthDate}}</th>
+                          <td>{{objMembershipDetails?.birthDateString}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">{{siteLabel.religion}}</th>
+                          <td>{{objMembershipDetails?.religionName}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">{{siteLabel.gender}}</th>
+                          <td>{{objMembershipDetails?.gender==1?"Male":"Female"}}</td>
+                        </tr>
+                      </table>
+                    </div>
+
+                    <div class="col-md-6">
+                      <table class="table">
+                        <tr>
+                          <th scope="row">Profile Image</th>
+                          <td>
+                            <a class="btn btn-md" style="background-color: #008755; color: #fff;" data-target="#exampleModalLong" data-toggle="modal" (click)="showPassport('profile')">
+                              {{siteLabel.profilePicture}}
+                            </a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Request Status</th>
+                          <td>
+                            <span class="badge badge-pill {{objMembershipDetails?.statusColor}}">{{objMembershipDetails?.statusString}}</span>&nbsp;
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row">{{siteLabel.monthlySalary}}</th>
+                          <td>{{objMembershipDetails?.salary}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">{{siteLabel.monthlyLimit}}</th>
+                          <td>
+                            <div class="input-group">
+                              <input aria-describedby="basic-addon2" aria-label="Monthly Limit" class="form-control col-md-3"
+                                     placeholder="Monthly Limit" [(ngModel)]="limit" type="text" value="{{objMembershipDetails?.limit}}">
+                              <div class="input-group-append">
+                                <span class="input-group-text">{{siteLabel.dirham}}</span>
+                                <button class="btn btn-outline-secondary" (click)="updateLimit()" type="button" style="color: black;">SAVE</button>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row">{{siteLabel.membershipNumber}}</th>
+                          <td>{{objMembershipDetails?.membershipNumber}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">{{siteLabel.permitNumber}}</th>
+                          <td>{{objMembershipDetails?.permitNumber}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">{{siteLabel.passportNumber}}</th>
+                          <td>{{objMembershipDetails?.passportNumber}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">{{siteLabel.requestCategory}}</th>
+                          <td>{{objMembershipDetails?.requestCategoryString}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">{{siteLabel.emiratesIDNumber}}</th>
+                          <td>
+                            <span *ngIf="isEditEmiratesIdNumber == null;">{{objMembershipDetails?.emiratesIDNumber != null && objMembershipDetails?.emiratesIDNumber != '' ? objMembershipDetails?.emiratesIDNumber : 'NA'}}</span>
+                            <span *ngIf="isEditEmiratesIdNumber == true && UserAccess == 1">
+                              <input type="text" class="form-control" placeholder="Liquor Manager" [(ngModel)]="updatedEmiratesIdNumber">
+                              <a *ngIf="isEditEmiratesIdNumber == true;" class='btn btn-danger btn-sm' (click)="resetEmiratesIdNumber()"><i class='fa fa-undo'></i></a>
+                              &nbsp;<a *ngIf="isEditEmiratesIdNumber == true;" style="margin-top: 1%;" class="btn btn-success btn-sm" (click)="updateEmiratesIdNumber()">
+                                <span *ngIf="emiratesIdNumberLoading" class="spinner-border spinner-border-sm mr-1"></span>{{siteLabel.submit}}</a>
+                            </span>
+                            &nbsp;&nbsp;
+                            <a *ngIf="isEditEmiratesIdNumber == null && UserAccess == 1" class='badge badge-pill badge-danger' (click)="editEmiratesIdNumber()"><i class='typcn typcn-pencil'></i></a>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-12 border-bottom border-top mb-3  p-3 bg-light">
+                      <div class="main-content-label mb-0">{{siteLabel.membershipInformation}}</div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <table class="table">
+                        <tr>
+                          <th scope="row">{{siteLabel.salesPointLocation}}</th>
+                          <td>{{objMembershipDetails?.salesPointUser.locations.name}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">{{siteLabel.salesPointUsers}}</th>
+                          <td>{{objMembershipDetails?.salesPointUser.user?objMembershipDetails.salesPointUser.user.name:''}}</td>
+                        </tr>
+                        
+                        
+                        <tr>
+                          <th scope="row">{{siteLabel.occupation}}</th>
+                          <td>{{objMembershipDetails?.occupation}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">{{siteLabel.visaResidency}}</th>
+                          <td>{{objMembershipDetails?.visaResidency}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">{{siteLabel.applicationNumber}}</th>
+                          <td *ngIf="objMembershipDetails?.applicationNumber != null">{{objMembershipDetails?.applicationNumber}}</td>
+                          <td *ngIf="objMembershipDetails?.applicationNumber == null">NA</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">{{siteLabel.addedBy}}</th>
+                          <td>{{objMembershipDetails?.salesPointUser.user?objMembershipDetails.salesPointUser.user.name:''}}</td>
+                        </tr>
+                        <tr *ngIf="objMembershipDetails?.status===2 && canExportToPDF()">
+                          <th scope="row">{{siteLabel.membershipCard}}</th>
+                          <td>
+                            <a class="btn btn-md" style="background-color: #008755; color: #fff;"  (click)="exportToPdf()">
+                              <i class="typcn typcn-download"></i>  Export To PDF
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+
+                    <div class="col-md-6">
+                      <table class="table">
+                        <tr>
+                          <th style="width: 35%;" scope="row">{{siteLabel.registrationDate}}</th>
+                          <td>{{objMembershipDetails?.registrationDateString}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">{{siteLabel.expirationDate}}</th>
+                          <td *ngIf="objMembershipDetails?.expirationDateString != null">
+                            <span *ngIf="isEditExpireDate == null;">{{objMembershipDetails?.expirationDateString}}</span>
+                            <span *ngIf="isEditExpireDate == true && UserAccess == 1">
+                              <input type="date" class="form-control" style="width: 50%;" placeholder="{{siteLabel.expirydate}}" [(ngModel)]="updatedExpireDate">
+                              <a *ngIf="isEditExpireDate == true;" class='badge badge-pill badge-warning ' (click)="resetEpireDate()"><i class='fa fa-undo'></i></a>
+                                &nbsp;<a *ngIf="isEditExpireDate == true;" style="margin-top: 1%;" class="btn btn-success btn-sm" (click)="updateEpireDate()">{{siteLabel.submit}}
+                                <span *ngIf="expireDateLoading" class="spinner-border spinner-border-sm mr-1"></span>
+                              </a>
+                            </span>
+                            &nbsp;&nbsp;<a *ngIf="isEditExpireDate == null && UserAccess == 1" class='badge badge-pill badge-danger' (click)="editEpireDate()">
+                              <i class='typcn typcn-pencil'></i></a>
+                          </td>
+                          <td *ngIf="objMembershipDetails?.expirationDateString == null"><span>NA</span></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">{{siteLabel.membershipNumberOld}}</th>
+                          <td style="white-space: pre-line;">
+                              {{objMembershipDetails?.membershipNumberOld}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row">{{siteLabel.membershipType}}</th>
+                          <td>{{objMembershipDetails?.membershipType.name}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">{{siteLabel.email}}</th>
+                          <td>{{objMembershipDetails?.email}}</td>
+                        </tr>
+                        
+                      </table>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 border-bottom border-top mb-3  p-3 bg-light">
+                      <div class="main-content-label mb-0">Membership Attachment</div>
+                    </div>
+                    <table class="table">
+                      <tr>
+                        <td>
+                          <a class="badge badge-pill badge-info" data-target="#exampleModalLong" data-toggle="modal" (click)="showPassport('pass')">
+                            {{siteLabel.showPassportAttachment}}
+                          </a>
+                        </td>
+                        <td>
+                          <a class="badge badge-pill badge-success" data-target="#exampleModalLong" data-toggle="modal" (click)="showPassport('visa')">
+                          {{siteLabel.emairatesId}}
+                          </a>
+                        </td>
+                        <td>
+                          <a class="badge badge-pill badge-primary " data-target="#exampleModalLong" data-toggle="modal" (click)="showPassport('attachment1')">
+                            {{siteLabel.other}}
+                          </a>
+                        </td>
+                        <td>
+                          <a class="badge badge-pill badge-warning" data-target="#exampleModalLong" data-toggle="modal" (click)="showPassport('attachment2')">
+                            {{siteLabel.other}}
+                          </a>
+                        </td>
+                        <td>
+                          <a class="badge badge-pill badge-danger" data-target="#exampleModalLong" data-toggle="modal" (click)="showPassport('attachment3')">
+                            {{siteLabel.other}}
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="tab-pane" id="tab3">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <form class="form-horizontal">
+                        <div class="form-group">
+                          <label for="status">{{siteLabel.changeStatusTo}}</label>
+                          <select class="form-control" [(ngModel)]=selectedStatus>
+                            <option *ngFor="let i of StatusEnums" value={{i.membershipStatusDBId}}>
+                              {{i.status}}
+                            </option>
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label for="status">Message</label>
+                          <textarea class="form-control" [(ngModel)]='msg' id="message_box" name="message_box" placeholder="Message"></textarea> 
+                        </div>
+
+                        <div class="form-group mb-0 mt-3 justify-content-end">
+                          <div>
+                            <button class="btn btn-primary" [disabled]='loading' (click)='updateMembershipStatus()'>
+                              <i class="btn-icon-prepend"
+                                 data-feather="save"></i>
+                              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                              {{siteLabel.accept}}
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="tab4">
+                  <div class="row">
+                    <div class="col-md-5">
+                      <select class="form-control" [(ngModel)]='historySearchVM.status' (change)='getHistory(0)'>
+                        <option [ngValue]="0" selected>{{siteLabel.searchByStatus}}</option>
+                        <option *ngFor="let i of StatusEnums" value={{i.membershipStatusDBId}}>
+                          {{i.status}}
+                        </option>
+                      </select>
+                    </div>
+          
+                    <div class="col-md-5">
+                      <input class="form-control" id="date-picker" placeholder="Search By Date" type="text">
+                    </div>
+                  </div>
+
+                  <div *ngIf="loading1" class="row" style="margin-top: 20px;">
+                    <div class="col-md-12">
+                      <div class="alert alert-warning">
+                        <span class="spinner-border spinner-border-sm mr-1"></span>
+                        Loading....
+                      </div>
+                    </div>
+                  </div>
+
+                  <div *ngIf="loading1===false" class="table-responsive" style="margin-top: 20px;">
+                    <table class="table text-md-nowrap dataTable no-footer">
+                      <thead class="thead-dark">
+                        <tr>
+                          <th>{{siteLabel.creationTime}}</th>
+                          <th>{{siteLabel.name}}</th>
+                          <th>{{siteLabel.agent}}</th>
+                          <th>{{siteLabel.salesPointLocation}}</th>
+                          <th>{{siteLabel.salesPoint}}</th>
+                          <th>{{siteLabel.status}}</th>
+                          <th>{{siteLabel.notes}}</th>
+                          <th>{{siteLabel.requestedBy}}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor='let i of history'>
+                          <td>{{i.creationDateString}}</td>
+                          <td>{{i.memberships.fullName}}</td>
+                          <td>{{i.memberships.salesPointUser.agent.user.name}}</td>
+                          <td>{{i.memberships.salesPointUser.locations.name}}</td>
+                          <td>{{i.memberships.salesPointUser.user.name}}</td>
+                          <td>
+                            <span class="badge badge-pill {{i.statusColor}}">{{i.statusString}}</span>
+                          </td>
+                          <td>{{i.notes}}</td>
+                          <td>
+                            {{i.user.name}}
+                          </td>
+                        </tr>
+                      </tbody>
+                      <tfoot class="thead-dark">
+                        <tr>
+                          <th>{{history?history.length:0}} {{siteLabel.total}}</th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+            
+                  <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                    <ul class="pagination mt-3 mb-0 justify-content-end" [hidden]="(loading1 || pagesCount < 2)">
+                      <li class="page-item">
+                        <a class="page-link" href="javascript:void(0)" [hidden]="page == 0" (click)="getHistory(page-1)">Previous</a>
+                      </li>
+                      <li class="page-item" *ngFor='let n of range()'
+                          [class]="{active: n == page}">
+                        <a class="page-link" href="javascript:void(0)" (click)="getHistory(n)" *ngIf="n != page">{{n+1}}</a>
+                        <a class="page-link" href="javascript:void(0)" *ngIf="n == page">{{n+1}}</a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="javascript:void(0)" [hidden]="page == pagesCount - 1" (click)="getHistory(page+1)">Next</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <!-- <div class="col-md-12 mt-3">
+                      <table class="table table-hover mb-0 text-md-nowrap">
+                        <thead>
+                        <tr>
+                          <th>Created At</th>
+                          <th>Name</th>
+                          <th>Agent</th>
+                          <th>Sales Point Location</th>
+                          <th>Sales Point</th>
+                          <th>Status</th>
+                          <th>Notes</th>
+                          <th>Request By</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                          <th scope="row">10-02-2021 10:00 AM</th>
+                          <td>Tiger Nixon</td>
+                          <td>AE - African</td>
+                          <td>AE BURDUBAI 8B</td>
+                          <td>AE BURDUBAI 8B</td>
+                          <td><span
+                            class="badge badge-pill badge-success">Approved</span>
+                          </td>
+                          <td></td>
+                          <td>AE BURDUBAI 8B</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">10-01-2021 11:00 AM</th>
+                          <td>Tiger Nixon</td>
+                          <td>AE - African</td>
+                          <td>AE BURDUBAI 8B</td>
+                          <td>AE BURDUBAI 8B</td>
+                          <td><span
+                            class="badge badge-pill badge-danger">Rejected</span>
+                          </td>
+                          <td></td>
+                          <td>AE BURDUBAI 8B</td>
+                        </tr>
+
+                        </tbody>
+                      </table>
+                    </div> -->
+                </div>
+                <div class="tab-pane" id="tab5">
+                  <div class="row">
+                    <div class="col-md-4 mb-2">
+                      <input class="form-control" [(ngModel)]='purchaseSearchVM.invoiceNumber' (input)='getPurchases(0)'
+                          placeholder="{{siteLabel.searchByInvoiceNumber}}" type="text">
+                    </div>
+
+                    <div class="col-md-4 mb-2">
+                      <input class="form-control" [(ngModel)]='purchaseSearchVM.amount'
+                        (input)='getPurchases(0)' placeholder="{{siteLabel.searchByAmount}}" type="number">
+                    </div>
+
+                    <div class="col-md-4 mb-2">
+                      <input class="form-control" [(ngModel)]='purchaseSearchVM.salesPoint' (input)='getPurchases(0)'
+                            placeholder="Search By Sale Point" type="text">
+                    </div>
+
+                    <div class="col-md-4 mb-2">
+                      <input class="form-control" id="date-picker-1" placeholder="Search By Date" type="text">
+                    </div>
+                  </div>
+
+                    <!-- <div class="col-md-4 mb-2">
+                      <button class="bg-primary btn text-white">Search</button>
+                      <button class="bg-primary btn text-white">Reset</button>
+                    </div> -->
+                  
+                  <div *ngIf="loading2" class="row" style="margin-top: 20px;">
+                    <div class="col-md-12">
+                      <div class="alert alert-warning">
+                        <span class="spinner-border spinner-border-sm mr-1"></span>
+                        Loading....
+                      </div>
+                    </div>
+                  </div>
+
+                  <div *ngIf="loading2===false"  class="table-responsive" style="margin-top: 20px;">
+                    <table class="table text-md-nowrap dataTable no-footer">
+                      <thead class="thead-dark">
+                        <tr>
+                          <th>{{siteLabel.date}}</th>
+                          <th>{{siteLabel.invoiceNumber}}</th>
+                          <th>{{siteLabel.totalAmount}}</th>
+                          <th>{{siteLabel.agent}}</th>
+                          <th>{{siteLabel.salePointLocation}}</th>
+                          <th>{{siteLabel.salePointUser}}</th>
+                          <th>{{siteLabel.notes}}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor='let i of purchases'>
+                          <td>{{i.creationDateString}}</td>
+                          <td>{{i.invoiceNumber}}</td>
+                          <td>{{i.totalAmount}}</td>
+                          <td>{{i.salesPointUser.agent.user.name}}</td>
+                          <td>{{i.salesPointUser.locations.name}}</td>
+                          <td>{{i.salesPointUser.user.name}}</td>
+                          <td>{{i.notes}}</td>
+                        </tr>
+                      </tbody>
+                      <tfoot class="thead-dark">
+                        <tr>
+                          <th>{{purchases?purchases.length:0}} {{siteLabel.total}}</th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+
+                  <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                    <ul class="pagination mt-3 mb-0 justify-content-end" [hidden]="(loading2 || pagesCount1 < 2)">
+                      <li class="page-item">
+                        <a class="page-link" href="javascript:void(0)" [hidden]="page1 == 0" (click)="getPurchases(page1-1)">Previous</a>
+                      </li>
+                      <li class="page-item" *ngFor='let n of range()'
+                          [class]="{active: n == page1}">
+                        <a class="page-link" href="javascript:void(0)" (click)="getPurchases(n)" *ngIf="n != page1">{{n+1}}</a>
+                        <a class="page-link" href="javascript:void(0)" *ngIf="n == page1">{{n+1}}</a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="javascript:void(0)" [hidden]="page1 == pagesCount1 - 1" (click)="getPurchases(page1+1)">Next</a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- <div class="col-md-12 mt-3">
+                    <table class="table table-hover mb-0 text-md-nowrap">
+                      <thead>
+                      <tr>
+                        <th>Created At</th>
+                        <th>Invoice Number</th>
+                        <th>Total Amount</th>
+                        <th>Agent</th>
+                        <th>Sales Point</th>
+                        <th>Notes</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                        <th scope="row">10-02-2021 10:00 AM</th>
+                        <td>111</td>
+                        <td>AED 60</td>
+                        <td>AE BURDUBAI 8B</td>
+                        <td>AE BURDUBAI 8B</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">10-01-2021 11:00 AM</th>
+                        <td>2222</td>
+                        <td>AE - African</td>
+                        <td>AE BURDUBAI 8B</td>
+                        <td>AE BURDUBAI 8B</td>
+                        <td>Hello Test</td>
+                      </tr>
+
+                      </tbody>
+                    </table>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/div-->
+    </div>
+    <!-- /row -->
+  </div>
+</div>
+
+<div aria-hidden="true" aria-labelledby="exampleModalLongTitle" class="modal fade" id="exampleModalLong" role="dialog"
+     tabindex="-1">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{siteLabel.image}}</h5>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <img *ngIf="isImageBased64()" src="{{imagePath ? 'data:image/jpg;base64,' +  imagePath : ''}}" alt="Image"
+                 class="img-responsive">
+            <img *ngIf="!isImageBased64()" src="{{imagePath}}" alt="Image"
+                 class="img-responsive">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-dismiss="modal" type="button">{{siteLabel.close}}</button>
+      </div>
+    </div>
+  </div>
+</div>

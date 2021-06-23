@@ -1,0 +1,133 @@
+<div class="container-fluid">
+    <!-- breadcrumb -->
+    <div class="breadcrumb-header justify-content-between">
+        <div class="my-auto">
+          <div class="d-flex">
+            <h4 class="content-title mb-0 my-auto">{{siteLabel.addSalesPointUser}}</h4>
+          </div>
+        </div>
+      </div>
+      <!-- breadcrumb -->
+
+     
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card" id="tabs-style4">
+                <div class="card-body">
+                    <form [formGroup]='formSalesUser' id="employee_form"  name="employee_form">
+                        <div class="form-body">
+                            <div class="panel panel-primary tabs-style-2">
+                                <div class="row">
+                                    <div class="row row-sm-12 col-md-12 mt-3">
+                                        <div class="col-md-6 col-lg-6">
+                                            <label for="role">{{siteLabel.agent}}*</label>
+                                            <select class="form-control" formControlName='agentId'
+                                                    [(ngModel)]='objSalesUser.agentId'
+                                                    (change)="getLocations()"
+                                                    id="role" name="role">
+                                                <option value="" selected>Please Select Agent</option>
+                                                <option *ngFor="let i of agents"
+                                                        value={{i.agentId}}>
+                                                {{i.user.name}}
+                                                </option>
+                                            </select>
+                                            <span *ngIf="formSalesUser.get('agentId').invalid && (formSalesUser.get('agentId').dirty || formSalesUser.get('agentId').touched)"
+                                            class="alert alert-danger">Please Select Agent</span>
+                                        </div>
+                                        <div class="col-md-6 col-lg-6">
+                                            <label for="location">{{siteLabel.locationName}}*</label>
+                                            <select class="form-control" id="location" name="location"
+                                                    formControlName='locationId'
+                                                    [(ngModel)]='objSalesUser.locationId'>
+                                                <option value="">Please Select Location</option>
+                                                <option *ngFor="let i of locations"
+                                                        value={{i.locationId}}>
+                                                {{i.name}}
+                                                </option>
+                                            </select>
+                                            <span *ngIf="formSalesUser.get('locationId').invalid && (formSalesUser.get('locationId').dirty || formSalesUser.get('name').touched)"
+                                            class="alert alert-danger">Please Select Location</span>   
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="row row-sm-12 col-md-12 mt-3">
+                                        <div class="col-md-6 col-lg-6">
+                                            <label for="name">{{siteLabel.name}}*</label>
+                                            <input class="form-control" formControlName='name'
+                                                   [(ngModel)]='objSalesUser.name' id="name" name="name" placeholder="Name" type="text">
+                                            <span *ngIf="formSalesUser.get('name').invalid && (formSalesUser.get('name').dirty || formSalesUser.get('name').touched)"
+                                            class="alert alert-danger">Please Enter Name</span> 
+                                        </div>
+                                        <div class="col-md-6 col-lg-6">
+                                            <label for="email">{{siteLabel.email}}*</label>
+                                            <input class="form-control" formControlName='email'
+                                                    [(ngModel)]='objSalesUser.email' id="email" name="email" placeholder="Email" type="text">
+                                            <span *ngIf="formSalesUser.get('email').invalid && (formSalesUser.get('email').dirty || formSalesUser.get('email').touched)"
+                                            class="alert alert-danger">Please Enter Email</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="row row-sm-12 col-md-12 mt-3">
+                                        <div class="col-md-6 col-lg-6">
+                                            <label for="phone_no">{{siteLabel.phoneNumber}}*</label>
+                                            <input class="form-control" maxlength="10" pattern="\d{10}"
+                                                    formControlName='phoneNumber' [(ngModel)]='objSalesUser.phoneNumber'
+                                                    id="phone_no" name="phone_no" placeholder="Phone Number" type="text">
+                                            <span *ngIf="formSalesUser.get('phoneNumber').invalid && (formSalesUser.get('phoneNumber').dirty || formSalesUser.get('phoneNumber').touched)"
+                                            class="alert alert-danger">Please Enter Phone Number</span>
+                                        </div>
+                                        <div class="col-md-6 col-lg-6">
+                                            <label for="password">{{siteLabel.password}}*</label>
+                                            <input class="form-control" formControlName='password' [(ngModel)]='objSalesUser.password' id="password" name="password" placeholder="Password" type="password">
+                                            <span *ngIf="formSalesUser.get('password').invalid && (formSalesUser.get('password').dirty || formSalesUser.get('password').touched)"
+                                            class="alert alert-danger">Please Enter Password</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="row row-sm-12 col-md-12 mt-3">
+                                        <div class="col-md-6 col-lg-6">
+                                            <label for="confirm_password">{{siteLabel.confirmPassword}}*</label>
+                                                <input class="form-control" formControlName='confirmPassword' [(ngModel)]='objSalesUser.confirmPassword' id="confirm_password" name="confirm_password"
+                                                        placeholder="Confirm Password"
+                                                        type="password">
+                                                        <span *ngIf="formSalesUser.get('confirmPassword').invalid && (formSalesUser.get('confirmPassword').dirty || formSalesUser.get('confirmPassword').touched)"
+                                                class="alert alert-danger">Please Enter Confirm Password</span>
+                                                <span *ngIf="formSalesUser.get('confirmPassword').value !=formSalesUser.get('password').value && (formSalesUser.get('confirmPassword').dirty || formSalesUser.get('confirmPassword').touched)"
+                                                class="alert alert-danger">Confirm & Password does not match</span>
+                                        </div>
+                                        <div class="col-md-6 col-lg-6">
+                                            <label for="status">{{siteLabel.status}}*</label>
+                                            <select class="form-control" formControlName='status' [(ngModel)]="objSalesUser.status" id="status" name="status">
+                                                <option [ngValue]=StatusEnums.Active>Active</option>
+                                                <option [ngValue]=StatusEnums.InActive>InActive</option>
+                                                <!--<option [ngValue]=StatusEnums.Approved>Approved</option>
+                                                <option [ngValue]=StatusEnums.Rejected>Rejected</option>-->
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="row row-sm-12 col-md-12 mt-3">
+                                        <div class="col-md-12 col-lg-12">
+                                            <button class="btn btn-primary" [disabled]='!formSalesUser.valid || loading' (click)='saveSalesUser()'>
+                                                <i class="btn-icon-prepend" data-feather="save"></i> {{siteLabel.submit}}
+                                                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                            </button>
+                                            
+                                            <button class="btn btn-light" (click)='formSalesUser.reset()'><i class="btn-icon-prepend" data-feather="x"></i>
+                                            {{siteLabel.cancel}}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,211 @@
+<div class="container-fluid">
+
+  <!-- breadcrumb -->
+  <div class="breadcrumb-header justify-content-between">
+    <div class="my-auto">
+      <div class="d-flex">
+        <h4 class="content-title mb-0 my-auto">{{siteLabel.taskManagement}}</h4>
+      </div>
+    </div>
+    <div class="d-flex my-xl-auto right-content">
+      <div class="pr-1 mb-3 mb-xl-0">
+        <a [routerLink]="['/add-task-management']" class="btn btn-primary">{{siteLabel.addNew}}</a>
+      </div>
+      <div class="pr-1 mb-3 mb-xl-0">
+        <button (click)="ApprovalForClient()" class="btn btn-primary">Approval For Client</button>
+      </div>
+    </div>
+  </div>
+  <!-- breadcrumb -->
+
+
+  <div class="row row-sm">
+
+    <div class="col-lg-6 col-xl-3 col-md-6 col-12">
+      <div class="card bg-primary-gradient text-white ">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="icon1 mt-2 text-center">
+                <i class="fe fe-pie-chart tx-40"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mt-0 text-center">
+                <span class="text-white">{{siteLabel.new}}</span>
+                <h2 class="text-white mb-0">{{taskRequest.new}}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-xl-3 col-md-6 col-12">
+      <div class="card bg-danger-gradient text-white">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="icon1 mt-2 text-center">
+                <i class="fe fe-pie-chart tx-40"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mt-0 text-center">
+                <span class="text-white">{{siteLabel.atLocation}}</span>
+                <h2 class="text-white mb-0">{{taskRequest.atLocation}}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-xl-3 col-md-6 col-12">
+      <div class="card bg-success-gradient text-white">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="icon1 mt-2 text-center">
+                <i class="fe fe-pie-chart tx-40"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mt-0 text-center">
+                <span class="text-white">{{siteLabel.completed}}</span>
+                <h2 class="text-white mb-0">{{taskRequest.completed}}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-xl-3 col-md-6 col-12">
+      <div class="card bg-warning-gradient text-white">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="icon1 mt-2 text-center">
+                <i class="fe fe-pie-chart tx-40"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mt-0 text-center">
+                <span class="text-white">{{siteLabel.returned}}</span>
+                <h2 class="text-white mb-0">{{taskRequest.returned}}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- row opened -->
+  <div class="row row-sm">
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-body">
+
+          <div class="row row-sm mb-4">
+            <div class="col-lg-3 mb-2">
+              <select class="form-control" [(ngModel)]=objSearchTaskList.status (change)='searchTask(0)'>
+                <option [ngValue]="0" selected>{{siteLabel.searchByStatus}}</option>
+              <option [ngValue]=StatusForTask.New>{{siteLabel.new}}</option>
+              <option [ngValue]=StatusForTask.InProgress>{{siteLabel.inProgress}}</option>
+              <option [ngValue]=StatusForTask.Accepted>{{siteLabel.accepted}}</option>
+              <option [ngValue]=StatusForTask.AtLocation>{{siteLabel.atLocation}}</option>
+              <option [ngValue]=StatusForTask.Completed>{{siteLabel.completed}}</option>
+              <option [ngValue]=StatusForTask.Cancelled>{{siteLabel.cancelled}}</option>
+              <option [ngValue]=StatusForTask.Rejected>{{siteLabel.rejected}}</option>
+              <option [ngValue]=StatusForTask.ClosedByAdmin>{{siteLabel.closedByAdmin}}</option>
+              <option [ngValue]=StatusForTask.Returned>{{siteLabel.returned}}</option>
+              </select>
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <select class="form-control" [(ngModel)]=objSearchTaskList.empId (change)='searchTask(0)'>
+                <option [ngValue]="0" selected>{{siteLabel.selectEmployees}}</option>
+                <option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of empArray">
+                    {{item.name}}
+                </option>
+              </select>
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Date</span>
+                </div>
+                <input aria-describedby="basic-addon1" aria-label="Username" class="form-control"
+                       placeholder="dd/mm/yyyy" type="text" [(ngModel)]='objSearchTaskList.createdOn' (input)='changeDate()'>
+              </div>
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <button class="bg-primary btn text-white">{{siteLabel.reset}}</button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <div *ngIf="loading" class="alert alert-warning">
+              <span class="spinner-border spinner-border-sm mr-1"></span>
+              Loading....
+            </div>
+            <table *ngIf="loading===false" class="table text-md-nowrap dataTable no-footer" id="example1">
+              <thead class="thead-dark">
+              <tr>
+                <th class="wd-15p border-bottom-0">{{siteLabel.NO}}</th>
+                <th class="wd-15p border-bottom-0">{{siteLabel.taskName}}</th>
+                <th class="wd-15p border-bottom-0">{{siteLabel.taskType}}</th>
+                <th class="wd-25p border-bottom-0">{{siteLabel.status}}</th>
+                <th class="wd-25p border-bottom-0">{{siteLabel.action}}</th>
+              </tr>
+              </thead>
+              <tbody *ngIf='tasks'>
+              <tr *ngFor='let m of tasks; let i = index'>
+                <td>{{i + 1}}</td>
+                <td>{{m.taskName}}</td>
+                <td>{{m.taskType}}</td>
+                <td>
+                  <label *ngIf='m.status===1' class="badge badge-pill badge-success">{{siteLabel.new}}</label>
+                  <label *ngIf='m.status===2' class="badge badge-pill badge-success">{{siteLabel.inProgress}}</label>
+                  <label *ngIf='m.status===3' class="badge badge-pill badge-warning">{{siteLabel.accepted}}</label>
+                  <label *ngIf='m.status===4' class="badge badge-pill badge-success">{{siteLabel.atLocation}}</label>
+                  <label *ngIf='m.status===5' class="badge badge-pill badge-warning">{{siteLabel.completed}}</label>
+                  <label *ngIf='m.status===6' class="badge badge-pill badge-success">{{siteLabel.cancelled}}</label>
+                  <label *ngIf='m.status===7' class="badge badge-pill badge-warning">{{siteLabel.rejected}}</label>  
+                  <label *ngIf='m.status===8' class="badge badge-pill badge-warning">{{siteLabel.closedByAdmin}}</label>  
+                  <label *ngIf='m.status===9' class="badge badge-pill badge-warning">{{siteLabel.returned}}</label>                
+                </td>  
+                <td>
+                  <a class='btn btn-primary btn-xs' routerLink="/task-management-details/{{m.id}}">
+                    <i class='fa fa-eye'></i>
+                  </a>
+                  &nbsp;
+                  <a routerLink="/add-task-management/{{m.id}}"  class='btn btn-primary btn-xs'>
+                    <i class='typcn typcn-pencil'></i>
+                  </a>
+                </td> 
+              </tr>
+              </tbody>
+              <tfoot class="thead-dark">
+                <tr>
+                  <th colspan="2">{{siteLabel.recordsPerRow}} : {{tasks?tasks.length:0}} &nbsp;&nbsp;&nbsp; {{siteLabel.totalRecords}} : {{totalCount}}</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <!-- <th></th>
+                  <th></th>
+                  <th></th> -->
+                </tr>
+              </tfoot>
+            </table>            
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/div-->
+  </div>
+  <!-- /row -->
+  </div>
+

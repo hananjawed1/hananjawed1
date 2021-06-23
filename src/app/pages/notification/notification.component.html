@@ -1,0 +1,225 @@
+<div class="container-fluid">
+
+  <!-- breadcrumb -->
+  <div class="breadcrumb-header justify-content-between">
+    <div class="my-auto">
+      <div class="d-flex">
+        <h4 class="content-title mb-0 my-auto">{{siteLabel.manageNotifications}}</h4>
+      </div>
+    </div>
+    <div class="d-flex my-xl-auto right-content">
+      <div class="pr-1 mb-3 mb-xl-0">
+        <a class="btn btn-primary" routerLink="/add-notification">
+          <i class="btn-icon-prepend" data-feather="plus-square"></i>{{siteLabel.addNew}}
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- breadcrumb -->
+
+  <!-- row opened -->
+  <div class="row row-sm">
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row row-sm mb-4">
+            <div class="col-lg-3 mb-2">
+              <select class="form-control" [(ngModel)]='SearchNotifyVM.type'
+                    (change)='searhNotifications(0)'>
+              <option [ngValue]=0 selected>{{siteLabel.all}}</option>
+              <option [ngValue]=1>{{siteLabel.membershipRequest}}</option>
+              <option [ngValue]=2>{{siteLabel.fileOpening}}</option>
+            </select>
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Date</span>
+                </div>
+                <input class="form-control" placeholder="{{siteLabel.date}}"
+                   type="date"
+                   (input)='changeDate()'
+                   [(ngModel)]='SearchNotifyVM.date'>
+              </div>
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <input class="form-control" placeholder="{{siteLabel.tradeLicenceNumber}}/{{siteLabel.membershipNumber}}"
+                   type="text"
+                   (input)='searhNotifications(0)'
+                   [(ngModel)]='SearchNotifyVM.number'>
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <input class="form-control" placeholder="{{siteLabel.phoneNumber}}"
+                   type="text"
+                   (input)='searhNotifications(0)'
+                   [(ngModel)]='SearchNotifyVM.phoneNumber'>
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <select class="form-control" [(ngModel)]='SearchNotifyVM.userId' (change)="searhNotifications(0)">
+                <option value="" selected>{{siteLabel.salesPointUser}}</option>
+                <option *ngFor="let i of salesPoints" value={{i.userId}}>
+                  {{i.user.name}}
+                </option>
+              </select>
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <select class="form-control" [(ngModel)]='SearchNotifyVM.userId2' (change)="searhNotifications(0)">
+                <option value="" selected>{{siteLabel.searchByAgent}}</option>
+                <option *ngFor="let i of agents" value={{i.userId}}>
+                  {{i.user.name}}
+                </option>
+              </select>
+            </div>
+
+            <div class="col-lg-3 mb-2">
+              <button class="bg-primary btn text-white" (click)="updateAll()">{{siteLabel.markAllAsRead}}</button>
+            </div>
+          </div>
+
+
+          <div class="table-responsive">
+            <div *ngIf="loading" class="row">
+              <div class="col-md-12">
+                <div class="alert alert-warning">
+                  <span class="spinner-border spinner-border-sm mr-1"></span>
+                  Loading....
+                </div>
+              </div>
+            </div>
+            <table *ngIf="loading===false"  class="table text-md-nowrap dataTable no-footer" id="example1">
+              <thead class="thead-dark">
+              <tr>
+                <th class="wd-15p border-bottom-0">{{siteLabel.dateTime}}</th>
+                <th class="wd-15p border-bottom-0">{{siteLabel.requestedBy}}</th>
+                <th class="wd-15p border-bottom-0">{{siteLabel.subject}}</th>
+                <th class="wd-15p border-bottom-0">{{siteLabel.message}}</th>
+                <th class="wd-15p border-bottom-0">{{siteLabel.type}}</th>
+                <th class="wd-15p border-bottom-0">{{siteLabel.number}}</th>
+                <th class="wd-15p border-bottom-0">{{siteLabel.phoneNumber}}</th>
+                <th class="wd-15p border-bottom-0">{{siteLabel.action}}</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor='let a of notifications' [ngClass]="a.isRead===true ? 'bg-white text-black' : 'bg-info text-white'">
+                <td>{{a.creationDateString}}</td>
+                <td>{{a.requestedBy}}</td>
+                <td><span *ngIf="a.subject != null">{{(a.subject.length>15)? (a.subject | slice:0:15)+'..':(a.subject)}}</span></td>
+                <td><span *ngIf="a.message != null">
+                  {{(a.message.length>15)? (a.message | slice:0:15)+'..':(a.message)}}
+                </span></td>
+                <td><span *ngIf="a.notificationType == 1 || a.notificationType == 2">{{siteLabel.membershipRequest}}</span>
+                  <span *ngIf="a.notificationType == 4 || a.notificationType == 5">{{siteLabel.fileOpening}}</span></td>
+                <td> {{a.number}}</td>
+                <td> {{a.phoneNumber}}</td>
+                <td>
+                  <div class='btn-group'>
+                    <button aria-expanded="true"
+                            aria-haspopup="true" class="btn btn-danger dropdown-toggle btn-xs" data-toggle="dropdown">
+                      {{siteLabel.action}}
+                    </button>
+                    <div class='dropdown-menu animated flipInX btn-sm'>
+                      <a class="dropdown-item" data-target="#exampleModalLong"
+                         data-toggle="modal" (click)="showDetails(a)" href="javascript:void(0)">{{siteLabel.viewDetails}}</a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+              <tfoot class="thead-dark">
+                <tr>
+                  <th>{{siteLabel.manageNotifications}} {{notifications?notifications.length:0}}</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </tfoot>
+            </table>
+            <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+              <ul class="pagination mt-3 mb-0 justify-content-end" [hidden]="(loading || pagesCount < 2)">
+                <li class="page-item">
+                  <a class="page-link" [hidden]="page == 0" href="javascript:void(0)" (click)="searhNotifications(0)">{{siteLabel.first}}</a>
+                </li>
+                <li class="paginate_button page-item previous">
+                  <a class="page-link" href="javascript:void(0)" [hidden]="page == 0" (click)="searhNotifications(page-1)">
+                    {{siteLabel.previous}}
+                  </a>
+                </li>
+                <li class="page-item" *ngFor='let n of range()'
+                    [class]="{active: n == page}">
+                  <a class="page-link" href="javascript:void(0)" (click)="searhNotifications(n)" *ngIf="n != page">{{n+1}}</a>
+                  <a class="page-link" href="javascript:void(0)" *ngIf="n == page">{{n+1}}</a>
+                </li>
+                <li class="paginate_button page-item next">
+                  <a class="page-link" href="javascript:void(0)" [hidden]="page == pagesCount - 1" (click)="searhNotifications(page+1)">
+                    {{siteLabel.next}}
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="javascript:void(0)" [hidden]="page == pagesCount - 1" (click)="searhNotifications(pagesCount - 1)">{{siteLabel.last}}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/div-->
+  </div>
+  <!-- /row -->
+
+  <div aria-hidden="true" aria-labelledby="exampleModalLongTitle" class="modal fade" id="exampleModalLong" role="dialog"
+     tabindex="-1">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{siteLabel.notificationDetails}}</h5>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-3">
+            <p><strong>{{siteLabel.by}} :</strong></p>
+          </div>
+          <div class="col-9">
+            <p>{{details?.requestedBy}}</p>
+          </div>
+          <hr>
+          <div class="col-3">
+            <p><strong>{{siteLabel.subject}} :</strong></p>
+          </div>
+          <div class="col-9">
+            <p>{{details?.subject}}</p>
+          </div>
+          <hr>
+          <div class="col-3">
+            <p><strong>{{siteLabel.details}}:</strong></p>
+          </div>
+          <div class="col-9">
+            <p>
+              {{details?.message}}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+
+        <a class="btn btn-primary" routerLink="{{details?.routerLink}}"
+           *ngIf="details?.id>0" data-dismiss="modal">{{siteLabel.viewDetails}}</a>
+
+        <button class="btn btn-secondary" data-dismiss="modal" type="button">{{siteLabel.close}}</button>
+
+      </div>
+    </div>
+  </div>
+</div>

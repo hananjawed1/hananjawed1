@@ -1,0 +1,61 @@
+<div class="container-fluid">
+
+    <!-- breadcrumb -->
+    <div class="breadcrumb-header justify-content-between">
+      <div class="my-auto">
+        <div class="d-flex">
+          <h4 class="content-title mb-0 my-auto">Client Request</h4>
+        </div>
+      </div>
+    </div>
+    <!-- breadcrumb -->
+  
+  
+   
+    <!-- row opened -->
+    <div class="row row-sm">
+      <div class="col-xl-12">
+        <div class="card">
+          <div class="card-body">
+            
+            <div class="table-responsive">
+              <div *ngIf="loading" class="alert alert-warning">
+                <span class="spinner-border spinner-border-sm mr-1"></span>
+                Loading....
+            </div>
+  
+              <table *ngIf="loading===false" class="table text-md-nowrap dataTable no-footer" id="example1">
+                <thead class="thead-dark">
+                  <tr>
+                    <th class="wd-25p border-bottom-0">LICENCE NUMBER</th>
+                    <th class="wd-25p border-bottom-0">STATUS</th>
+                    <th class="wd-25p border-bottom-0">CATEGORY</th>
+                    <th class="wd-25p border-bottom-0"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                      <tr *ngFor="let request of ClientNewRequestDetails">
+                        <td>{{clientDetails.tradeLicenceNumber}}</td>
+                        <td *ngIf='request.status == 0'><span class="badge  badge-danger">NA</span></td>
+                        <td *ngIf='request.status == 1'><span class="badge  badge-warning">Pending</span></td>
+                        <td *ngIf='request.status == 2'><span class="badge  badge-info">Returned</span></td>
+                        <td *ngIf='request.status == 3'><span class="badge  badge-success">Completed</span></td>
+                        <td *ngIf="request.requestType == 1">Change Liquor Manager</td>
+                        <td *ngIf="request.requestType == 2">Renewal</td>
+                        <td *ngIf="request.requestType == 3">Other</td>
+                        <td *ngIf="request.requestType == 4">Upload Receipt</td>
+                        <td><a class='btn btn-success btn-xs' routerLink="/client-request-update/{{request.newFileRequestId}}">View Details</a></td>
+                      </tr>
+        
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/div-->
+    </div>
+    <!-- /row -->
+  </div>
+  

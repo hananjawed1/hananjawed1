@@ -1,0 +1,96 @@
+<div class="container-fluid">
+
+  <!-- breadcrumb -->
+  <div class="breadcrumb-header justify-content-between">
+    <div class="my-auto">
+      <div class="d-flex">
+        <h4 class="content-title mb-0 my-auto">{{siteLabel.checklistManagement}}</h4>
+      </div>
+    </div>
+    <div class="d-flex my-xl-auto right-content">
+      <div class="pr-1 mb-3 mb-xl-0">
+        <a class="btn btn-primary" routerLink="/assign-check-list-group">
+          <i class="btn-icon-prepend" data-feather="plus-square"></i>{{siteLabel.assignChecklistGroup}}
+        </a>
+      </div>
+      <div class="pr-1 mb-3 mb-xl-0">
+        <a routerLink="/check-list-group" class="btn btn-primary">
+          <i class="btn-icon-prepend" data-feather="plus-square"></i>{{siteLabel.checklistGroup}}
+        </a>
+      </div>
+      <div class="pr-1 mb-3 mb-xl-0">
+        <a routerLink="/check-list-options" class="btn btn-primary">
+          <i class="btn-icon-prepend" data-feather="plus-square"></i>{{siteLabel.checklistOptions}}
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- breadcrumb -->
+
+  <!-- row opened -->
+  <div class="row row-sm">
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-body">
+
+
+          <div class="table-responsive">
+            <div *ngIf="loading" class="row">
+              <div class="col-md-12">
+              <div class="alert alert-warning">
+                  <span class="spinner-border spinner-border-sm mr-1"></span>
+                  Loading....
+              </div>
+              </div>
+          </div>  
+
+            <table class="table text-md-nowrap dataTable no-footer" id="example1" *ngIf="loading===false">
+              <thead class="thead-dark">
+              <tr>
+                <th class="wd-15p border-bottom-0">{{siteLabel.name}}</th>
+                <th class="wd-25p border-bottom-0">{{siteLabel.status}}</th>
+                <th class="wd-10p border-bottom-0">{{siteLabel.action}}</th>
+              </tr>
+              </thead>
+              <tbody *ngIf='assignCheckListOption'>
+                <tr *ngFor='let checkList of assignCheckListOption'>
+                  <td>{{checkList.name}}</td>
+                  <td>
+                    <label *ngIf='checkList.status===1' class="badge badge-pill badge-success">Active</label>
+                    <label *ngIf='checkList.status===2' class="badge badge-pill badge-warning">InActive</label>
+                  </td>
+                  <td>
+                      <div class='btn-group'>
+                          <button aria-expanded="true"
+                                  aria-haspopup="true" class="btn btn-danger dropdown-toggle btn-xs" data-toggle="dropdown">
+                              {{siteLabel.action}}
+                          </button>
+                          <div class='dropdown-menu animated flipInX btn-sm'>
+                              <a class="dropdown-item" (click)='InactivateAssignCheckListGroup(checkList)' href="javascript:void(0)">
+                                <span *ngIf='checkList.status===1'>Inactive</span>
+                                <span *ngIf='checkList.status===2'>Activate</span>
+                              </a>
+                              <a class="dropdown-item" href="javascript:void(0)" (click)='EditAssignCheckListGroup(checkList)'>
+                                {{siteLabel.edit}}
+                              </a>
+                          </div>
+                      </div>
+                  </td> 
+                </tr>
+              </tbody>
+              <tfoot class="thead-dark">
+                <tr>
+                  <th> {{siteLabel.total}} {{assignCheckListOption?assignCheckListOption.length:0}}</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/div-->
+  </div>
+  <!-- /row -->
+</div>

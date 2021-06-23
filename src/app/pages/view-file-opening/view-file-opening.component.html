@@ -1,0 +1,129 @@
+<style>
+    td{
+      font-weight: 500;
+    }
+  </style>
+  <div class="container-fluid">
+  
+    <!-- breadcrumb -->
+    <div class="breadcrumb-header justify-content-between">
+      <div class="my-auto">
+        <div class="d-flex">
+          <h4 class="content-title mb-0 my-auto">{{siteLabel.manageFileOpening}}</h4>
+        </div>
+      </div>
+    </div>
+  
+    <!-- breadcrumb -->
+  
+    <!-- row opened -->
+    <div class="row row-sm">
+      <div class="col-xl-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="row row-sm mb-4">
+              <div class="col-lg-3 mb-2">
+                <input class="form-control" [(ngModel)]='searchClients.tradeLicenceNumber' (input)='searchMembership(0)' 
+                  placeholder="{{siteLabel.searchByTradeLicenceNumber}}" type="text">
+              </div>
+  
+              <div class="col-lg-3 mb-2">
+                <input class="form-control" [(ngModel)]='searchClients.entityName'  (input)='searchMembership(0)'
+                     placeholder="{{siteLabel.entityName}}" type="text">
+              </div>
+  
+              <div class="col-lg-3 mb-2">
+                <select class="form-control" [(ngModel)]="searchClients.requestType" (change)="searchMembership(0)">
+                  <option value="0">{{siteLabel.licenceType}}</option>
+                  <option *ngFor="let i of requestTypes" value={{i.id}}>{{i.name}}</option>
+                </select>
+              </div>         
+  
+              <div class="col-lg-3 mb-2">
+                <button class="bg-primary btn text-white" (click)="resetSearch()">Reset</button>
+              </div>
+            </div>
+  
+            <div class="table-responsive" style="margin-top: 20px;" id="Client">
+              <div *ngIf="loading" class="alert alert-warning">
+                <span class="spinner-border spinner-border-sm mr-1"></span>
+                Loading....
+              </div>
+  
+              <table *ngIf="loading===false" class="table text-md-nowrap dataTable no-footer" >
+                <thead class="thead-dark">
+                  <tr>
+                    <th class="wd-15p border-bottom-0">{{siteLabel.tradeLicenceNumber}}</th>
+                    <th class="wd-15p border-bottom-0">{{siteLabel.entityName}}</th>
+                    <th class="wd-15p border-bottom-0">{{siteLabel.businessType}}</th>
+                    <th class="wd-15p border-bottom-0">{{siteLabel.status}}</th>
+                    <!-- <th class="wd-15p border-bottom-0">{{siteLabel.requestType}}</th> -->
+                    <!-- <th class="wd-15p border-bottom-0">{{siteLabel.profileStatus}}</th> -->
+                    <th class="wd-15p border-bottom-0">{{siteLabel.action}}</th>
+                    
+                  </tr>
+                </thead>
+                <tbody *ngIf='clients'>
+                  <tr *ngFor='let emp of clients'>
+                    <td>{{emp.tradeLicenceNumber}}</td>
+                    <td>{{emp.entityName}}</td>
+                     <td *ngIf="emp.businessTypeString != 0">{{emp.businessTypeString}}</td>
+                    <td *ngIf="emp.businessTypeString == 0">NA</td> 
+                    <td><span class="badge badge-pill {{emp.statusColor}}">{{emp.statusString}}</span></td>
+                    <!-- <td>{{emp.requestTypeString}}</td> -->
+                    <!-- <td *ngIf="emp.isComplet == true"><span class="badge badge-pill badge-success" >{{siteLabel.completed}}</span></td> -->
+                    <!-- <td *ngIf="emp.isComplet == false"><span class="badge badge-pill badge-danger" >{{siteLabel.incomplete}}</span></td> -->
+                    <td>
+                      <a routerLink="/add-file-opening/{{emp.clientId}}" class='btn btn-success btn-xs'>
+                        <i class='typcn typcn-pencil'></i>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot class="thead-dark">
+                  <tr>
+                    <th>{{siteLabel.recordsPerRow}} : {{clients?clients.length:0}} &nbsp;&nbsp;&nbsp; {{siteLabel.totalRecords}} : {{totalCount}}</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </tfoot>
+              </table>
+              
+              <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                <ul class="pagination mt-3 mb-0 justify-content-end" [hidden]="(loading || pagesCount < 2)">
+                  <li class="page-item">
+                    <a class="page-link" [hidden]="page == 0" (click)="searchMembership(0)"><<</a>
+                  </li>
+                  <li class="paginate_button page-item previous">
+                    <a class="page-link" href="javascript:void(0)" [hidden]="page == 0" (click)="searchMembership(page-1)">
+                      {{siteLabel.previous}}
+                    </a>
+                  </li>
+                  <li class="page-item" *ngFor='let n of range()'
+                      [class]="{active: n == page}">
+                    <a class="page-link" href="javascript:void(0)" (click)="searchMembership(n)" *ngIf="n != page">{{n+1}}</a>
+                    <a class="page-link" href="javascript:void(0)" *ngIf="n == page">{{n+1}}</a>
+                  </li>
+                  <li class="paginate_button page-item next">
+                    <a class="page-link" href="javascript:void(0)" [hidden]="page == pagesCount - 1" (click)="searchMembership(page+1)">
+                      {{siteLabel.next}}
+                    </a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" [hidden]="page == pagesCount - 1" (click)="searchMembership(pagesCount - 1)">>></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+  
+            
+          </div>
+        </div>
+      </div>
+      <!--/div-->
+    </div>
+    <!-- /row -->
+  </div>
+  

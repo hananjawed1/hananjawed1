@@ -1,0 +1,28 @@
+{
+  "name": "cryptofont",
+  "repo": "AlexanderPoellmann/CryptoFont",
+  "description": "CryptoFont - A sleek webfont for your favourite cryptocurrencies",
+  "version": "0.1.1",
+  "keywords": [
+    "crypto",
+    "cryptocurrency",
+    "cryptocoin",
+    "webfont",
+    "font",
+    "icon"
+  ],
+  "dependencies": {},
+  "development": {},
+  "license": "SIL, MIT, CC BY 3.0",
+  "styles": [
+    "css/cryptofont.css",
+    "css/cryptofont.min.css"
+  ],
+  "fonts": [
+    "/assets/fonts/cryptofont-webfont.eot",
+    "/assets/fonts/cryptofont-webfont.svg",
+    "/assets/fonts/cryptofont-webfont.ttf",
+    "/assets/fonts/cryptofont-webfont.woff",
+    "/assets/fonts/CryptoFont.otf"
+  ]
+}
