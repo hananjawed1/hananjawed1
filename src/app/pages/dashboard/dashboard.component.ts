@@ -37,8 +37,9 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   //public fileOpening$: Observable<FileOpeningSummary>;
   //public fileOpeningState$: Observable<FileOpeningSummary>;
   fileOpening: FileOpeningSummary = { 
-    totalRequest: 0, totalPendingRequest: 0, totalApprovedLicense: 0, totalNewLicense: 0,
-    totalRenewalLicense: 0, totalHotel: 0, totalBar: 0, totalClub: 0, totalRestaurant: 0  
+    totalRequest: 0, totalPendingRequest: 0, totalApprovedLicense: 0, totalNewLicense: 0, totalRenewalLicense: 0, totalHotel: 0, 
+    totalBar: 0, totalClub: 0, totalRestaurant: 0,  totalHotelApartments: 0, totalReexportCompanies: 0, totalFloatingRestaurants: 0,
+    totalShops: 0, totalImportExportCompanies: 0, totalCamp: 0, totalHospitalityLicense : 0
   } 
 
   public fromDateFO = new BehaviorSubject<Date>(undefined);
@@ -293,6 +294,13 @@ export interface FileOpeningSummary {
   totalBar: number;
   totalClub: number;
   totalRestaurant: number;
+  totalHotelApartments: number;
+  totalReexportCompanies: number;
+  totalFloatingRestaurants: number;
+  totalShops: number;
+  totalImportExportCompanies: number;
+  totalCamp: number;
+  totalHospitalityLicense : number;
 };
 
 export interface TaskManagementCounts { 
