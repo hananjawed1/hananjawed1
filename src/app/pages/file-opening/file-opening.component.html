@@ -19,10 +19,7 @@
       <div class="pr-1 mb-3 mb-xl-0">
         <a [routerLink]="['/manage-groups']" class="btn btn-primary">{{siteLabel.manageGroups}}</a>
       </div>
-    </div>
-    
-     
-    
+    </div>    
   </div>
 
   <!-- breadcrumb -->
@@ -106,12 +103,161 @@
     </div>
   </div> -->
 
-  <!-- row opened -->
+  <!-- HEADER COUNTS -->
   <div class="row row-sm">
     <div class="col-xl-12">
-      <div class="card">
+      <div class="card" id="tabs-style4">
         <div class="card-body">
+          <h4 class="headding mb-4" style="color: #155545 " >File Opening</h4>
+          <div class="row row-sm ">
+
+            <div style="width: 20%;">
+              <div class="card bg-success-gradient text-white header_bg file-opening-bg">
+                <div class="card-body">
+                  <div class="mt-0 text-center">
+                    <a href="file-opening.html">
+                      <span class="text-white">Hotel</span>
+                      <h2 class="text-white mb-0">{{fileOpening.totalHotel}}</h2>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="width: 20%;">
+              <div class="card bg-success-gradient text-white header_bg file-opening-bg">
+                <div class="card-body">
+                  <div class="mt-0 text-center">
+                    <a href="file-opening.html">
+                      <span class="text-white">Restaurent</span>
+                      <h2 class="text-white mb-0">{{fileOpening.totalRestaurant}}</h2>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="width: 20%;">
+              <div class="card bg-success-gradient text-white header_bg file-opening-bg">
+                <div class="card-body">
+                  <div class="mt-0 text-center">
+                    <a href="file-opening.html">
+                      <span class="text-white">Hotel Apartments</span>
+                      <h2 class="text-white mb-0">{{fileOpening.totalHotelApartments}}</h2>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="width: 20%;">
+              <div class="card bg-success-gradient text-white header_bg file-opening-bg">
+                <div class="card-body">
+                  <div class="mt-0 text-center">
+                    <a href="file-opening.html">
+                      <span class="text-white">Club</span>
+                      <h2 class="text-white mb-0">{{fileOpening.totalClub}}</h2>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="width: 20%;">
+              <div class="card bg-success-gradient text-white header_bg file-opening-bg">
+                <div class="card-body">
+                  <div class="mt-0 text-center">
+                    <a href="file-opening.html">
+                      <span class="text-white">Reexport Companies</span>
+                      <h2 class="text-white mb-0">{{fileOpening.totalReexportCompanies}}</h2>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row row-sm ">
+            <div style="width: 20%;">
+              <div class="card bg-success-gradient text-white header_bg file-opening-bg">
+                <div class="card-body">
+                  <div class="mt-0 text-center">
+                    <a href="file-opening.html">
+                      <span class="text-white">Floating Restaurants</span>
+                      <h2 class="text-white mb-0">{{fileOpening.totalFloatingRestaurants}}</h2>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="width: 20%;">
+              <div class="card bg-success-gradient text-white header_bg file-opening-bg">
+                <div class="card-body">
+                  <div class="mt-0 text-center">
+                    <a href="file-opening.html">
+                      <span class="text-white">Shops</span>
+                      <h2 class="text-white mb-0">{{fileOpening.totalShops}}</h2>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="width: 20%;">
+              <div class="card bg-success-gradient text-white header_bg file-opening-bg">
+                <div class="card-body">
+                  <div class="mt-0 text-center">
+                    <a href="file-opening.html">
+                      <span class="text-white">Import Export Companies</span>
+                      <h2 class="text-white mb-0">{{fileOpening.totalImportExportCompanies}}</h2>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="width: 20%;">
+              <div class="card bg-success-gradient text-white header_bg file-opening-bg">
+                <div class="card-body">
+                  <div class="mt-0 text-center">
+                    <a href="file-opening.html">
+                      <span class="text-white">Camp</span>
+                      <h2 class="text-white mb-0">{{fileOpening.totalCamp}}</h2>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="width: 20%;">
+              <div class="card bg-success-gradient text-white header_bg file-opening-bg">
+                <div class="card-body">
+                  <div class="mt-0 text-center">
+                    <a href="file-opening.html">
+                      <span class="text-white">HospitalityLicense</span>
+                      <h2 class="text-white mb-0">{{fileOpening.totalHospitalityLicense}}</h2>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK SEARCH -->
+  <div class="row row-sm">
+    <div class="col-xl-12">
+      <div class="card" id="tabs-style4">
+        <div class="card-body">
+          <h4 class="headding mb-4" style="color: #155545 " >Quick Search</h4>
+
           <div class="row row-sm mb-4">
+
             <div class="col-lg-3 mb-2">
               <input class="form-control" [(ngModel)]='searchClients.tradeLicenceNumber' (input)='searchMembership(0)' 
                 placeholder="{{siteLabel.searchByTradeLicenceNumber}}" type="text">
@@ -183,235 +329,277 @@
               </select>
             </div>
 
-            <div class="col-lg-3 mb-2">
-              <button class="bg-primary btn text-white" (click)="resetSearch()">Reset</button>
+            <!-- <div class="col-lg-1 m-1">
+              <button class="bg-primary btn text-white header_bg">search</button>
+            </div> -->
+
+            <div class="col-lg-1 m-1 ">
+              <button class="  btn-outline-primary btn text-primary" (click)="resetSearch()">Reset</button>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-          <div class="table-responsive" style="margin-top: 20px;" id="Client">
-            <div *ngIf="loading" class="alert alert-warning">
-              <span class="spinner-border spinner-border-sm mr-1"></span>
-              Loading....
-            </div>
-
-            <table *ngIf="loading===false" class="table text-md-nowrap dataTable no-footer" >
-              <thead class="thead-dark">
-                <tr>
-                  <th class="wd-15p border-bottom-0">{{siteLabel.tradeLicenceNumber}}</th>
-                  <th class="wd-15p border-bottom-0">{{siteLabel.entityName}}</th>
-                  <!-- <th class="wd-15p border-bottom-0">{{siteLabel.businessType}}</th> -->
-                  <th class="wd-15p border-bottom-0">{{siteLabel.status}}</th>
-                  <!-- <th class="wd-15p border-bottom-0">{{siteLabel.requestType}}</th> -->
-                  <th class="wd-15p border-bottom-0">{{siteLabel.profileStatus}}</th>
-                  <th class="wd-15p border-bottom-0">{{siteLabel.action}}</th>
-                  <th class="wd-15p border-bottom-0"></th>
-                </tr>
-              </thead>
-              <tbody *ngIf='clients'>
-                <tr *ngFor='let emp of clients'>
-                  <td>{{emp.tradeLicenceNumber}}</td>
-                  <td>{{emp.entityName}}</td>
-                  <!-- <td *ngIf="emp.businessTypeString != 0">{{emp.businessTypeString}}</td>
-                  <td *ngIf="emp.businessTypeString == 0">NA</td> -->
-                  <td><span class="badge badge-pill {{emp.statusColor}}">{{emp.statusString}}</span></td>
-                  <!-- <td>{{emp.requestTypeString}}</td> -->
-                  <td *ngIf="emp.isComplet == true"><span class="badge badge-pill badge-success" >{{siteLabel.completed}}</span></td>
-                  <td *ngIf="emp.isComplet == false"><span class="badge badge-pill badge-danger" >{{siteLabel.incomplete}}</span></td>
-                  <td>
-                    <button class="btn btn-primary" routerLink="/file-opening-details/{{emp.clientId}}">
-                      View Details
-                    </button>
-                  </td>
-                  <td>
-                      <button class="btn btn-primary" (click)="GetTaskDetails(emp.clientId)" >
-                        Task Details
-                      </button> 
-                  </td>
-                </tr>
-              </tbody>
-              <tfoot class="thead-dark">
-                <tr>
-                  <th>{{siteLabel.recordsPerRow}} : {{clients?clients.length:0}} &nbsp;&nbsp;&nbsp; {{siteLabel.totalRecords}} : {{totalCount}}</th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                </tr>
-              </tfoot>
-            </table>
-            
-            <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
-              <ul class="pagination mt-3 mb-0 justify-content-end" [hidden]="(loading || pagesCount < 2)">
-                <li class="page-item">
-                  <a class="page-link" [hidden]="page == 0" (click)="searchMembership(0)"><<</a>
-                </li>
-                <li class="paginate_button page-item previous">
-                  <a class="page-link" href="javascript:void(0)" [hidden]="page == 0" (click)="searchMembership(page-1)">
-                    {{siteLabel.previous}}
-                  </a>
-                </li>
-                <li class="page-item" *ngFor='let n of range()'
-                    [class]="{active: n == page}">
-                  <a class="page-link" href="javascript:void(0)" (click)="searchMembership(n)" *ngIf="n != page">{{n+1}}</a>
-                  <a class="page-link" href="javascript:void(0)" *ngIf="n == page">{{n+1}}</a>
-                </li>
-                <li class="paginate_button page-item next">
-                  <a class="page-link" href="javascript:void(0)" [hidden]="page == pagesCount - 1" (click)="searchMembership(page+1)">
-                    {{siteLabel.next}}
-                  </a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link" [hidden]="page == pagesCount - 1" (click)="searchMembership(pagesCount - 1)">>></a>
-                </li>
-              </ul>
+  <!-- Quick Filter -->
+  <div class="row row-sm">
+    <div class="col-xl-12">
+      <div class="card" id="tabs-style4">
+        <div class="card-body">
+          <div class="panel panel-primary tabs-style-2">
+            <div class="tab-menu-heading">
+              <h4 class="headding mb-4" style="color: #155545 " >Quick Filter</h4>
+              <div class="tabs-menu1">
+                <!-- Tabs -->
+                <ul class="nav panel-tabs main-nav-line">
+                  <li style="width:25%"><a href="#tab1" class="nav-link  active mr-2" data-toggle="tab">Entity Request<span class="badge badge-danger float-right side-badge"> 4</span></a></li>
+                  <li style="width:25%"><a href="#tab2" (click)="callClientRequest()" class="nav-link mr-2" data-toggle="tab">ClientRequest <span class="badge badge-danger float-right side-badge"> 5</span></a></li>
+                  <li style="width:25%"><a href="#tab1" class="nav-link mr-2" data-toggle="tab">Approvals <span class="badge badge-danger float-right side-badge"> 6</span></a></li>
+                  <li style="width:25%"><a href="#tab3" class="nav-link" data-toggle="tab">My Task <span class="badge badge-danger float-right side-badge">7</span></a></li>
+                </ul>
+              </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-          <div class="table-responsive" style="margin-top: 20px;" id="Task" style="display: none;">
-            <div *ngIf="loading" class="alert alert-warning">
-              <span class="spinner-border spinner-border-sm mr-1"></span>
-              Loading....
-            </div>
-
-            <table *ngIf="loading===false" class="table text-md-nowrap dataTable no-footer"  >
-              <thead class="thead-dark">
-                <tr>
-                  <th class="wd-15p border-bottom-0" >Assign To</th>
-                  <th class="wd-15p border-bottom-0" >Notes</th>
-                  <th class="wd-15p border-bottom-0" >{{siteLabel.status}}</th>
-                  <th class="wd-15p border-bottom-0" >{{siteLabel.creationTime}}</th>
-                  <th class="wd-15p border-bottom-0" >{{siteLabel.action}}</th>
-                </tr>
-              </thead>
-              <tbody *ngIf='tasks'>
-                <tr *ngFor="let i of tasks| orderBy: order : true ">
-                  <td>{{i.employee.user.name}}</td>
-                  <td>{{i.notes}}</td>
-                  <td>{{i.status}}</td>
-                  <td>{{i.creationDateString}}</td>
-                  <td><button class="btn btn-primary" routerLink="/file-opening-details/{{i.clientId}}">
-                    View Details
-                  </button></td>
+  <!-- Result -->
+  <div class="row row-sm">
+    <div class="col-xl-12">
+      <div class="card" id="tabs-style4">
+        <div class="card-body">
+          <h4 class="headding mb-4" style="color: #155545 " >Result</h4>
+          
+          <!-- <div class="table-responsive" style="margin-top: 20px;" id="Client"> -->
+          <div class="panel-body tabs-menu-body main-content-body-right border">
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab1">
+                <div class="table-responsive" id="Client">
+                  <div *ngIf="loading" class="alert alert-warning">
+                    <span class="spinner-border spinner-border-sm mr-1"></span>
+                    Loading....
+                  </div>
+      
+                  <table *ngIf="loading===false" class="table text-md-nowrap dataTable no-footer">
+                    <thead>
+                      <tr>
+                        <th class="wd-15p border-bottom-0">{{siteLabel.tradeLicenceNumber}}</th>
+                        <th class="wd-15p border-bottom-0">{{siteLabel.entityName}}</th>
+                        <!-- <th class="wd-15p border-bottom-0">{{siteLabel.businessType}}</th> -->
+                        <th class="wd-15p border-bottom-0">{{siteLabel.status}}</th>
+                        <!-- <th class="wd-15p border-bottom-0">{{siteLabel.requestType}}</th> -->
+                        <th class="wd-15p border-bottom-0">{{siteLabel.profileStatus}}</th>
+                        <th class="wd-15p border-bottom-0">{{siteLabel.action}}</th>
+                      </tr>
+                    </thead>
+                    <tbody *ngIf='clients'>
+                      <tr *ngFor='let emp of clients'>
+                        <td><a routerLink="/file-opening-details/{{emp.clientId}}" style="font-size: 16px">{{emp.tradeLicenceNumber}}</a></td>
+                        <td>{{emp.entityName}}</td>
+                        <!-- <td *ngIf="emp.businessTypeString != 0">{{emp.businessTypeString}}</td>
+                        <td *ngIf="emp.businessTypeString == 0">NA</td> -->
+                        <td><h5><span class="badge badge-pill {{emp.statusColor}}">{{emp.statusString}}</span></h5></td>
+                        <!-- <td>{{emp.requestTypeString}}</td> -->
+                        <td *ngIf="emp.isComplet == true"><h5><span class="badge badge-pill badge-success" >{{siteLabel.completed}}</span></h5></td>
+                        <td *ngIf="emp.isComplet == false"><h5><span class="badge badge-pill badge-danger" >{{siteLabel.incomplete}}</span></h5></td>
+                        <td>
+                          <div class="btn-icon-list">
+                            <a routerLink="/file-opening-details/{{emp.clientId}}">
+                              <button class="btn btn-primary btn-icon"><i class="typcn typcn-eye"></i></button>
+                            </a>
+                            <button class="btn btn-primary ml-1 btn-icon" (click)="GetTaskDetails(emp.clientId)"><i class="typcn typcn-book"></i></button>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tfoot class="thead-dark">
+                      <tr>
+                        <th>{{siteLabel.recordsPerRow}} : {{clients?clients.length:0}} &nbsp;&nbsp;&nbsp; {{siteLabel.totalRecords}} : {{totalCount}}</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                      </tr>
+                    </tfoot>
+                  </table>
                   
-                 
-                </tr>
-              </tbody>
-              <tfoot class="thead-dark">
-                <tr>
-                  <th>{{siteLabel.recordsPerRow}} : {{tasks?tasks.length:0}} &nbsp;&nbsp;&nbsp; {{siteLabel.totalRecords}} : {{totalCount}}</th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  
-                </tr>
-              </tfoot>
-            </table>
-
-            <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
-              <ul class="pagination mt-3 mb-0 justify-content-end" [hidden]="(loading || pagesCount < 2)">
-                <li class="page-item">
-                  <a class="page-link" [hidden]="page == 0" (click)="searchTaskDetails(0)"><<</a>
-                </li>
-                <li class="paginate_button page-item previous">
-                  <a class="page-link" href="javascript:void(0)" [hidden]="page == 0" (click)="searchTaskDetails(page-1)">
-                    {{siteLabel.previous}}
-                  </a>
-                </li>
-                <li class="page-item" *ngFor='let n of range()'
-                    [class]="{active: n == page}">
-                  <a class="page-link" href="javascript:void(0)" (click)="searchTaskDetails(n)" *ngIf="n != page">{{n+1}}</a>
-                  <a class="page-link" href="javascript:void(0)" *ngIf="n == page">{{n+1}}</a>
-                </li>
-                <li class="paginate_button page-item next">
-                  <a class="page-link" href="javascript:void(0)" [hidden]="page == pagesCount - 1" (click)="searchTaskDetails(page+1)">
-                    {{siteLabel.next}}
-                  </a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link" [hidden]="page == pagesCount - 1" (click)="searchTaskDetails(pagesCount - 1)">>></a>
-                </li>
-              </ul>
+                  <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                    <ul class="pagination mt-3 mb-0 justify-content-end" [hidden]="(loading || pagesCount < 2)">
+                      <li class="page-item">
+                        <a class="page-link" [hidden]="page == 0" (click)="searchMembership(0)"><<</a>
+                      </li>
+                      <li class="paginate_button page-item previous">
+                        <a class="page-link" href="javascript:void(0)" [hidden]="page == 0" (click)="searchMembership(page-1)">
+                          {{siteLabel.previous}}
+                        </a>
+                      </li>
+                      <li class="page-item" *ngFor='let n of range()'
+                          [class]="{active: n == page}">
+                        <a class="page-link" href="javascript:void(0)" (click)="searchMembership(n)" *ngIf="n != page">{{n+1}}</a>
+                        <a class="page-link" href="javascript:void(0)" *ngIf="n == page">{{n+1}}</a>
+                      </li>
+                      <li class="paginate_button page-item next">
+                        <a class="page-link" href="javascript:void(0)" [hidden]="page == pagesCount - 1" (click)="searchMembership(page+1)">
+                          {{siteLabel.next}}
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" [hidden]="page == pagesCount - 1" (click)="searchMembership(pagesCount - 1)">>></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tab2">
+                <div class="table-responsive" style="margin-top: 20px;" id="Task" style="display: none;">
+                  <div *ngIf="loading" class="alert alert-warning">
+                    <span class="spinner-border spinner-border-sm mr-1"></span>
+                    Loading....
+                  </div>
+      
+                  <table *ngIf="loading===false" class="table text-md-nowrap dataTable no-footer"  >
+                    <thead class="thead-dark">
+                      <tr>
+                        <th class="wd-15p border-bottom-0" >Assign To</th>
+                        <th class="wd-15p border-bottom-0" >Notes</th>
+                        <th class="wd-15p border-bottom-0" >{{siteLabel.status}}</th>
+                        <th class="wd-15p border-bottom-0" >{{siteLabel.creationTime}}</th>
+                        <th class="wd-15p border-bottom-0" >{{siteLabel.action}}</th>
+                      </tr>
+                    </thead>
+                    <tbody *ngIf='tasks'>
+                      <tr *ngFor="let i of tasks| orderBy: order : true ">
+                        <td><a routerLink="/file-opening-details/{{i.clientId}}" style="font-size: 16px">{{i.employee.user.name}}</a></td>
+                        <td>{{i.notes}}</td>
+                        <td>{{i.status}}</td>
+                        <td>{{i.creationDateString}}</td>
+                        <td>
+                          <a routerLink="/file-opening-details/{{i.clientId}}">
+                            <button class="btn btn-primary btn-icon"><i class="typcn typcn-eye"></i></button>
+                          </a>
+                        </td>                
+                      </tr>
+                    </tbody>
+                    <tfoot class="thead-dark">
+                      <tr>
+                        <th>{{siteLabel.recordsPerRow}} : {{tasks?tasks.length:0}} &nbsp;&nbsp;&nbsp; {{siteLabel.totalRecords}} : {{totalCount}}</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        
+                      </tr>
+                    </tfoot>
+                  </table>
+      
+                  <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                    <ul class="pagination mt-3 mb-0 justify-content-end" [hidden]="(loading || pagesCount < 2)">
+                      <li class="page-item">
+                        <a class="page-link" [hidden]="page == 0" (click)="searchTaskDetails(0)"><<</a>
+                      </li>
+                      <li class="paginate_button page-item previous">
+                        <a class="page-link" href="javascript:void(0)" [hidden]="page == 0" (click)="searchTaskDetails(page-1)">
+                          {{siteLabel.previous}}
+                        </a>
+                      </li>
+                      <li class="page-item" *ngFor='let n of range()'
+                          [class]="{active: n == page}">
+                        <a class="page-link" href="javascript:void(0)" (click)="searchTaskDetails(n)" *ngIf="n != page">{{n+1}}</a>
+                        <a class="page-link" href="javascript:void(0)" *ngIf="n == page">{{n+1}}</a>
+                      </li>
+                      <li class="paginate_button page-item next">
+                        <a class="page-link" href="javascript:void(0)" [hidden]="page == pagesCount - 1" (click)="searchTaskDetails(page+1)">
+                          {{siteLabel.next}}
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" [hidden]="page == pagesCount - 1" (click)="searchTaskDetails(pagesCount - 1)">>></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tab3">
+                <div class="table-responsive" style="margin-top: 20px;" id="ClientRequest" style="display: none;">
+                  <div *ngIf="loading" class="alert alert-warning">
+                    <span class="spinner-border spinner-border-sm mr-1"></span>
+                    Loading....
+                  </div>
+      
+                  <table *ngIf="loading===false" class="table text-md-nowrap dataTable no-footer"  >
+                    <thead class="thead-dark">
+                      <tr>
+                        <th class="wd-15p border-bottom-0" >Trade Licence Number - Entity Name</th>
+                        <th class="wd-15p border-bottom-0" >Category</th>
+                        <th class="wd-15p border-bottom-0" >{{siteLabel.status}}</th>
+                        <th class="wd-15p border-bottom-0" >{{siteLabel.creationTime}}</th>
+                        <th class="wd-15p border-bottom-0" >{{siteLabel.action}}</th>
+                      </tr>
+                    </thead>
+                    <tbody *ngIf='ClientNewRequestDetails'>
+                      <tr *ngFor="let i of ClientNewRequestDetails">
+                        <td><a routerLink="/client-request-update/{{i.newFileRequestId}}" style="font-size: 16px">{{i.tradeLicenseNumber}} - {{i.entityName}}</a></td>
+                        <td *ngIf='i.requestType == 0'>NA></td>
+                        <td *ngIf='i.requestType == 1'>Change Liquor Manager </td>
+                        <td *ngIf='i.requestType == 2'>Renewal</td>
+                        <td *ngIf='i.requestType == 3'>Other</td>
+                        <td *ngIf='i.requestType == 4'>Upload Receipt</td>
+                        <td *ngIf='i.status == 0'><h5><span class="badge badge-pill badge-danger">NA</span></h5></td>
+                        <td *ngIf='i.status == 1'><h5><span class="badge badge-pill badge-warning">Pending</span></h5></td>
+                        <td *ngIf='i.status == 2'><h5><span class="badge badge-pill badge-info">Returned</span></h5></td>
+                        <td *ngIf='i.status == 3'><h5><span class="badge badge-pill badge-success">Completed</span></h5></td>
+                        <td>{{i.creationDateString}}</td>
+                        <td>
+                            <a routerLink="/client-request-update/{{i.newFileRequestId}}">
+                              <button class="btn btn-primary btn-icon"><i class="typcn typcn-eye"></i></button>
+                            </a>
+                        </td>                
+                      </tr>
+                    </tbody>
+                    <tfoot class="thead-dark">
+                      <tr>
+                        <th>{{siteLabel.recordsPerRow}} : {{ClientNewRequestDetails?ClientNewRequestDetails.length:0}} &nbsp;&nbsp;&nbsp; {{siteLabel.totalRecords}} : {{totalCount}}</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        
+                      </tr>
+                    </tfoot>
+                  </table>
+      
+                  <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                    <ul class="pagination mt-3 mb-0 justify-content-end" [hidden]="(loading || pagesCount < 2)">
+                      <li class="page-item">
+                        <a class="page-link" [hidden]="page == 0" (click)="searchClientRequest(0)"><<</a>
+                      </li>
+                      <li class="paginate_button page-item previous">
+                        <a class="page-link" href="javascript:void(0)" [hidden]="page == 0" (click)="searchClientRequest(page-1)">
+                          {{siteLabel.previous}}
+                        </a>
+                      </li>
+                      <li class="page-item" *ngFor='let n of range()'
+                          [class]="{active: n == page}">
+                        <a class="page-link" href="javascript:void(0)" (click)="searchClientRequest(n)" *ngIf="n != page">{{n+1}}</a>
+                        <a class="page-link" href="javascript:void(0)" *ngIf="n == page">{{n+1}}</a>
+                      </li>
+                      <li class="paginate_button page-item next">
+                        <a class="page-link" href="javascript:void(0)" [hidden]="page == pagesCount - 1" (click)="searchClientRequest(page+1)">
+                          {{siteLabel.next}}
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" [hidden]="page == pagesCount - 1" (click)="searchClientRequest(pagesCount - 1)">>></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>            
             </div>
           </div>
-
-          <div class="table-responsive" style="margin-top: 20px;" id="ClientRequest" style="display: none;">
-            <div *ngIf="loading" class="alert alert-warning">
-              <span class="spinner-border spinner-border-sm mr-1"></span>
-              Loading....
-            </div>
-
-            <table *ngIf="loading===false" class="table text-md-nowrap dataTable no-footer"  >
-              <thead class="thead-dark">
-                <tr>
-                  <th class="wd-15p border-bottom-0" >Trade Licence Number - Entity Name</th>
-                  <th class="wd-15p border-bottom-0" >Category</th>
-                  <th class="wd-15p border-bottom-0" >{{siteLabel.status}}</th>
-                  <th class="wd-15p border-bottom-0" >{{siteLabel.creationTime}}</th>
-                  <th class="wd-15p border-bottom-0" >{{siteLabel.action}}</th>
-                </tr>
-              </thead>
-              <tbody *ngIf='ClientNewRequestDetails'>
-                <tr *ngFor="let i of ClientNewRequestDetails">
-                  <td>{{i.tradeLicenseNumber}} - {{i.entityName}}</td>
-                  <td *ngIf='i.requestType == 0'>NA></td>
-                  <td *ngIf='i.requestType == 1'>Change Liquor Manager </td>
-                  <td *ngIf='i.requestType == 2'>Renewal</td>
-                  <td *ngIf='i.requestType == 3'>Other</td>
-                  <td *ngIf='i.requestType == 4'>Upload Receipt</td>
-                  <td *ngIf='i.status == 0'><span class="badge badge-pill badge-danger">NA</span></td>
-                  <td *ngIf='i.status == 1'><span class="badge badge-pill badge-warning">Pending</span></td>
-                  <td *ngIf='i.status == 2'><span class="badge badge-pill badge-info">Returned</span></td>
-                  <td *ngIf='i.status == 3'><span class="badge badge-pill badge-success">Completed</span></td>
-                  <td>{{i.creationDateString}}</td>
-                  <td><button class="btn btn-primary" routerLink="/client-request-update/{{i.newFileRequestId}}">
-                    View Details
-                  </button></td>
-                  
-                 
-                </tr>
-              </tbody>
-              <tfoot class="thead-dark">
-                <tr>
-                  <th>{{siteLabel.recordsPerRow}} : {{ClientNewRequestDetails?ClientNewRequestDetails.length:0}} &nbsp;&nbsp;&nbsp; {{siteLabel.totalRecords}} : {{totalCount}}</th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  
-                </tr>
-              </tfoot>
-            </table>
-
-            <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
-              <ul class="pagination mt-3 mb-0 justify-content-end" [hidden]="(loading || pagesCount < 2)">
-                <li class="page-item">
-                  <a class="page-link" [hidden]="page == 0" (click)="searchClientRequest(0)"><<</a>
-                </li>
-                <li class="paginate_button page-item previous">
-                  <a class="page-link" href="javascript:void(0)" [hidden]="page == 0" (click)="searchClientRequest(page-1)">
-                    {{siteLabel.previous}}
-                  </a>
-                </li>
-                <li class="page-item" *ngFor='let n of range()'
-                    [class]="{active: n == page}">
-                  <a class="page-link" href="javascript:void(0)" (click)="searchClientRequest(n)" *ngIf="n != page">{{n+1}}</a>
-                  <a class="page-link" href="javascript:void(0)" *ngIf="n == page">{{n+1}}</a>
-                </li>
-                <li class="paginate_button page-item next">
-                  <a class="page-link" href="javascript:void(0)" [hidden]="page == pagesCount - 1" (click)="searchClientRequest(page+1)">
-                    {{siteLabel.next}}
-                  </a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link" [hidden]="page == pagesCount - 1" (click)="searchClientRequest(pagesCount - 1)">>></a>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-
           <!-- <div class="table-responsive">
             <table class="table text-md-nowrap" id="example1">
               <thead>

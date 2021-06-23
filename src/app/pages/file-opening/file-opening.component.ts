@@ -23,7 +23,8 @@ export class FileOpeningComponent implements OnInit {
   fileOpening: FileOpeningSummary =
   {
     totalRequest: 0, totalPendingRequest: 0, totalApprovedLicense: 0, totalNewLicense: 0, totalRenewalLicense: 0,
-    totalHotel: 0, totalBar: 0, totalClub: 0, totalRestaurant: 0
+    totalHotel: 0, totalBar: 0, totalClub: 0, totalRestaurant: 0, totalHotelApartments: 0, totalReexportCompanies: 0, totalFloatingRestaurants: 0,
+    totalShops: 0, totalImportExportCompanies: 0, totalCamp: 0, totalHospitalityLicense : 0
   }
   searchTask: ISearchTaskVM = {
     employeeId : 0, clientId :0, page: 0, pageSize: 10
@@ -105,6 +106,8 @@ export class FileOpeningComponent implements OnInit {
     $("#Client").show();
     $("#Task").hide();
     $("#ClientRequest").hide();
+    $("#tab1").addClass("active");
+    $("#tab1").removeClass("active");
       this.searchClients=
           {
           status: 0, phoneNumber: '', page: 0,
@@ -157,33 +160,40 @@ export class FileOpeningComponent implements OnInit {
         
     });
 }
-  searchClientRequest(page){
+
+callClientRequest(){
+  alert("JOJOHOIHOHOHOH");
+  this.searchRequest.requestType = 1;
+  this.searchClientRequest(0);
+}
+
+searchClientRequest(page){
     $("#Client").hide();
     $("#Task").hide();
     $("#ClientRequest").show();
+
     page = page || 0;
     var id = Number(this.route.snapshot.paramMap.get('id'));
     this.searchRequest.page = page;
     this.searchRequest.clientId = id;
     this.searchRequest.requestType = Number(this.searchRequest.requestType);
+    
     if(this.searchRequest.requestType == 1) {
       this.apiservice.PostData(urls.UrlModel.FileRequest.SearchRequest, this.searchRequest).subscribe(res => {
         this.ClientNewRequestDetails = res.items;
-        console.log(res);
           this.page = res.page;
           this.pagesCount = res.totalPages;
           this.totalCount = res.totalCount;
       })
     }
   }
-  getFileOpeningCounts(){
-   
+
+  getFileOpeningCounts(){ 
     this.apiservice.PostData(urls.UrlModel.Dashboard.FileOpening, { toDate: null, fromDate: null })
     .subscribe(res => {
         this.fileOpening = res;
     })
   }
-
   
   searchMembership(page) {
     $("#Client").show();
@@ -287,7 +297,14 @@ export interface FileOpeningSummary {
   totalHotel: number,
   totalBar: number,
   totalClub: number,
-  totalRestaurant: number
+  totalRestaurant: number,
+  totalHotelApartments: number,
+  totalReexportCompanies: number,
+  totalFloatingRestaurants: number,
+  totalShops: number,
+  totalImportExportCompanies: number,
+  totalCamp: number,
+  totalHospitalityLicense : number
 }
 
 export interface ISearchTaskVM {
